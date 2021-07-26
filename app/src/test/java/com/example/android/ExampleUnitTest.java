@@ -49,7 +49,7 @@ public class ExampleUnitTest {
     @Test
     public void testEth() throws Exception {
         // web3j와 ganache-cli 연결
-        Web3j web3j = Web3j.build(new HttpService("http://3.36.109.115:8547"));
+        Web3j web3j = Web3j.build(new HttpService("http://3.35.140.172:8547"));
         // 연결된 ganache-cli에 있는 계정 정보 get
         EthAccounts ethAccounts = web3j.ethAccounts().sendAsync().get();
         // ganache-cli 버전 get
@@ -80,7 +80,7 @@ public class ExampleUnitTest {
         String fromTx = userWallets.get(0).getAddress();
         String toTx = userWallets.get(1).getAddress();
         String etherTx = "10";
-        Admin admin = Admin.build(new HttpService("http://3.36.109.115:8547"));
+        Admin admin = Admin.build(new HttpService("http://3.35.140.172:8547"));
 
         Transaction transaction = Transaction.createEtherTransaction(
                 fromTx,
