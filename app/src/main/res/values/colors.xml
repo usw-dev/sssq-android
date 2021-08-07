@@ -7,6 +7,9 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="ETHEREUM_purple">#37367b</color>
-    <color name="EHTEREUM_purple2">#14044d</color>
+    <color name="gray">#808080</color>
+    <color name="red">#FF0000</color>
+    <color name="blue">#0000FF</color>
+    <color name="little_gray">#F0F0F0</color>
+    <color name="main_color">#1d2041</color>
 </resources>
