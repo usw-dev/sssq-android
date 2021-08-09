@@ -16,7 +16,7 @@ public class screen_5 extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_screen5);
 
-        button_OK=findViewById(R.id.button_OK);
+        button_OK = findViewById(R.id.button_OK);
 
         button_OK.setOnClickListener(new View.OnClickListener() {
             @Override

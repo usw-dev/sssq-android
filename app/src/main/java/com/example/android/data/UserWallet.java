@@ -7,6 +7,9 @@ public class UserWallet {
     private String address;
     private BigDecimal ether;
 
+    public UserWallet() {
+    }
+
     public UserWallet(String address, BigDecimal ether) {
         this.address = address;
         this.ether = ether;
