@@ -1,37 +1,21 @@
 package com.example.android;
 
-import android.view.SurfaceControl;
-
-import com.kenai.jffi.Function;
-
 import org.junit.Test;
-import org.web3j.abi.TypeReference;
-import org.web3j.abi.datatypes.Address;
-import org.web3j.abi.datatypes.Array;
-import org.web3j.abi.datatypes.Type;
-import org.web3j.abi.datatypes.generated.Uint256;
-import org.web3j.abi.datatypes.generated.Uint8;
+import org.reactivestreams.Subscription; //
 import org.web3j.protocol.Web3j;
 import org.web3j.protocol.admin.Admin;
-import org.web3j.protocol.admin.methods.response.PersonalUnlockAccount;
 import org.web3j.protocol.core.DefaultBlockParameterName;
 import org.web3j.protocol.core.methods.request.Transaction;
 import org.web3j.protocol.core.methods.response.EthAccounts;
 import org.web3j.protocol.core.methods.response.EthGetBalance;
-import org.web3j.protocol.core.methods.response.EthLog;
 import org.web3j.protocol.core.methods.response.EthSendTransaction;
 import org.web3j.protocol.core.methods.response.Web3ClientVersion;
 import org.web3j.protocol.http.HttpService;
 import org.web3j.utils.Convert;
 
-import java.io.IOException;
 import java.math.BigDecimal;
-import java.math.BigInteger;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
-import java.util.concurrent.ExecutionException;
 
 import static org.junit.Assert.*;
 
@@ -46,10 +30,17 @@ public class ExampleUnitTest {
         assertEquals(4, 2 + 2);
     }
 
+    public org.web3j.protocol.core.methods.response.Transaction tx;
+    public org.web3j.protocol.core.methods.response.Transaction getTx(Transaction tx) { return this.tx; }
+
+    public void setTx(org.web3j.protocol.core.methods.response.Transaction tx) {
+        this.tx = tx;
+    }
+
     @Test
     public void testEth() throws Exception {
         // web3j와 ganache-cli 연결
-        Web3j web3j = Web3j.build(new HttpService("http://13.124.144.195:8547"));
+        Web3j web3j = Web3j.build(new HttpService("http://3.35.235.189:8547"));
         // 연결된 ganache-cli에 있는 계정 정보 get
         EthAccounts ethAccounts = web3j.ethAccounts().sendAsync().get();
         // ganache-cli 버전 get
@@ -80,7 +71,7 @@ public class ExampleUnitTest {
         String fromTx = userWallets.get(0).getAddress();
         String toTx = userWallets.get(1).getAddress();
         String etherTx = "10";
-        Admin admin = Admin.build(new HttpService("http://13.124.144.195:8547"));
+        Admin admin = Admin.build(new HttpService("http://3.35.235.189:8547"));
 
         Transaction transaction = Transaction.createEtherTransaction(
                 fromTx,
@@ -102,5 +93,14 @@ public class ExampleUnitTest {
         for (UserWallet userWallet : userWallets) {
             System.out.println("address : " + userWallet.getAddress() + ", ether : " + userWallet.getEther());
         }
+
+
+
+        //Subscription subscription = (Subscription) web3j.transactionFlowable().subscribe(tx -> System.out.println(tx.getHash()));
+        Subscription subscription = (Subscription) web3j.replayPastTransactionsFlowable(DefaultBlockParameterName.EARLIEST,DefaultBlockParameterName.LATEST).subscribe(tx -> this.tx=tx);
+        //Subscription subscription = (Subscription) web3j.replayPastTransactionsFlowable(new DefaultBlockParameterNumber(1),new DefaultBlockParameterNumber(2)).subscribe(tx -> System.out.println(tx.getHash()));
+        //web3j.ethLogFlowable((EthFilter) subscription).subscribe(log -> System.out.println(log.toString()));
+        //System.out.println(subscription);
+        System.out.println(this.tx);
     }
 }
