@@ -20,15 +20,15 @@ public class screen_1 extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_screen1);
 
-        button_transaction=findViewById(R.id.button_transaction);
-
-        button_transaction.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(screen_1.this, screen_2.class);
-                startActivity(intent);
-            }
-        });
+//        button_transaction=findViewById(R.id.button_transaction);
+//
+//        button_transaction.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(screen_1.this, screen_2.class);
+//                startActivity(intent);
+//            }
+//        });
     }
 
     @Override
