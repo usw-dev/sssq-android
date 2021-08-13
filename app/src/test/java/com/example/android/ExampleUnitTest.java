@@ -1,9 +1,7 @@
 package com.example.android;
 
-import android.util.Log;
-
 import org.junit.Test;
-import org.reactivestreams.Subscription; //
+import org.reactivestreams.Subscription;
 import org.web3j.abi.FunctionEncoder;
 import org.web3j.abi.TypeReference;
 import org.web3j.abi.datatypes.Function;
@@ -112,8 +110,6 @@ public class ExampleUnitTest {
         for (UserWallet userWallet : userWallets) {
             System.out.println("address : " + userWallet.getAddress() + ", ether : " + userWallet.getEther());
         }
-
-
 
         //Subscription subscription = (Subscription) web3j.transactionFlowable().subscribe(tx -> System.out.println(tx.getHash()));
         Subscription subscription = (Subscription) web3j.replayPastTransactionsFlowable(DefaultBlockParameterName.EARLIEST,DefaultBlockParameterName.LATEST).subscribe(tx -> this.tx=tx);
