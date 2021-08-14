@@ -11,6 +11,7 @@ import org.web3j.crypto.RawTransaction;
 import org.web3j.protocol.Web3j;
 import org.web3j.protocol.admin.Admin;
 import org.web3j.protocol.core.DefaultBlockParameterName;
+import org.web3j.protocol.core.DefaultBlockParameterNumber;
 import org.web3j.protocol.core.methods.request.EthFilter;
 import org.web3j.protocol.core.methods.request.Transaction;
 import org.web3j.protocol.core.methods.response.EthAccounts;
@@ -57,7 +58,7 @@ public class ExampleUnitTest {
     @Test
     public void testEth() throws Exception {
         // web3j와 ganache-cli 연결
-        Web3j web3j = Web3j.build(new HttpService("http://3.35.235.189:8547"));
+        Web3j web3j = Web3j.build(new HttpService("http://3.36.117.15:8547"));
         // 연결된 ganache-cli에 있는 계정 정보 get
         EthAccounts ethAccounts = web3j.ethAccounts().sendAsync().get();
         // ganache-cli 버전 get
@@ -88,7 +89,7 @@ public class ExampleUnitTest {
         String fromTx = userWallets.get(0).getAddress();
         String toTx = userWallets.get(1).getAddress();
         String etherTx = "10";
-        Admin admin = Admin.build(new HttpService("http://3.35.235.189:8547"));
+        Admin admin = Admin.build(new HttpService("http://3.36.117.15:8547"));
 
         Transaction transaction = Transaction.createEtherTransaction(
                 fromTx,
@@ -111,12 +112,15 @@ public class ExampleUnitTest {
             System.out.println("address : " + userWallet.getAddress() + ", ether : " + userWallet.getEther());
         }
 
-        //Subscription subscription = (Subscription) web3j.transactionFlowable().subscribe(tx -> System.out.println(tx.getHash()));
-        Subscription subscription = (Subscription) web3j.replayPastTransactionsFlowable(DefaultBlockParameterName.EARLIEST,DefaultBlockParameterName.LATEST).subscribe(tx -> this.tx=tx);
-        //Subscription subscription = (Subscription) web3j.replayPastTransactionsFlowable(new DefaultBlockParameterNumber(1),new DefaultBlockParameterNumber(2)).subscribe(tx -> System.out.println(tx.getHash()));
-        //web3j.ethLogFlowable((EthFilter) subscription).subscribe(log -> System.out.println(log.toString()));
-        //System.out.println(subscription);
-        System.out.println(this.tx);
+        // Subscription subscription = (Subscription) web3j.transactionFlowable().subscribe(tx -> System.out.println(tx.getHash()));
+
+        // Subscription subscription = (Subscription) web3j.replayPastTransactionsFlowable(DefaultBlockParameterName.EARLIEST,DefaultBlockParameterName.LATEST).subscribe(System.out::println);
+
+        Subscription subscription = (Subscription) web3j.replayPastTransactionsFlowable(new DefaultBlockParameterNumber(1),new DefaultBlockParameterNumber(2)).subscribe(tx -> System.out.println(tx.getHash()));
+        // web3j.ethLogFlowable((EthFilter) subscription).subscribe(log -> System.out.println(log.toString()));
+
+        // System.out.println(subscription);
+        // System.out.println(this.tx);
     }
 
     @Test

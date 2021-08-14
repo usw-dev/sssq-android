@@ -1,5 +1,6 @@
 package com.example.android.data;
 
+import org.reactivestreams.Subscription;
 import org.web3j.protocol.Web3j;
 import org.web3j.protocol.core.DefaultBlockParameterName;
 import org.web3j.protocol.core.methods.response.EthAccounts;
@@ -9,6 +10,7 @@ import org.web3j.protocol.http.HttpService;
 import org.web3j.utils.Convert;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 
 public class BlockChainDAO {
     UserWallet userWallet = new UserWallet();
@@ -22,8 +24,7 @@ public class BlockChainDAO {
         BigDecimal ether = Convert.fromWei(ethGetBalance.getBalance().toString(), Convert.Unit.ETHER);
 
         // 거래 내역 부분
-
-
+        Subscription subscription = (Subscription) web3j.replayPastTransactionsFlowable(DefaultBlockParameterName.EARLIEST,DefaultBlockParameterName.LATEST).subscribe(System.out::println);
 
         // UserWallet 생성 + 생성자 값 대입
         UserWallet userWallet = new UserWallet(address, ether, history);
