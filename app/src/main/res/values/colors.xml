@@ -12,4 +12,6 @@
     <color name="blue">#0000FF</color>
     <color name="little_gray">#F0F0F0</color>
     <color name="main_color">#1d2041</color>
+    <color name="green">#3dce93</color>
+    <color name="invisible">#00000000</color>
 </resources>

@@ -1,12 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<androidx.drawerlayout.widget.DrawerLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".screen_1"
     android:background="@color/main_color"
+    android:id="@+id/screen1"
     android:orientation="vertical">
 
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".screen_1"
+        android:background="@color/main_color"
+        android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -26,10 +38,11 @@
                 android:background="@color/main_color"
                 android:scaleType="fitStart"
                 android:layout_gravity="center"
-                android:src="@drawable/icon_mymenu">
+                android:src="@drawable/icon_mymenu"
+                android:id="@+id/icon_mymenu">
             </ImageButton>
-
         </LinearLayout>
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
@@ -160,137 +173,29 @@
                 android:background="@color/main_color"
                 android:scaleType="fitXY"
                 android:src="@drawable/icon_refresh">
+
             </ImageButton>
         </LinearLayout>
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="190dp"
-        android:gravity="center"
-        android:orientation="vertical">
-
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:contentDescription="StringValue"
-            android:src="@drawable/image_account">
-        </ImageView>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_gravity="center"
-        android:background="@drawable/image_log"
-        android:orientation="vertical"
-        android:layout_height="400dp">
-
         <LinearLayout
             android:layout_width="match_parent"
+            android:layout_height="190dp"
             android:gravity="center"
+            android:orientation="vertical">
 
-            android:layout_height="wrap_content">
-
-            <ImageButton
-                android:layout_width="wrap_content"
-                android:layout_height="20dp"
-                android:background="@color/white"
-                android:layout_gravity="center"
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:contentDescription="StringValue"
-                android:src="@drawable/icon_showlog" />
+                android:src="@drawable/image_account">
+
+            </ImageView>
         </LinearLayout>
+      </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="@color/black"
-                android:textSize="20sp"
-                android:text="최근 결제 내역">
-            </TextView>
-        </LinearLayout>
-
-
-            <ScrollView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                >
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:gravity="center"
-                    android:orientation="vertical"
-                    android:layout_height="wrap_content">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:orientation="horizontal"
-                        android:layout_height="500dp">
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:textSize="30sp"
-                            android:textColor="@color/black"
-                            android:text="06.01">
-                        </TextView>
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:text="상세 정보"
-                            android:textColor="@color/gray"
-                            android:textSize="30sp">
-
-                        </TextView>
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:textSize="30sp"
-                            android:textColor="@color/red"
-                            android:text="금액">
-                        </TextView>
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:orientation="horizontal"
-                        android:layout_height="500dp">
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:textColor="@color/black"
-                            android:textSize="30sp"
-                            android:text="06.01">
-                        </TextView>
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:text="상세 정보"
-                            android:textColor="@color/gray"
-                            android:textSize="30sp">
-
-                        </TextView>
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:textSize="30sp"
-                            android:textColor="@color/blue"
-                            android:text="금액">
-
-                        </TextView>
-                    </LinearLayout>
-                </LinearLayout>
-            </ScrollView>
-    </LinearLayout>
-</LinearLayout>
+    <include layout="@layout/activity_screen_trhistory"/>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+    <include layout="@layout/activity_screen_mymenu"/>
+</androidx.drawerlayout.widget.DrawerLayout>
 
