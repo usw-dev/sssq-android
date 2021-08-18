@@ -1,8 +1,10 @@
-package com.example.android;
+package com.example.android.screen1;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.example.android.R;
 
 public class ScreenTrhistoryActivity extends AppCompatActivity {
 

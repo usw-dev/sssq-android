@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".screen_1"
+    tools:context=".screen1.screen_1"
     android:background="@color/main_color"
     android:id="@+id/screen1"
     android:orientation="vertical">
@@ -16,7 +16,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".screen_1"
+        tools:context=".screen1.screen_1"
         android:background="@color/main_color"
         android:orientation="vertical">
 
@@ -94,8 +94,7 @@
                 android:layout_height="match_parent">
 
                 <ImageButton
-                    android:id="@+id/IB"
-                    android:onClick="IB_clicked"
+                    android:id="@+id/account_button"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:scaleType="fitCenter"
