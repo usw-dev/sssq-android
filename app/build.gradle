@@ -47,4 +47,8 @@ dependencies {
     implementation 'org.slf4j:slf4j-simple:1.6.1'
     implementation 'com.android.support:multidex:1.0.3'
     implementation ('org.web3j:core:4.6.0-android')
+    implementation 'com.google.android.material:material:1.2.0-alpha02'
+    implementation 'com.makeramen:roundedimageview:2.3.0'
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.2.0-rc03'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.2.0-rc03'
 }

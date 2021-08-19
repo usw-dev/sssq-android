@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.ImageButton;
 import android.widget.LinearLayout;
 
 import com.example.android.R;
@@ -20,7 +19,7 @@ public class slide extends AppCompatActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_screen1);
+        setContentView(R.layout.screen_main);
 
         bottomSheet = findViewById(R.id.bottomSheet);
         transup = AnimationUtils.loadAnimation(this, R.anim.translateup); //xml 위로올리는거 적용

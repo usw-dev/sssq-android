@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".screen1.screen_1"
+    tools:context=".Mainscreen.screen_main"
     android:background="@color/main_color"
     android:id="@+id/screen1"
     android:orientation="vertical">
@@ -16,7 +16,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".screen1.screen_1"
+        tools:context=".Mainscreen.screen_main"
         android:background="@color/main_color"
         android:orientation="vertical">
 
@@ -80,11 +80,12 @@
                 android:layout_height="match_parent">
 
                 <ImageButton
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:scaleType="fitCenter"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
                     android:background="@color/main_color"
-                    android:src="@drawable/icon_addaccount" />
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/icon_addaccount"
+                    tools:ignore="TouchTargetSizeCheck" />
             </LinearLayout>
 
             <LinearLayout
@@ -124,8 +125,8 @@
                         android:layout_height="match_parent"
                         android:background="@color/main_color"
                         android:scaleType="fitCenter"
-                        android:src="@drawable/icon_nextaccount">
-                    </ImageButton>
+                        android:src="@drawable/icon_nextaccount"
+                        tools:ignore="TouchTargetSizeCheck"></ImageButton>
                 </LinearLayout>
 
             </LinearLayout>
@@ -168,12 +169,13 @@
             android:layout_height="match_parent">
 
             <ImageButton
-                android:layout_width="25dp"
-                android:layout_height="25dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 android:layout_gravity="center"
                 android:background="@color/main_color"
                 android:scaleType="fitXY"
-                android:src="@drawable/icon_refresh">
+                android:src="@drawable/icon_refresh"
+                tools:ignore="TouchTargetSizeCheck">
 
             </ImageButton>
         </LinearLayout>
@@ -195,8 +197,8 @@
         </LinearLayout>
       </LinearLayout>
 
-    <include layout="@layout/activity_screen_trhistory"/>
+    <include layout="@layout/screen_trhistory"/>
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
-    <include layout="@layout/activity_screen_mymenu"/>
+    <include layout="@layout/screen_mymenu"/>
 </androidx.drawerlayout.widget.DrawerLayout>
 

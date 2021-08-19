@@ -7,7 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-import com.example.android.screen1.screen_1;
+import com.example.android.Mainscreen.screen_main;
 
 public class screen_3_qr extends AppCompatActivity {
 
@@ -23,7 +23,7 @@ public class screen_3_qr extends AppCompatActivity {
         button_home.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(screen_3_qr.this, screen_1.class);
+                Intent intent = new Intent(screen_3_qr.this, screen_main.class);
                 startActivity(intent);
             }
         });

@@ -1,4 +1,4 @@
-package com.example.android.screen1;
+package com.example.android.Mainscreen;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -6,11 +6,11 @@ import android.os.Bundle;
 
 import com.example.android.R;
 
-public class ScreenTrhistoryActivity extends AppCompatActivity {
+public class screen_mymenu extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_screen_trhistory);
+        setContentView(R.layout.screen_mymenu);
     }
 }
