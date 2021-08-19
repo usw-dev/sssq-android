@@ -96,6 +96,7 @@
 
                 <ImageButton
                     android:id="@+id/account_button"
+                    android:onClick="IB_clicked"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:scaleType="fitCenter"

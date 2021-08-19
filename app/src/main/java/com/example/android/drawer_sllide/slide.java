@@ -11,27 +11,31 @@ import com.example.android.R;
 
 public class slide extends AppCompatActivity {
 
-    static boolean flag; //올라오고 내려온 상태
-    Animation transup; //올라오는 애니메이션
-    Animation transdown; //내려가는 애니메이션
-    LinearLayout bottomSheet; // 올라오고 내려갈 최근거래내역
+//    static boolean flag; //올라오고 내려온 상태
+//    Animation transup; //올라오는 애니메이션
+//    Animation transdown; //내려가는 애니메이션
+//    LinearLayout bottomSheet; // 올라오고 내려갈 최근거래내역
+    public static boolean flag = true; //올라오고 내려온 상태
+    public Animation transup; //올라오는 애니메이션
+    public Animation transdown; //내려가는 애니메이션
+    public LinearLayout bottomSheet; // 올라오고 내려갈 최근거래내역
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.screen_main);
+//    @Override
+//    public void onCreate(Bundle savedInstanceState) {
+//        super.onCreate(savedInstanceState);
+//        setContentView(R.layout.screen_main);
+//
+//        bottomSheet = findViewById(R.id.bottomSheet);
+//        transup = AnimationUtils.loadAnimation(this, R.anim.translateup); //xml 위로올리는거 적용
+//        transdown = AnimationUtils.loadAnimation(this, R.anim.translatedown); //xml 밑으로 내리는거 적용
+//        slide.Sliding animationListener = new slide.Sliding(); //sliding 리스너 생성
+//        transup.setAnimationListener(animationListener); //transup에 리스너 적용
+//        transdown.setAnimationListener(animationListener); //transup에 리스너 적용
+//
+//        IB_clicked();
+//    }
 
-        bottomSheet = findViewById(R.id.bottomSheet);
-        transup = AnimationUtils.loadAnimation(this, R.anim.translateup); //xml 위로올리는거 적용
-        transdown = AnimationUtils.loadAnimation(this, R.anim.translatedown); //xml 밑으로 내리는거 적용
-        slide.Sliding animationListener = new slide.Sliding(); //sliding 리스너 생성
-        transup.setAnimationListener(animationListener); //transup에 리스너 적용
-        transdown.setAnimationListener(animationListener); //transup에 리스너 적용
-
-        IB_clicked();
-    }
-
-    public void IB_clicked() {
+    public void IB_clicked(View v) {
         if (flag) {
             bottomSheet.startAnimation(transup); //올림
         } else {
