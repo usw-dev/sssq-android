@@ -11,11 +11,14 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.example.android.R;
+import com.example.android.Settingscreen.setting;
 import com.example.android.backbutton_event.backbutton_event;
 import com.example.android.drawer_sllide.slide;
+import com.example.android.screen_2;
 
 public class screen_main extends slide {
 
@@ -25,7 +28,7 @@ public class screen_main extends slide {
     private backbutton_event backbutton_event;
     private com.example.android.drawer_sllide.drawer screen_1_drawer;
     private com.example.android.drawer_sllide.slide screen_1_slide;
-    private Button button_setting;
+    private Button but_setting;
 
 //    boolean flag = true; //올라오고 내려온 상태
 //    Animation transup; //올라오는 애니메이션
@@ -69,8 +72,16 @@ public class screen_main extends slide {
         transup.setAnimationListener(animationListener); //transup에 리스너 적용
         transdown.setAnimationListener(animationListener);
         //계좌 터치 시 애니메이션 이벤트
-    };
 
+        but_setting = findViewById(R.id.but_setting);
+        but_setting.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(screen_main.this, setting.class);
+                startActivity(intent);
+            }
+        });
+    };
     @Override
     public void onBackPressed()
     {

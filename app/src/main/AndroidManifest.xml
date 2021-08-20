@@ -23,12 +23,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".screen_3_address" />
-        <activity android:name=".screen_3_qr" />
         <activity android:name=".Mainscreen.screen_main" />
         <activity android:name=".screen_2" />
-        <activity android:name=".screen_5" />
+        <activity android:name=".screen_3_address" />
+        <activity android:name=".screen_3_qr" />
         <activity android:name=".screen_4" />
+        <activity android:name=".screen_5" />
+        <activity android:name=".Settingscreen.setting" />
     </application>
 
 </manifest>
