@@ -11,6 +11,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Android">
         <activity
+            android:name=".ScreenVerActivity"
+            android:exported="true" />
+        <activity
             android:name=".Mainscreen.ScreenTrhistoryActivity"
             android:exported="true" />
         <activity
