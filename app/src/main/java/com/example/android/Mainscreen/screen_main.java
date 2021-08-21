@@ -1,10 +1,12 @@
 package com.example.android.Mainscreen;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.motion.utils.Easing;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.view.animation.Animation;
@@ -17,8 +19,25 @@ import android.widget.LinearLayout;
 import com.example.android.R;
 import com.example.android.Settingscreen.setting;
 import com.example.android.backbutton_event.backbutton_event;
+import com.example.android.drawer_sllide.drawer;
 import com.example.android.drawer_sllide.slide;
 import com.example.android.screen_2;
+import com.github.mikephil.charting.charts.BarChart;
+import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.components.Description;
+import com.github.mikephil.charting.components.XAxis;
+import com.github.mikephil.charting.components.YAxis;
+import com.github.mikephil.charting.data.BarData;
+import com.github.mikephil.charting.data.BarDataSet;
+import com.github.mikephil.charting.data.BarEntry;
+import com.github.mikephil.charting.data.Entry;
+import com.github.mikephil.charting.data.LineData;
+import com.github.mikephil.charting.data.LineDataSet;
+import com.github.mikephil.charting.interfaces.datasets.IBarDataSet;
+import com.github.mikephil.charting.utils.ColorTemplate;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class screen_main extends slide {
 
@@ -29,7 +48,9 @@ public class screen_main extends slide {
     private com.example.android.drawer_sllide.drawer screen_1_drawer;
     private com.example.android.drawer_sllide.slide screen_1_slide;
     private Button but_setting;
+    private BarChart chart_month;
 
+    int[] colorArray = new int[]{Color.RED,Color.BLUE};
 //    boolean flag = true; //올라오고 내려온 상태
 //    Animation transup; //올라오는 애니메이션
 //    Animation transdown; //내려가는 애니메이션
@@ -40,11 +61,11 @@ public class screen_main extends slide {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.screen_main);
 
-        screen_1_drawer = new com.example.android.drawer_sllide.drawer();
+        screen_1_drawer = new drawer();
         //드로어 레이아웃
         backbutton_event = new backbutton_event(this);
         //뒤로가기 이벤트
-        screen_1_slide = new com.example.android.drawer_sllide.slide();
+        screen_1_slide = new slide();
         //계좌 터치 이벤트
 
         drawerLayout = (DrawerLayout) findViewById(R.id.screen1);
@@ -81,7 +102,29 @@ public class screen_main extends slide {
                 startActivity(intent);
             }
         });
+        //메인 -> 메뉴 -> 환경 설정
+
+        chart_month = (BarChart)findViewById(R.id.chart_month);
+
+        BarDataSet barDataSet = new BarDataSet(chart_values(),"Bar");
+        barDataSet.setColors(colorArray);
+
+        BarData barData=new BarData(barDataSet);
+        chart_month.setData(barData);
     };
+
+    private ArrayList<BarEntry> chart_values(){
+        ArrayList dataVals = new ArrayList<>();
+
+        dataVals.add(new BarEntry(0,new float[]{3},5));
+        dataVals.add(new BarEntry(1,new float[]{4}));
+        dataVals.add(new BarEntry(3,new float[]{5}));
+        dataVals.add(new BarEntry(4,new float[]{2}));
+        dataVals.add(new BarEntry(6,new float[]{2}));
+        dataVals.add(new BarEntry(7,new float[]{4}));
+        return dataVals;
+    }
+
     @Override
     public void onBackPressed()
     {
