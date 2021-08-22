@@ -1,5 +1,7 @@
 package com.example.android.data;
 
+import org.reactivestreams.Subscription;
+
 import java.math.BigDecimal;
 import java.util.ArrayList;
 
@@ -12,12 +14,12 @@ public class UserWallet {
     private BigDecimal ether;
 
     // 개인 거래 내역
-    private ArrayList<String> history;
+    private Subscription history;
 
     public UserWallet() {
     }
 
-    public UserWallet(String address, BigDecimal ether, ArrayList<String> history) {
+    public UserWallet(String address, BigDecimal ether, Subscription history) {
         this.address = address;
         this.ether = ether;
         this.history = history;
@@ -39,11 +41,11 @@ public class UserWallet {
         this.ether = ether;
     }
 
-    public ArrayList<String> getHistory() {
+    public Subscription getHistory() {
         return history;
     }
 
-    public void setHistory(ArrayList<String> history) {
+    public void setHistory(Subscription history) {
         this.history = history;
     }
 }
