@@ -7,11 +7,24 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.example.android.data.BlockChainDAO;
+import com.example.android.data.UserWallet;
+
+import org.reactivestreams.Subscription;
+
+import java.math.BigDecimal;
+
 public class screen_2 extends AppCompatActivity {
 
     private Button button_showqr;
     private Button button_scanqr;
     private Button button_address;
+
+//    private BlockChainDAO blockChainDAO = new BlockChainDAO("무언가 주소가 될 것");
+//    private UserWallet userWallet = blockChainDAO.getUserWallet();
+//
+//    private BigDecimal ether = userWallet.getEther();
+//    private Subscription history = userWallet.getHistory();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

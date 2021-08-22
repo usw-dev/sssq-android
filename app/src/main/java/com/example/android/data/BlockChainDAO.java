@@ -12,6 +12,11 @@ import java.math.BigDecimal;
 public class BlockChainDAO {
     UserWallet userWallet = new UserWallet();
 
+//    public BlockChainDAO() throws Exception{
+//        UserWallet userWallet = new UserWallet("WX08-9828-1930-0942-8852-1056",10,Subscription subscripton);
+//        this.userWallet = userWallet;
+//    }
+
     public BlockChainDAO(String address) throws Exception{
         // Web3j 연결부분
         Web3j web3j = Web3j.build(new HttpService("http://3.35.235.189:8547"));
