@@ -1,204 +1,330 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<androidx.drawerlayout.widget.DrawerLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/screen1"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Mainscreen.screen_main"
     android:background="@color/main_color"
-    android:id="@+id/screen1"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context=".Mainscreen.screen_main">
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".Mainscreen.screen_main"
-        android:background="@color/main_color"
-        android:orientation="vertical">
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:gravity="center"
-        android:orientation="horizontal">
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:gravity="start"
-            android:layout_height="match_parent">
-
-            <ImageButton
-                android:layout_width="50dp"
-                android:layout_height="60dp"
-                android:background="@color/main_color"
-                android:scaleType="fitStart"
-                android:layout_gravity="center"
-                android:src="@drawable/icon_mymenu"
-                android:id="@+id/icon_mymenu">
-            </ImageButton>
-        </LinearLayout>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="3"
-            android:textColor="@color/white"
-            android:gravity="center"
-            android:textStyle="bold"
-            android:textSize="20sp"
-            android:text="개인 지갑 정보"/>
-
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="match_parent"/>
-    </LinearLayout>
-    <!-- 상단 -->
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:background="@color/main_color"
-        android:baselineAligned="false"
-        android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:baselineAligned="false">
+            android:background="@color/main_color"
+            android:orientation="vertical"
+            tools:context=".Mainscreen.screen_main">
 
             <LinearLayout
-                android:layout_width="0dp"
-                android:layout_weight="0.5"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
                 android:gravity="center"
-                android:layout_height="match_parent">
+                android:orientation="horizontal">
 
-                <ImageButton
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:background="@color/main_color"
-                    android:scaleType="fitCenter"
-                    android:src="@drawable/icon_addaccount"
-                    tools:ignore="TouchTargetSizeCheck" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_weight="3"
-                android:gravity="center"
-                android:layout_height="match_parent">
-
-                <ImageButton
-                    android:id="@+id/account_button"
-                    android:onClick="IB_clicked"
-                    android:layout_width="match_parent"
+                <LinearLayout
+                    android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:scaleType="fitCenter"
-                    android:background="@color/main_color"
-                    android:src="@drawable/image_account" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_weight="0.5"
-                android:gravity="center"
-                android:baselineAligned="false"
-                android:layout_height="match_parent">
-
-                <LinearLayout
-                    android:layout_width="0dp"
                     android:layout_weight="1"
-                    android:layout_height="match_parent"/>
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="match_parent">
+                    android:gravity="start">
 
                     <ImageButton
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:id="@+id/icon_mymenu"
+                        android:layout_width="50dp"
+                        android:layout_height="60dp"
+                        android:layout_gravity="center"
                         android:background="@color/main_color"
-                        android:scaleType="fitCenter"
-                        android:src="@drawable/icon_nextaccount"
-                        tools:ignore="TouchTargetSizeCheck"></ImageButton>
+                        android:scaleType="fitStart"
+                        android:src="@drawable/icon_mymenu"></ImageButton>
                 </LinearLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="3"
+                    android:gravity="center"
+                    android:text="개인 지갑 정보"
+                    android:textColor="@color/white"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1" />
+            </LinearLayout>
+            <!-- 상단 -->
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:background="@color/main_color"
+                android:baselineAligned="false"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:baselineAligned="false">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.5"
+                        android:gravity="center">
+
+                        <ImageButton
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:background="@color/main_color"
+                            android:scaleType="fitCenter"
+                            android:src="@drawable/icon_addaccount"
+                            tools:ignore="TouchTargetSizeCheck" />
+                    </LinearLayout>
+
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="3"
+                        android:gravity="center">
+
+                        <ImageButton
+                            android:id="@+id/account_button"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@color/main_color"
+                            android:onClick="IB_clicked"
+                            android:scaleType="fitCenter"
+                            android:src="@drawable/image_account" />
+                        <!--카드 배경 부분-->
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <LinearLayout
+                                android:layout_width="20dp"
+                                android:layout_height="match_parent" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="vertical">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="0dp"
+                                    android:layout_weight="0.5" />
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="0dp"
+                                    android:layout_weight="1"
+                                    android:gravity="center_vertical"
+                                    android:orientation="horizontal">
+
+                                    <LinearLayout
+                                        android:layout_width="0dp"
+                                        android:layout_height="match_parent"
+                                        android:layout_weight="7"
+                                        android:gravity="center_vertical">
+
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_gravity="left"
+                                            android:text="asdasdfsdfasdgasdgfasdf"
+                                            android:textSize="20dp"
+                                            android:textStyle="italic" />
+                                    </LinearLayout>
+                                    <!--address-->
+
+                                    <LinearLayout
+                                        android:layout_width="0dp"
+                                        android:layout_height="match_parent"
+                                        android:layout_weight="3"
+                                        android:gravity="center">
+
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:text="codi"
+                                            android:textSize="20dp" />
+                                    </LinearLayout>
+
+                                    <!--codi-->
+
+                                </LinearLayout>
+                                <!--address codi-->
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="0dp"
+                                    android:layout_weight="1"
+                                    android:gravity="center_vertical">
+
+                                    <TextView
+                                        android:id="@+id/set_ETH"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="500"
+                                        android:textColor="@color/black"
+                                        android:textSize="30dp"
+                                        android:textStyle="bold" />
+                                    <!--이더 액수-->
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="ETH"
+                                        android:textColor="@color/black"
+                                        android:textSize="30dp" />
+                                    <!--ETH-->
+                                </LinearLayout>
+                                <!--ETH-->
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="0dp"
+                                    android:layout_weight="1"
+                                    android:orientation="horizontal">
+
+                                    <LinearLayout
+                                        android:layout_width="0dp"
+                                        android:layout_height="match_parent"
+                                        android:layout_weight="4">
+
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_gravity="bottom"
+                                            android:text="홍길동"/>
+                                    </LinearLayout>
+                                    <!--name-->
+
+                                    <LinearLayout
+                                        android:layout_width="0dp"
+                                        android:layout_height="match_parent"
+                                        android:layout_weight="2">
+
+                                        <ImageView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:src="@drawable/icon_codi"/>
+                                    </LinearLayout>
+                                    <!--codi_image-->
+                                </LinearLayout>
+                                <!--name codi_image-->
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="0dp"
+                                    android:layout_weight="0.5" />
+                            </LinearLayout>
+                        </LinearLayout>
+                    </RelativeLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.5"
+                        android:baselineAligned="false"
+                        android:gravity="center">
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1" />
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1">
+
+                            <ImageButton
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:background="@color/main_color"
+                                android:scaleType="fitCenter"
+                                android:src="@drawable/icon_nextaccount"
+                                tools:ignore="TouchTargetSizeCheck"></ImageButton>
+                        </LinearLayout>
+
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+            <!-- 중단 부분 -->
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:baselineAligned="false"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.5" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="3">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="월별 수익 / 지출"
+                        android:textColor="@color/white"
+                        android:textSize="20sp"
+                        android:textStyle="bold"></TextView>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="start"
+                    android:layout_weight="0.5">
+
+                    <ImageButton
+                        android:id="@+id/IB3"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_gravity="center"
+                        android:background="@color/main_color"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/icon_refresh"
+                        tools:ignore="TouchTargetSizeCheck">
+
+                    </ImageButton>
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="190dp"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <com.github.mikephil.charting.charts.BarChart
+                    android:id="@+id/chart_month"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
 
             </LinearLayout>
         </LinearLayout>
-    </LinearLayout>
-    <!-- 중단 부분 -->
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:gravity="center"
-        android:baselineAligned="false"
-        android:orientation="horizontal">
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_weight="0.5"
-            android:layout_height="match_parent"/>
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_weight="3"
-            android:layout_height="match_parent">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:textColor="@color/white"
-                android:gravity="center"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                android:text="월별 수익 / 지출">
-            </TextView>
-
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_weight="0.5"
-            android:layout_gravity="start"
-            android:layout_height="match_parent">
-
-            <ImageButton
-                android:id="@+id/IB3"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_gravity="center"
-                android:background="@color/main_color"
-                android:scaleType="fitXY"
-                android:src="@drawable/icon_refresh"
-                tools:ignore="TouchTargetSizeCheck">
-
-            </ImageButton>
-        </LinearLayout>
-    </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="190dp"
-            android:gravity="center"
-            android:orientation="vertical">
-
-            <com.github.mikephil.charting.charts.BarChart
-                android:id="@+id/chart_month"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-
-        </LinearLayout>
-      </LinearLayout>
-
-    <include layout="@layout/screen_trhistory"/>
+        <include layout="@layout/screen_trhistory" />
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
-    <include layout="@layout/screen_mymenu"/>
+
+    <include layout="@layout/screen_mymenu" />
 </androidx.drawerlayout.widget.DrawerLayout>
 
