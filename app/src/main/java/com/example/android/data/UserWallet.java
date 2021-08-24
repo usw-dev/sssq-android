@@ -1,11 +1,14 @@
 package com.example.android.data;
 
+import android.app.Application;
+import android.widget.TextView;
+
 import org.reactivestreams.Subscription;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
 
-public class UserWallet {
+public class UserWallet extends Application {
 
     // 개인 계좌 정보
     private String address;
@@ -15,6 +18,15 @@ public class UserWallet {
 
     // 개인 거래 내역
     private Subscription history;
+
+    // 카드 주소
+    private TextView card_address;
+
+    // 카드 잔액
+    private TextView card_ether;
+
+    // 카드 내역
+    //
 
     public UserWallet() {
     }
@@ -29,9 +41,7 @@ public class UserWallet {
         return address;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
-    }
+    public void setAddress(String address) { this.address = address; }
 
     public BigDecimal getEther() {
         return ether;

@@ -135,10 +135,11 @@
                                         android:gravity="center_vertical">
 
                                         <TextView
+                                            android:id="@+id/card_account_address"
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
                                             android:layout_gravity="left"
-                                            android:text="asdasdfsdfasdgasdgfasdf"
+                                            android:text="ADDRESS"
                                             android:textSize="20dp"
                                             android:textStyle="italic" />
                                     </LinearLayout>
@@ -169,10 +170,10 @@
                                     android:gravity="center_vertical">
 
                                     <TextView
-                                        android:id="@+id/set_ETH"
+                                        android:id="@+id/card_ETH"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:text="500"
+                                        android:text="0"
                                         android:textColor="@color/black"
                                         android:textSize="30dp"
                                         android:textStyle="bold" />
@@ -200,10 +201,11 @@
                                         android:layout_weight="4">
 
                                         <TextView
+                                            android:id="@+id/card_name"
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
                                             android:layout_gravity="bottom"
-                                            android:text="홍길동"/>
+                                            android:text="NAME"/>
                                     </LinearLayout>
                                     <!--name-->
 
@@ -295,7 +297,7 @@
                     android:layout_weight="0.5">
 
                     <ImageButton
-                        android:id="@+id/IB3"
+                        android:id="@+id/button_refresh"
                         android:layout_width="30dp"
                         android:layout_height="30dp"
                         android:layout_gravity="center"
