@@ -116,7 +116,25 @@ public class screen_main extends slide {
         BarDataSet barDataSet = new BarDataSet(chart_values(), "Bar");
         barDataSet.setColors(colorArray);
 
+//        //q
+//        barDataSet.setColors(Color.BLUE); //q 색 colorArray
+//        // 그룹 만든 bar2
+//        BarDataSet barDataSet2 = new BarDataSet(chart_values2(),"지출");
+//        barDataSet2.setColors(Color.RED);
+//
+//        barDataSet.setDrawValues(false); //데이터 텍스트값 나타내지않음
+//        barDataSet2.setValueTextColor(Color.RED); //데이터2 글자색 빨강
+//        //q
         BarData barData = new BarData(barDataSet);
+//        //q
+//        BarData barData = new BarData(barDataSet,barDataSet2);
+//        float groupSpace = 0.2f; //그룹사이 거리
+//        float barSpace = 0.02f; //그룹안 바 사이 거리
+//        float barWidth = 0.45f;// 전체 x축에서 한그룹의 넓이
+//        barData.setBarWidth(barWidth);
+//        barData.groupBars(0,groupSpace,barSpace);
+//        //q
+
         chart_month.setData(barData);
         //차트
     };
@@ -131,7 +149,19 @@ public class screen_main extends slide {
         dataVals.add(new BarEntry(7, new float[]{4}));
         return dataVals;
     }
-
+//    //q
+//    private ArrayList<BarEntry> chart_values2(){
+//        ArrayList dataVals = new ArrayList<>();
+//
+//        dataVals.add(new BarEntry(0,new float[]{4},5));
+//        dataVals.add(new BarEntry(1,new float[]{2}));
+//        dataVals.add(new BarEntry(3,new float[]{2}));
+//        dataVals.add(new BarEntry(4,new float[]{5}));
+//        dataVals.add(new BarEntry(6,new float[]{4}));
+//        dataVals.add(new BarEntry(7,new float[]{3}));
+//        return dataVals;
+//    }
+//    //q
     @Override
     public void onBackPressed() {
         backbutton_event.backbutton();
