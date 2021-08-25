@@ -1,14 +1,12 @@
-package com.example.android;
+package com.example.android.Screen;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.widget.ImageView;
 
-import com.bumptech.glide.Glide;
-import com.example.android.Mainscreen.screen_main;
+import com.example.android.R;
 
 public class SplashActivity extends AppCompatActivity {
 
@@ -16,10 +14,6 @@ public class SplashActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.screen_splash);
-
-        ImageView splash = findViewById(R.id.splash_image);
-
-        Glide.with(this).load(R.raw.image_splash).into(splash);
 
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {

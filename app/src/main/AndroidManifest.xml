@@ -12,28 +12,23 @@
         android:theme="@style/Theme.Android">
 
         <activity
-            android:name=".ScreenVerActivity"
+            android:name=".Screen.screen_appver"
             android:exported="true" />
         <activity
-            android:name=".Mainscreen.ScreenTrhistoryActivity"
+            android:name=".Screen.ScreenTrhistoryActivity"
             android:exported="true" />
         <activity
-            android:name=".Mainscreen.screen_mymenu"
+            android:name=".Screen.screen_mymenu"
             android:exported="true" />
-        <activity android:name=".SplashActivity">
+        <activity android:name=".Screen.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Mainscreen.screen_main" />
-        <activity android:name=".screen_2" />
-        <activity android:name=".screen_3_address" />
-        <activity android:name=".screen_3_qr" />
-        <activity android:name=".screen_4" />
-        <activity android:name=".screen_5" />
-        <activity android:name=".Settingscreen.setting" />
+        <activity android:name=".Screen.screen_main" />
+        <activity android:name=".Screen.setting" />
     </application>
 
 </manifest>

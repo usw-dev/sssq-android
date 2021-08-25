@@ -1,14 +1,16 @@
-package com.example.android;
+package com.example.android.Screen;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-public class ScreenVerActivity extends AppCompatActivity {
+import com.example.android.R;
+
+public class screen_mymenu extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.screen_appver);
+        setContentView(R.layout.screen_mymenu);
     }
 }

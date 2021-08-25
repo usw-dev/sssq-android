@@ -1,4 +1,4 @@
-package com.example.android.Mainscreen;
+package com.example.android.Screen;
 
 import androidx.drawerlayout.widget.DrawerLayout;
 
@@ -7,31 +7,22 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
-import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.android.R;
-import com.example.android.Settingscreen.setting;
-import com.example.android.backbutton_event.backbutton_event;
-import com.example.android.data.BlockChainDAO;
+import com.example.android.Action.backbutton_event;
 import com.example.android.data.UserWallet;
-import com.example.android.drawer_sllide.drawer;
-import com.example.android.drawer_sllide.slide;
-import com.example.android.screen_2;
+import com.example.android.Action.drawer;
+import com.example.android.Action.slide;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
 
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
-import java.util.List;
 
 public class screen_main extends slide {
 
@@ -39,13 +30,14 @@ public class screen_main extends slide {
     private View drawerView;
     private Activity activity;
     private backbutton_event backbutton_event;
-    private com.example.android.drawer_sllide.drawer screen_1_drawer;
-    private com.example.android.drawer_sllide.slide screen_1_slide;
+    private com.example.android.Action.drawer screen_1_drawer;
+    private com.example.android.Action.slide screen_1_slide;
     private Button but_setting;
     private ImageButton but_refresh;
     private BarChart chart_month;
     private TextView address;
     private UserWallet user_wallet;
+    private Button button_ver;
 //    private BlockChainDAO BDAO = (BlockChainDAO) getApplicationContext();
 
     @Override
@@ -88,6 +80,18 @@ public class screen_main extends slide {
             }
         });
         //메인 -> 메뉴 -> 환경 설정
+
+
+        button_ver = findViewById(R.id.app_ver);
+
+        button_ver.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(screen_main.this, screen_appver.class);
+                startActivity(intent);
+            }
+        });
+        //메인 -> 메뉴 -> 앱 버전
 
 //        but_refresh = findViewById(R.id.button_refresh);
 //        but_refresh.setOnClickListener(new View.OnClickListener() {

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Settingscreen.setting"
+    tools:context=".Screen.setting"
     android:orientation="vertical">
 
     <LinearLayout
@@ -44,7 +44,6 @@
                 android:layout_height="80dp">
 
                 <Button
-                    android:id="@+id/app_info"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -52,30 +51,7 @@
                     android:textStyle="bold"
                     android:textColor="@color/black"
                     android:textSize="15dp"
-                    android:text="어플리케이션 정보"/>
-            </LinearLayout>
-
-            <View
-                android:layout_width="400dp"
-                android:layout_height="2dp"
-                android:layout_gravity="center"
-                android:background="@color/little_gray"/>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:gravity="start"
-                android:layout_height="80dp">
-
-                <Button
-                    android:id="@+id/app_ver"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:background="@color/invisible"
-                    android:textStyle="bold"
-                    android:textColor="@color/black"
-                    android:textSize="15dp"
-                    android:text="어플리케이션 버전"/>
+                    android:text="셋팅 1"/>
             </LinearLayout>
 
             <View
@@ -97,7 +73,29 @@
                     android:textStyle="bold"
                     android:textColor="@color/black"
                     android:textSize="15dp"
-                    android:text="문의하기"/>
+                    android:text="셋팅 2"/>
+            </LinearLayout>
+
+            <View
+                android:layout_width="400dp"
+                android:layout_height="2dp"
+                android:layout_gravity="center"
+                android:background="@color/little_gray"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:gravity="start"
+                android:layout_height="80dp">
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="@color/invisible"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"
+                    android:textSize="15dp"
+                    android:text="셋팅 3"/>
             </LinearLayout>
 
             <View
