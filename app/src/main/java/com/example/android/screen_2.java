@@ -7,7 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-import com.example.android.data.BlockChainDAO;
+//import com.example.android.data.BlockChainDAO;
 import com.example.android.data.UserWallet;
 
 import org.reactivestreams.Subscription;

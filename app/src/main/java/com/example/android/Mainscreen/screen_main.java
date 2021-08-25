@@ -46,13 +46,7 @@ public class screen_main extends slide {
     private BarChart chart_month;
     private TextView address;
     private UserWallet user_wallet;
-    private BlockChainDAO BDAO = (BlockChainDAO) getApplicationContext();
-
-    int[] colorArray = new int[]{Color.RED, Color.BLUE};
-//    boolean flag = true; //올라오고 내려온 상태
-//    Animation transup; //올라오는 애니메이션
-//    Animation transdown; //내려가는 애니메이션
-//    LinearLayout bottomSheet; // 올라오고 내려갈 최근거래내역
+//    private BlockChainDAO BDAO = (BlockChainDAO) getApplicationContext();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,15 +69,8 @@ public class screen_main extends slide {
         //드로어 레이아웃 오픈
 
         ImageButton account_button = (ImageButton) findViewById(R.id.account_button);
-//        //어카운트 이미지
-//
-//        Button button_setting = findViewById(R.id.but_setting);
-//
-//        account_button.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                screen_1_slide.onCreate(savedInstanceState);}
-//        });
+        //어카운트 이미지
+
         bottomSheet = findViewById(R.id.bottomSheet);
         transup = AnimationUtils.loadAnimation(this, R.anim.translateup); //xml 위로올리는거 적용
         transdown = AnimationUtils.loadAnimation(this, R.anim.translatedown); //xml 밑으로 내리는거 적용
@@ -102,38 +89,42 @@ public class screen_main extends slide {
         });
         //메인 -> 메뉴 -> 환경 설정
 
-        but_refresh = findViewById(R.id.button_refresh);
-        but_refresh.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                user_wallet = BDAO.getUserWallet();
-            }
-        });
+//        but_refresh = findViewById(R.id.button_refresh);
+//        but_refresh.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                user_wallet = BDAO.getUserWallet();
+//            }
+//        });
         //새로고침 버튼
 
         chart_month = (BarChart) findViewById(R.id.chart_month);
 
-        BarDataSet barDataSet = new BarDataSet(chart_values(), "Bar");
-        barDataSet.setColors(colorArray);
+        BarDataSet barDataSet = new BarDataSet(chart_values(),"수입");
+        barDataSet.setColors(Color.rgb(121,231,231));
+        BarDataSet barDataSet2 = new BarDataSet(chart_values2(),"지출");
+        barDataSet2.setColors(Color.WHITE);
 
-//        //q
-//        barDataSet.setColors(Color.BLUE); //q 색 colorArray
-//        // 그룹 만든 bar2
-//        BarDataSet barDataSet2 = new BarDataSet(chart_values2(),"지출");
-//        barDataSet2.setColors(Color.RED);
-//
-//        barDataSet.setDrawValues(false); //데이터 텍스트값 나타내지않음
-//        barDataSet2.setValueTextColor(Color.RED); //데이터2 글자색 빨강
-//        //q
-        BarData barData = new BarData(barDataSet);
-//        //q
-//        BarData barData = new BarData(barDataSet,barDataSet2);
-//        float groupSpace = 0.2f; //그룹사이 거리
-//        float barSpace = 0.02f; //그룹안 바 사이 거리
-//        float barWidth = 0.45f;// 전체 x축에서 한그룹의 넓이
-//        barData.setBarWidth(barWidth);
-//        barData.groupBars(0,groupSpace,barSpace);
-//        //q
+        barDataSet.setDrawValues(false); //데이터 텍스트값 나타내지않음
+        barDataSet2.setDrawValues(false); //데이터 텍스트값 나타내지않음
+
+        BarData barData = new BarData(barDataSet,barDataSet2);
+
+        float groupSpace = 0.2f; //그룹사이 거리
+        float barSpace = 0.02f; //그룹안 바 사이 거리
+        float barWidth = 0.45f;// 전체 x축에서 한그룹의 넓이
+        barData.setBarWidth(barWidth); //적용
+        barData.groupBars(0,groupSpace,barSpace); //적용
+
+        chart_month.setScaleEnabled(false); // 터치x
+        chart_month.getAxisLeft().setDrawGridLines(false); //y축(가로줄) 격자 x 두개 같이써야 없어짐
+        chart_month.getAxisLeft().setDrawAxisLine(false); // y축 왼쪽 선 제거
+        chart_month.getAxisLeft().setDrawLabels(false); // y축 왼쪽 라벨 제거
+        chart_month.getAxisRight().setDrawGridLines(false); //y축(가로줄) 격자 x 두개 같이써야 없어짐
+        chart_month.getAxisRight().setDrawAxisLine(false); // y축 오른쪽 선 제거
+        chart_month.getAxisRight().setDrawLabels(false); // y축 오른쪽 라벨 제거
+        chart_month.getXAxis().setEnabled(false); //x축(세로줄) 격자 x 하나만써도 되는듯
+        chart_month.getLegend().setEnabled(false); //레전드(차트밑에 색과 라벨을 나타내는 설정)을 제거
 
         chart_month.setData(barData);
         //차트
@@ -149,19 +140,19 @@ public class screen_main extends slide {
         dataVals.add(new BarEntry(7, new float[]{4}));
         return dataVals;
     }
-//    //q
-//    private ArrayList<BarEntry> chart_values2(){
-//        ArrayList dataVals = new ArrayList<>();
-//
-//        dataVals.add(new BarEntry(0,new float[]{4},5));
-//        dataVals.add(new BarEntry(1,new float[]{2}));
-//        dataVals.add(new BarEntry(3,new float[]{2}));
-//        dataVals.add(new BarEntry(4,new float[]{5}));
-//        dataVals.add(new BarEntry(6,new float[]{4}));
-//        dataVals.add(new BarEntry(7,new float[]{3}));
-//        return dataVals;
-//    }
-//    //q
+    //q
+    private ArrayList<BarEntry> chart_values2(){
+        ArrayList dataVals = new ArrayList<>();
+
+        dataVals.add(new BarEntry(0,new float[]{4},5));
+        dataVals.add(new BarEntry(1,new float[]{2}));
+        dataVals.add(new BarEntry(3,new float[]{2}));
+        dataVals.add(new BarEntry(4,new float[]{5}));
+        dataVals.add(new BarEntry(6,new float[]{4}));
+        dataVals.add(new BarEntry(7,new float[]{3}));
+        return dataVals;
+    }
+    //q
     @Override
     public void onBackPressed() {
         backbutton_event.backbutton();
