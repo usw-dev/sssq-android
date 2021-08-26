@@ -18,11 +18,14 @@ import com.example.android.data.UserWallet;
 import com.example.android.Action.drawer;
 import com.example.android.Action.slide;
 import com.github.mikephil.charting.charts.BarChart;
+import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
+import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class screen_main extends slide {
 
@@ -109,6 +112,8 @@ public class screen_main extends slide {
         BarDataSet barDataSet2 = new BarDataSet(chart_values2(),"지출");
         barDataSet2.setColors(Color.WHITE);
 
+        ArrayList<String> labels = new ArrayList<>(Arrays.asList("1월","2월","3월","4월","5월","6월"));//x축 String 라벨
+
         barDataSet.setDrawValues(false); //데이터 텍스트값 나타내지않음
         barDataSet2.setDrawValues(false); //데이터 텍스트값 나타내지않음
 
@@ -116,19 +121,25 @@ public class screen_main extends slide {
 
         float groupSpace = 0.2f; //그룹사이 거리
         float barSpace = 0.02f; //그룹안 바 사이 거리
-        float barWidth = 0.45f;// 전체 x축에서 한그룹의 넓이
+        float barWidth = 0.3f;// 전체 x축에서 한그룹의 넓이
         barData.setBarWidth(barWidth); //적용
         barData.groupBars(0,groupSpace,barSpace); //적용
 
-        chart_month.setScaleEnabled(false); // 터치x
+        chart_month.setTouchEnabled(false); // 터치x
         chart_month.getAxisLeft().setDrawGridLines(false); //y축(가로줄) 격자 x 두개 같이써야 없어짐
         chart_month.getAxisLeft().setDrawAxisLine(false); // y축 왼쪽 선 제거
         chart_month.getAxisLeft().setDrawLabels(false); // y축 왼쪽 라벨 제거
         chart_month.getAxisRight().setDrawGridLines(false); //y축(가로줄) 격자 x 두개 같이써야 없어짐
         chart_month.getAxisRight().setDrawAxisLine(false); // y축 오른쪽 선 제거
         chart_month.getAxisRight().setDrawLabels(false); // y축 오른쪽 라벨 제거
-        chart_month.getXAxis().setEnabled(false); //x축(세로줄) 격자 x 하나만써도 되는듯
+        chart_month.getXAxis().setDrawGridLines(false); // x축(세로줄) 격자 제거
+        chart_month.getXAxis().setDrawAxisLine(false); // x축 선 제거
+        chart_month.getXAxis().setDrawLabels(true); // x축 라벨 사용
+        chart_month.getXAxis().setTextColor(Color.WHITE); //x축라벨 색
+        chart_month.getXAxis().setPosition(XAxis.XAxisPosition.BOTTOM); // 라벨위치 아래로
         chart_month.getLegend().setEnabled(false); //레전드(차트밑에 색과 라벨을 나타내는 설정)을 제거
+        chart_month.getDescription().setEnabled(false); // 데스크립션 제거
+        chart_month.getXAxis().setValueFormatter(new IndexAxisValueFormatter(labels)); //115줄의 x축 String 라벨적용
 
         chart_month.setData(barData);
         //차트
@@ -138,10 +149,10 @@ public class screen_main extends slide {
 
         dataVals.add(new BarEntry(0, new float[]{3}, 5));
         dataVals.add(new BarEntry(1, new float[]{4}));
-        dataVals.add(new BarEntry(3, new float[]{5}));
+        dataVals.add(new BarEntry(2, new float[]{5}));
+        dataVals.add(new BarEntry(3, new float[]{2}));
         dataVals.add(new BarEntry(4, new float[]{2}));
-        dataVals.add(new BarEntry(6, new float[]{2}));
-        dataVals.add(new BarEntry(7, new float[]{4}));
+        dataVals.add(new BarEntry(5, new float[]{4}));
         return dataVals;
     }
     //q
@@ -150,10 +161,10 @@ public class screen_main extends slide {
 
         dataVals.add(new BarEntry(0,new float[]{4},5));
         dataVals.add(new BarEntry(1,new float[]{2}));
-        dataVals.add(new BarEntry(3,new float[]{2}));
-        dataVals.add(new BarEntry(4,new float[]{5}));
-        dataVals.add(new BarEntry(6,new float[]{4}));
-        dataVals.add(new BarEntry(7,new float[]{3}));
+        dataVals.add(new BarEntry(2,new float[]{2}));
+        dataVals.add(new BarEntry(3,new float[]{5}));
+        dataVals.add(new BarEntry(4,new float[]{4}));
+        dataVals.add(new BarEntry(5,new float[]{3}));
         return dataVals;
     }
     //q
