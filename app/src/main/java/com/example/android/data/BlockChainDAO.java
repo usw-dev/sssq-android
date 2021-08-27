@@ -27,7 +27,9 @@ public class BlockChainDAO extends Application{
         BigDecimal ether = Convert.fromWei(ethGetBalance.getBalance().toString(), Convert.Unit.ETHER);
 
         // 거래 내역 부분
-        Subscription subscription = (Subscription) web3j.replayPastTransactionsFlowable(DefaultBlockParameterName.EARLIEST,DefaultBlockParameterName.LATEST).subscribe(System.out::println);
+        Subscription subscription = (Subscription) web3j
+                .replayPastTransactionsFlowable(DefaultBlockParameterName.EARLIEST,DefaultBlockParameterName.LATEST)
+                .subscribe(tx->{tx.getFrom();});
 
         // UserWallet 생성 + 생성자 값 대입
         UserWallet userWallet = new UserWallet(address, ether, subscription);

@@ -121,7 +121,9 @@ public class ExampleUnitTest {
         // Subscription subscription = (Subscription) web3j.replayPastTransactionsFlowable(DefaultBlockParameterName.EARLIEST,DefaultBlockParameterName.LATEST).subscribe(System.out::println);
 
         // String txHash = ethSendTransaction.getTransactionHash();
-        Subscription subscription = (Subscription) web3j.replayPastTransactionsFlowable(DefaultBlockParameterName.EARLIEST,DefaultBlockParameterName.LATEST).subscribe(tx -> {
+        Subscription subscription = (Subscription) web3j
+                .replayPastTransactionsFlowable(DefaultBlockParameterName.EARLIEST,DefaultBlockParameterName.LATEST)
+                .subscribe(tx -> {
             System.out.println(tx.getBlockNumber() + " : " + tx.getBlockHash());
 
             System.out.println("from : " + tx.getFrom() + "    to : " + tx.getTo());
