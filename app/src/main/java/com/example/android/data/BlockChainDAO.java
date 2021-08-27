@@ -40,4 +40,3 @@ public class BlockChainDAO extends Application{
         return userWallet;
     }
 }
-
