@@ -5,9 +5,9 @@
     android:id="@+id/screen1"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/main_color"
+    android:background="#000000"
     android:orientation="vertical"
-    tools:context=".Mainscreen.screen_main">
+    tools:context=".Screen.screen_main">
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
@@ -18,7 +18,7 @@
             android:layout_height="match_parent"
             android:background="@color/main_color"
             android:orientation="vertical"
-            tools:context=".Mainscreen.screen_main">
+            tools:context=".Screen.screen_main">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -39,7 +39,7 @@
                         android:layout_gravity="center"
                         android:background="@color/main_color"
                         android:scaleType="fitStart"
-                        android:src="@drawable/icon_mymenu"></ImageButton>
+                        android:src="@drawable/icon_mymenu"/>
                 </LinearLayout>
 
                 <TextView
@@ -47,6 +47,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="3"
                     android:gravity="center"
+                    android:fontFamily="@font/arhelr14"
                     android:text="개인 지갑 정보"
                     android:textColor="@color/white"
                     android:textSize="20sp"
@@ -139,6 +140,7 @@
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
                                             android:layout_gravity="left"
+                                            android:fontFamily="@font/arhelr14"
                                             android:text="ADDRESS"
                                             android:textSize="20dp"
                                             android:textStyle="italic" />
@@ -155,6 +157,7 @@
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
                                             android:text="codi"
+                                            android:fontFamily="@font/arhelr14"
                                             android:textSize="20dp" />
                                     </LinearLayout>
 
@@ -176,15 +179,17 @@
                                         android:text="0"
                                         android:textColor="@color/black"
                                         android:textSize="30dp"
-                                        android:textStyle="bold" />
+                                        android:textStyle="bold"
+                                        android:fontFamily="@font/arktlrhrlb"/>
                                     <!--이더 액수-->
 
                                     <TextView
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:text="ETH"
+                                        android:text=" ETH"
                                         android:textColor="@color/black"
-                                        android:textSize="30dp" />
+                                        android:textSize="30dp"
+                                        android:fontFamily="@font/arktlrhrlb"/>
                                     <!--ETH-->
                                 </LinearLayout>
                                 <!--ETH-->
@@ -205,7 +210,8 @@
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
                                             android:layout_gravity="bottom"
-                                            android:text="NAME"/>
+                                            android:text="NAME"
+                                            android:fontFamily="@font/arhelr14"/>
                                     </LinearLayout>
                                     <!--name-->
 
@@ -217,7 +223,7 @@
                                         <ImageView
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
-                                            android:src="@drawable/icon_codi"/>
+                                            android:src="@drawable/icon_codi" />
                                     </LinearLayout>
                                     <!--codi_image-->
                                 </LinearLayout>
@@ -286,7 +292,8 @@
                         android:text="월별 수익 / 지출"
                         android:textColor="@color/white"
                         android:textSize="20sp"
-                        android:textStyle="bold"></TextView>
+                        android:fontFamily="@font/arhelr14"
+                        android:textStyle="bold"/>
 
                 </LinearLayout>
 
