@@ -112,18 +112,20 @@ public class screen_main extends slide {
         BarDataSet barDataSet2 = new BarDataSet(chart_values2(),"지출");
         barDataSet2.setColors(Color.WHITE);
 
-        ArrayList<String> labels = new ArrayList<>(Arrays.asList("1월","2월","3월","4월","5월","6월"));//x축 String 라벨
+//        ArrayList<String> labels = new ArrayList<>(Arrays.asList("1월","2월","3월","4월","5월","6월"));//x축 String 라벨
+        String[] labels = new String[]{"01월","02월","03월","04월","05월","06월"}; //위처럼 x축 string
 
         barDataSet.setDrawValues(false); //데이터 텍스트값 나타내지않음
         barDataSet2.setDrawValues(false); //데이터 텍스트값 나타내지않음
 
         BarData barData = new BarData(barDataSet,barDataSet2);
 
-        float groupSpace = 0.2f; //그룹사이 거리
+        float groupSpace = 0.56f; //그룹사이 거리
         float barSpace = 0.02f; //그룹안 바 사이 거리
-        float barWidth = 0.3f;// 전체 x축에서 한그룹의 넓이
+        float barWidth = 0.2f;// 전체 x축에서 한그룹의 넓이
         barData.setBarWidth(barWidth); //적용
-        barData.groupBars(0,groupSpace,barSpace); //적용
+        barData.groupBars(-0,groupSpace,barSpace); //적용
+//        barData.getGroupWidth(0,0);
 
         chart_month.setTouchEnabled(false); // 터치x
         chart_month.getAxisLeft().setDrawGridLines(false); //y축(가로줄) 격자 x 두개 같이써야 없어짐
@@ -136,35 +138,37 @@ public class screen_main extends slide {
         chart_month.getXAxis().setDrawAxisLine(false); // x축 선 제거
         chart_month.getXAxis().setDrawLabels(true); // x축 라벨 사용
         chart_month.getXAxis().setTextColor(Color.WHITE); //x축라벨 색
+        chart_month.getXAxis().setLabelCount(6); // 라벨6개 고정
+        chart_month.getXAxis().setCenterAxisLabels(true); //라벨 가운데로
         chart_month.getXAxis().setPosition(XAxis.XAxisPosition.BOTTOM); // 라벨위치 아래로
         chart_month.getLegend().setEnabled(false); //레전드(차트밑에 색과 라벨을 나타내는 설정)을 제거
         chart_month.getDescription().setEnabled(false); // 데스크립션 제거
         chart_month.getXAxis().setValueFormatter(new IndexAxisValueFormatter(labels)); //115줄의 x축 String 라벨적용
-
+        // false true
         chart_month.setData(barData);
         //차트
     };
     private ArrayList<BarEntry> chart_values() {
         ArrayList dataVals = new ArrayList<>();
 
-        dataVals.add(new BarEntry(0, new float[]{3}, 5));
+        dataVals.add(new BarEntry(0, new float[]{3}));
         dataVals.add(new BarEntry(1, new float[]{4}));
         dataVals.add(new BarEntry(2, new float[]{5}));
-        dataVals.add(new BarEntry(3, new float[]{2}));
         dataVals.add(new BarEntry(4, new float[]{2}));
-        dataVals.add(new BarEntry(5, new float[]{4}));
+        dataVals.add(new BarEntry(5, new float[]{2}));
+        dataVals.add(new BarEntry(6, new float[]{4}));
         return dataVals;
     }
     //q
     private ArrayList<BarEntry> chart_values2(){
         ArrayList dataVals = new ArrayList<>();
 
-        dataVals.add(new BarEntry(0,new float[]{4},5));
+        dataVals.add(new BarEntry(0,new float[]{4}));
         dataVals.add(new BarEntry(1,new float[]{2}));
         dataVals.add(new BarEntry(2,new float[]{2}));
-        dataVals.add(new BarEntry(3,new float[]{5}));
-        dataVals.add(new BarEntry(4,new float[]{4}));
-        dataVals.add(new BarEntry(5,new float[]{3}));
+        dataVals.add(new BarEntry(4,new float[]{5}));
+        dataVals.add(new BarEntry(5,new float[]{4}));
+        dataVals.add(new BarEntry(6,new float[]{3}));
         return dataVals;
     }
     //q
