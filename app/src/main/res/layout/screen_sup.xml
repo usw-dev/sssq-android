@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".Screen.setting">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="문의하기"
+            android:textColor="@color/black"
+            android:textSize="30dp"
+            android:textStyle="bold" />
+    </LinearLayout>
+    <!--    제목 부분-->
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@color/black" />
+    <!--    구분선-->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/arhelr14"
+                android:text="송치훈"
+                android:textColor="@color/black"
+                android:textSize="40dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Leader"
+                android:textSize="20dp" />
+
+            <TextView
+                android:id="@+id/sup_thd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/thd"
+                android:textSize="20dp"
+                android:textColor="@color/blue"/>
+            <!--송치훈-->
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/arhelr14"
+                android:text="김규민"
+                android:textColor="@color/black"
+                android:textSize="40dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Frontend &amp; Backend"
+                android:textSize="20dp" />
+
+            <TextView
+                android:id="@+id/sup_rla"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/rla"
+                android:textSize="20dp"
+                android:textColor="@color/blue"/>
+            <!--김규민-->
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/arhelr14"
+                android:text="민철홍"
+                android:textColor="@color/black"
+                android:textSize="40dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Frontend &amp; Backend"
+                android:textSize="20dp" />
+
+            <TextView
+                android:id="@+id/sup_als"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/als"
+                android:textSize="20dp"
+                android:textColor="@color/blue" />
+            <!--민철홍-->
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/arhelr14"
+                android:text="안유태"
+                android:textColor="@color/black"
+                android:textSize="40dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Backend"
+                android:textSize="20dp" />
+
+            <TextView
+                android:id="@+id/sup_dks"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/dks"
+                android:textSize="20dp"
+                android:textColor="@color/blue" />
+            <!--안유태-->
+        </LinearLayout>
+    </LinearLayout>
+    <!--이메일 리스트-->
+</LinearLayout>

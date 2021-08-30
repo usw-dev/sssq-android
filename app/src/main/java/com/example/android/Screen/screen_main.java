@@ -41,7 +41,8 @@ public class screen_main extends slide {
     private TextView address;
     private UserWallet user_wallet;
     private Button button_ver;
-//    private BlockChainDAO BDAO = (BlockChainDAO) getApplicationContext();
+    private Button button_info;
+    private Button button_sup;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -96,6 +97,27 @@ public class screen_main extends slide {
         });
         //메인 -> 메뉴 -> 앱 버전
 
+        button_info = findViewById(R.id.app_info);
+
+        button_info.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(screen_main.this, screen_appinfo.class);
+                startActivity(intent);
+            }
+        });
+        //메인 -> 메뉴 -> 앱 정보
+
+        button_sup = findViewById(R.id.app_sup);
+
+        button_sup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(screen_main.this, screen_sup.class);
+                startActivity(intent);
+            }
+        });
+        //메인 -> 메뉴 -> 문의하기
 //        but_refresh = findViewById(R.id.button_refresh);
 //        but_refresh.setOnClickListener(new View.OnClickListener() {
 //            @Override

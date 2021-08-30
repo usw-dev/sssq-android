@@ -25,6 +25,7 @@
             android:backgroundTint="@color/green"/>
 
         <Button
+            android:id="@+id/app_info"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="앱 정보"
@@ -44,6 +45,7 @@
             android:backgroundTint="@color/green"/>
 
         <Button
+            android:id="@+id/app_sup"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="문의하기"
