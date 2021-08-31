@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".Screen.setting">
+    tools:context=".Screen.setting"
+    android:background="@color/white">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -54,6 +55,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Leader"
+                android:textColor="@color/gray"
                 android:textSize="20dp" />
 
             <TextView
@@ -86,6 +88,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Frontend &amp; Backend"
+                android:textColor="@color/gray"
                 android:textSize="20dp" />
 
             <TextView
@@ -118,6 +121,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Frontend &amp; Backend"
+                android:textColor="@color/gray"
                 android:textSize="20dp" />
 
             <TextView
@@ -150,6 +154,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Backend"
+                android:textColor="@color/gray"
                 android:textSize="20dp" />
 
             <TextView

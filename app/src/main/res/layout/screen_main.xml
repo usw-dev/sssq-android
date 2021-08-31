@@ -143,6 +143,7 @@
                                             android:fontFamily="@font/arhelr14"
                                             android:text="ADDRESS"
                                             android:textSize="20dp"
+                                            android:textColor="@color/gray"
                                             android:textStyle="italic" />
                                     </LinearLayout>
                                     <!--address-->
@@ -158,7 +159,8 @@
                                             android:layout_height="wrap_content"
                                             android:text="codi"
                                             android:fontFamily="@font/arhelr14"
-                                            android:textSize="20dp" />
+                                            android:textSize="20dp"
+                                            android:textColor="@color/gray"/>
                                     </LinearLayout>
 
                                     <!--codi-->
@@ -211,6 +213,7 @@
                                             android:layout_height="wrap_content"
                                             android:layout_gravity="bottom"
                                             android:text="NAME"
+                                            android:textColor="@color/gray"
                                             android:fontFamily="@font/arhelr14"/>
                                     </LinearLayout>
                                     <!--name-->
