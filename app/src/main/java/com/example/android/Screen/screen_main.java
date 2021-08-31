@@ -67,12 +67,15 @@ public class screen_main extends slide {
         ImageButton account_button = (ImageButton) findViewById(R.id.account_button);
         //어카운트 이미지
 
-        bottomSheet = findViewById(R.id.bottomSheet);
+        senddata = findViewById(R.id.senddata);
         transup = AnimationUtils.loadAnimation(this, R.anim.translateup); //xml 위로올리는거 적용
         transdown = AnimationUtils.loadAnimation(this, R.anim.translatedown); //xml 밑으로 내리는거 적용
         Sliding animationListener = new Sliding(); //sliding 리스너 생성
         transup.setAnimationListener(animationListener); //transup에 리스너 적용
         transdown.setAnimationListener(animationListener);
+
+        sendaddress = findViewById(R.id.sendaddress);
+        sendmoney = findViewById(R.id.sendmoney);
         //계좌 터치 시 애니메이션 이벤트
 
         but_setting = findViewById(R.id.but_setting);

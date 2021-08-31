@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 
 import com.example.android.R;
@@ -18,7 +19,9 @@ public class slide extends AppCompatActivity {
     public static boolean flag = true; //올라오고 내려온 상태
     public Animation transup; //올라오는 애니메이션
     public Animation transdown; //내려가는 애니메이션
-    public LinearLayout bottomSheet; // 올라오고 내려갈 최근거래내역
+    public static LinearLayout senddata; // 올라오고 내려갈 송금
+    public EditText sendaddress; //송금하기 주소
+    public EditText sendmoney; //송금하기 이더
 
 //    @Override
 //    public void onCreate(Bundle savedInstanceState) {
@@ -37,10 +40,10 @@ public class slide extends AppCompatActivity {
 
     public void IB_clicked(View v) {
         if (flag) {
-            bottomSheet.startAnimation(transup); //올림
+            senddata.startAnimation(transup); //올림
         } else {
-            bottomSheet.setVisibility(View.VISIBLE);
-            bottomSheet.startAnimation(transdown); //내림
+            senddata.setVisibility(View.VISIBLE);
+            senddata.startAnimation(transdown); //내림
         }
     }
 
@@ -53,6 +56,7 @@ public class slide extends AppCompatActivity {
         public void onAnimationEnd(Animation animation) {
             //애니메이션 종료할때 호출되는 메서드
             if (flag) {
+                senddata.setVisibility(View.INVISIBLE);
                 flag = false; //
             }
             else {
