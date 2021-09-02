@@ -1,5 +1,7 @@
 package com.example.android.Screen;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.app.Activity;
@@ -9,7 +11,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.android.R;
@@ -23,11 +27,12 @@ import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
+import com.google.android.material.bottomsheet.BottomSheetBehavior;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class screen_main extends slide {
+public class screen_main extends AppCompatActivity {
 
     private DrawerLayout drawerLayout;
     private View drawerView;
@@ -43,6 +48,10 @@ public class screen_main extends slide {
     private Button button_ver;
     private Button button_info;
     private Button button_sup;
+    private LinearLayout senddata;
+    private BottomSheetBehavior behavior;
+    private EditText sendaddress; //송금하기 주소
+    private EditText sendmoney; //송금하기 이더
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,18 +73,33 @@ public class screen_main extends slide {
         screen_1_drawer.drawer(drawerLayout, drawerView, btn_mymenu);
         //드로어 레이아웃 오픈
 
-        ImageButton account_button = (ImageButton) findViewById(R.id.account_button);
-        //어카운트 이미지
-
         senddata = findViewById(R.id.senddata);
-        transup = AnimationUtils.loadAnimation(this, R.anim.translateup); //xml 위로올리는거 적용
-        transdown = AnimationUtils.loadAnimation(this, R.anim.translatedown); //xml 밑으로 내리는거 적용
-        Sliding animationListener = new Sliding(); //sliding 리스너 생성
-        transup.setAnimationListener(animationListener); //transup에 리스너 적용
-        transdown.setAnimationListener(animationListener);
+        behavior = BottomSheetBehavior.from(senddata);
+        ImageButton account_button = findViewById(R.id.account_button);
+        account_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(behavior.getState()!=BottomSheetBehavior.STATE_HALF_EXPANDED){
+                    behavior.setState(BottomSheetBehavior.STATE_HALF_EXPANDED);
+
+                }
+                else {
+                    behavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+                }
+            }
+        });
 
         sendaddress = findViewById(R.id.sendaddress);
         sendmoney = findViewById(R.id.sendmoney);
+
+//        transup = AnimationUtils.loadAnimation(this, R.anim.translateup); //xml 위로올리는거 적용
+//        transdown = AnimationUtils.loadAnimation(this, R.anim.translatedown); //xml 밑으로 내리는거 적용
+//        Sliding animationListener = new Sliding(); //sliding 리스너 생성
+//        transup.setAnimationListener(animationListener); //transup에 리스너 적용
+//        transdown.setAnimationListener(animationListener);
+//
+//        sendaddress = findViewById(R.id.sendaddress);
+//        sendmoney = findViewById(R.id.sendmoney);
         //계좌 터치 시 애니메이션 이벤트
 
         but_setting = findViewById(R.id.but_setting);

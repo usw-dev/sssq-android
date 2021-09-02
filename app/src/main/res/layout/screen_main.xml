@@ -99,7 +99,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:background="@color/main_color"
-                            android:onClick="IB_clicked"
+
                             android:scaleType="fitCenter"
                             android:src="@drawable/image_account" />
                         <!--카드 배경 부분-->
@@ -334,8 +334,8 @@
             </LinearLayout>
         </LinearLayout>
 
-        <include layout="@layout/screen_senddata" />
         <include layout="@layout/screen_trhistory" />
+        <include layout="@layout/screen_senddata" />
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
     <include layout="@layout/screen_mymenu" />

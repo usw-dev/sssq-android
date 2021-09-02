@@ -7,7 +7,8 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     app:behavior_hideable="false"
-    app:behavior_peekHeight="50dp"
+    app:behavior_peekHeight="0dp"
+    app:behavior_draggable="false"
     app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
 
     <LinearLayout
@@ -51,15 +52,13 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
+                android:layout_height="match_parent"
+                android:gravity="center|top"
                 android:orientation="vertical">
-
                 <LinearLayout
                     android:layout_width="350dp"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
-
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -68,7 +67,6 @@
                         android:textColor="@color/black"
                         android:textSize="20sp"></TextView>
                 </LinearLayout>
-
                 <LinearLayout
                     android:layout_width="350dp"
                     android:layout_height="wrap_content"
@@ -79,18 +77,15 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:ems="10"
-                        android:gravity="right"
                         android:hint="address"
                         android:inputType="textPersonName"
                         android:textColor="@color/black"
                         android:textSize="30sp"></EditText>
                 </LinearLayout>
-
                 <LinearLayout
                     android:layout_width="350dp"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
-
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -99,18 +94,15 @@
                         android:textColor="@color/black"
                         android:textSize="20sp"></TextView>
                 </LinearLayout>
-
                 <LinearLayout
                     android:layout_width="350dp"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
-
                     <EditText
                         android:id="@+id/sendmoney"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:ems="10"
-                        android:gravity="right"
                         android:hint="Eth"
                         android:inputType="number"
                         android:textColor="@color/black"
@@ -119,7 +111,18 @@
             </LinearLayout>
         </LinearLayout>
 
+        <Button
+            android:id="@+id/data_send"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:text="Send"
+            android:textColor="#E4D7D7"
+            android:textColorHint="#CDBCBC"
+            app:rippleColor="#C37F7F" />
     </LinearLayout>
+
+
 
 
 </LinearLayout>
