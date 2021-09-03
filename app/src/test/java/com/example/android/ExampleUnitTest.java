@@ -57,10 +57,16 @@ public class ExampleUnitTest {
         this.tx = tx;
     }
 
+    List<tx> txInfo = new ArrayList<>();
+
+    public void testin(String txHash, String txTo, BigInteger txValue) {
+        txInfo.add(new tx(txHash,txTo,txValue));
+    }
+
     @Test
     public void testEth() throws Exception {
         // web3j와 ganache-cli 연결
-        Web3j web3j = Web3j.build(new HttpService("http://3.38.108.59:8547"));
+        Web3j web3j = Web3j.build(new HttpService("http://13.125.181.148:8547"));
         // 연결된 ganache-cli에 있는 계정 정보 get
         EthAccounts ethAccounts = web3j.ethAccounts().sendAsync().get();
         // ganache-cli 버전 get
@@ -121,13 +127,16 @@ public class ExampleUnitTest {
         // Subscription subscription = (Subscription) web3j.replayPastTransactionsFlowable(DefaultBlockParameterName.EARLIEST,DefaultBlockParameterName.LATEST).subscribe(System.out::println);
 
         // String txHash = ethSendTransaction.getTransactionHash();
+
         Subscription subscription = (Subscription) web3j
                 .replayPastTransactionsFlowable(DefaultBlockParameterName.EARLIEST,DefaultBlockParameterName.LATEST)
                 .subscribe(tx -> {
             System.out.println(tx.getBlockNumber() + " : " + tx.getBlockHash());
-
+            System.out.println("tx : " + tx.getHash());
             System.out.println("from : " + tx.getFrom() + "    to : " + tx.getTo());
             System.out.println("value : " + tx.getValue());
+
+            testin(tx.getHash(),tx.getTo(),tx.getValue());
         });
 
 //        EthGetTransactionReceipt transactionReceipt = web3j.ethGetTransactionReceipt(txHash).send();
@@ -138,13 +147,24 @@ public class ExampleUnitTest {
 
         //System.out.println(subscription);
         // System.out.println(this.tx);
+
+        Thread.sleep(2000);
+
+        System.out.println();
+        System.out.println();
+
+        for(tx ti : txInfo) {
+            System.out.println("txHash : " + ti.getTxHash());
+            System.out.println("txTo : " + ti.getTxTo());
+            System.out.println("txValue : " + ti.getTxValue());
+        }
     }
 
     @Test
     public void transfer() throws Exception {
         // web3j와 ganache-cli 연결
-        Web3j web3j = Web3j.build(new HttpService("http://3.38.108.59:8547"));
-        Admin admin = Admin.build(new HttpService("http://3.38.108.59:8547"));
+        Web3j web3j = Web3j.build(new HttpService("http://13.125.181.148:8547"));
+        Admin admin = Admin.build(new HttpService("http://13.125.181.148:8547"));
         // 연결된 ganache-cli에 있는 계정 정보 get
         EthAccounts ethAccounts = web3j.ethAccounts().sendAsync().get();
         // ganache-cli 버전 get
@@ -175,7 +195,7 @@ public class ExampleUnitTest {
         String fromTx = userWallets.get(0).getAddress();
         String toTx = userWallets.get(1).getAddress();
         String contractAddress = "0xb4B6a6Aa93b5Dd8aACD02b83Eb6b5017a3Fdd94C";
-        String etherTx = "10";
+        String etherTx = "3";
 
         // set
         Function function = new Function(
@@ -191,7 +211,17 @@ public class ExampleUnitTest {
         EthSendTransaction transactionResponse = web3j.ethSendTransaction(transaction).sendAsync().get();
         String transactionHash = transactionResponse.getTransactionHash();
         System.out.println(transactionHash);
+        Thread.sleep(3000);
         EthGetTransactionReceipt transactionReceipt = web3j.ethGetTransactionReceipt(transactionHash).send();
+        if(transactionReceipt.getTransactionReceipt().isPresent())
+        {
+            // 9. 결과확인
+            System.out.println("transactionReceipt.getResult().getContractAddress() = " +
+                    transactionReceipt.getResult());
+        }
+        else {
+            System.out.println("transaction complete not yet");
+        }
         TransactionReceipt receipt = transactionReceipt.getResult();
         System.out.println("receipt : " + receipt);
 
@@ -229,8 +259,8 @@ public class ExampleUnitTest {
     @Test
     public void payment() throws Exception {
         // web3j와 ganache-cli 연결
-        Web3j web3j = Web3j.build(new HttpService("http://3.38.108.59:8547"));
-        Admin admin = Admin.build(new HttpService("http://3.38.108.59:8547"));
+        Web3j web3j = Web3j.build(new HttpService("http://13.125.181.148:8547"));
+        Admin admin = Admin.build(new HttpService("http://13.125.181.148:8547"));
         // 연결된 ganache-cli에 있는 계정 정보 get
         EthAccounts ethAccounts = web3j.ethAccounts().sendAsync().get();
 
