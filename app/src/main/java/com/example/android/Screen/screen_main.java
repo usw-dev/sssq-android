@@ -102,17 +102,6 @@ public class screen_main extends AppCompatActivity {
 //        sendmoney = findViewById(R.id.sendmoney);
         //계좌 터치 시 애니메이션 이벤트
 
-        but_setting = findViewById(R.id.but_setting);
-        but_setting.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(screen_main.this, setting.class);
-                startActivity(intent);
-            }
-        });
-        //메인 -> 메뉴 -> 환경 설정
-
-
         button_ver = findViewById(R.id.app_ver);
 
         button_ver.setOnClickListener(new View.OnClickListener() {

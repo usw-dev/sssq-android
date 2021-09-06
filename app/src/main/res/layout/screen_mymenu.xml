@@ -15,16 +15,6 @@
         android:orientation="vertical">
 
         <Button
-            android:id="@+id/but_setting"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="환경설정"
-            android:textColor="@color/main_color"
-            android:textSize="30sp"
-            android:textStyle="bold"
-            android:backgroundTint="@color/green"/>
-
-        <Button
             android:id="@+id/app_info"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
