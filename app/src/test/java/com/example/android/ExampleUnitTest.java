@@ -60,7 +60,7 @@ public class ExampleUnitTest {
     @Test
     public void testEth() throws Exception {
         // web3j와 ganache-cli 연결
-        Web3j web3j = Web3j.build(new HttpService("http://3.38.108.59:8547"));
+        Web3j web3j = Web3j.build(new HttpService("http://52.79.255.216:8547"));
         // 연결된 ganache-cli에 있는 계정 정보 get
         EthAccounts ethAccounts = web3j.ethAccounts().sendAsync().get();
         // ganache-cli 버전 get
