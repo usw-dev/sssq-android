@@ -7,6 +7,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.view.animation.AnimationUtils;
@@ -19,6 +20,7 @@ import android.widget.TextView;
 import com.example.android.Action.chart;
 import com.example.android.R;
 import com.example.android.Action.backbutton_event;
+import com.example.android.data.Connect;
 import com.example.android.data.UserWallet;
 import com.example.android.Action.drawer;
 import com.example.android.Action.slide;
@@ -31,8 +33,17 @@ import com.github.mikephil.charting.data.DataSet;
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 
+import org.web3j.protocol.Web3j;
+import org.web3j.protocol.Web3jService;
+import org.web3j.protocol.core.DefaultBlockParameterName;
+import org.web3j.protocol.core.methods.response.EthGetBalance;
+import org.web3j.protocol.http.HttpService;
+import org.web3j.utils.Convert;
+
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.concurrent.ExecutionException;
 
 public class screen_main extends AppCompatActivity {
 
@@ -43,6 +54,7 @@ public class screen_main extends AppCompatActivity {
     private com.example.android.Action.drawer screen_1_drawer;
     private com.example.android.Action.slide screen_1_slide;
     private com.example.android.Action.chart screen_1_chart;
+    private com.example.android.data.Connect connect;
     private BarChart chart_month;
     private Button but_setting;
     private ImageButton but_refresh;
@@ -55,13 +67,19 @@ public class screen_main extends AppCompatActivity {
     private BottomSheetBehavior behavior;
     private EditText sendaddress; //송금하기 주소
     private EditText sendmoney; //송금하기 이더
+    private TextView zkem;
+    public static Web3j web3j;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.screen_main);
 
+        zkem = findViewById(R.id.card_ETH);
+
         screen_1_drawer = new drawer();
+
         //드로어 레이아웃
         backbutton_event = new backbutton_event(this);
         //뒤로가기 이벤트
@@ -137,14 +155,6 @@ public class screen_main extends AppCompatActivity {
             }
         });
         //메인 -> 메뉴 -> 문의하기
-//        but_refresh = findViewById(R.id.button_refresh);
-//        but_refresh.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                user_wallet = BDAO.getUserWallet();
-//            }
-//        });
-        //새로고침 버튼
 
         screen_1_chart = new chart();
 
@@ -171,6 +181,45 @@ public class screen_main extends AppCompatActivity {
         // false true
         chart_month.setData(screen_1_chart.barchart());
         //차트
+
+        but_refresh = findViewById(R.id.button_refresh);
+
+
+        connect = new Connect();
+
+
+
+        but_refresh.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String EEEE = null;
+
+//                new AsyncTask() {
+//                    String ether;
+//                    @Override
+//                    protected Object doInBackground(Object[] objects) {
+//
+//
+//                        try {
+//                            web3j = Web3j.build(new HttpService("http://52.79.255.216:8547"));
+//                            EthGetBalance ethGetBalance = web3j.ethGetBalance("0xf480fb1d4f32b7797c829d6f05bb0805c152b3ec", DefaultBlockParameterName.LATEST).sendAsync().get();
+//                            BigDecimal eth = Convert.fromWei(ethGetBalance.getBalance().toString(), Convert.Unit.ETHER);
+//                            ether = eth.toString();
+//                        } catch (ExecutionException | InterruptedException e) {
+//                            ether = "err";
+//                        }
+//
+//                        return null;
+//                    }
+//                }.execute();
+                    EEEE = connect.connect(web3j);
+
+
+                zkem.setText(EEEE);
+            }
+        });
+
+
     };
     @Override
     public void onBackPressed() {

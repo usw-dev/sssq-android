@@ -17,6 +17,7 @@ import org.web3j.protocol.core.DefaultBlockParameterNumber;
 import org.web3j.protocol.core.methods.request.EthFilter;
 import org.web3j.protocol.core.methods.request.Transaction;
 import org.web3j.protocol.core.methods.response.EthAccounts;
+import org.web3j.protocol.core.methods.response.EthBlock;
 import org.web3j.protocol.core.methods.response.EthCall;
 import org.web3j.protocol.core.methods.response.EthGetBalance;
 import org.web3j.protocol.core.methods.response.EthGetTransactionReceipt;
@@ -30,10 +31,13 @@ import org.web3j.utils.Convert;
 import java.lang.annotation.Target;
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import jnr.ffi.Struct;
 
@@ -59,14 +63,14 @@ public class ExampleUnitTest {
 
     List<tx> txInfo = new ArrayList<>();
 
-    public void testin(String txHash, String txTo, BigInteger txValue) {
-        txInfo.add(new tx(txHash,txTo,txValue));
+    public void testin(String txHash, String txTo, BigInteger txValue, String timestamp) {
+        txInfo.add(new tx(txHash,txTo,txValue,timestamp));
     }
 
     @Test
     public void testEth() throws Exception {
         // web3j와 ganache-cli 연결
-        Web3j web3j = Web3j.build(new HttpService("http://13.125.181.148:8547"));
+        Web3j web3j = Web3j.build(new HttpService("http://3.35.54.22:8547"));
         // 연결된 ganache-cli에 있는 계정 정보 get
         EthAccounts ethAccounts = web3j.ethAccounts().sendAsync().get();
         // ganache-cli 버전 get
@@ -131,13 +135,17 @@ public class ExampleUnitTest {
         Subscription subscription = (Subscription) web3j
                 .replayPastTransactionsFlowable(DefaultBlockParameterName.EARLIEST,DefaultBlockParameterName.LATEST)
                 .subscribe(tx -> {
-            System.out.println(tx.getBlockNumber() + " : " + tx.getBlockHash());
-            System.out.println("tx : " + tx.getHash());
-            System.out.println("from : " + tx.getFrom() + "    to : " + tx.getTo());
-            System.out.println("value : " + tx.getValue());
+//            System.out.println(tx.getBlockNumber() + " : " + tx.getBlockHash());
+//            System.out.println("tx : " + tx.getHash());
+//            System.out.println("from : " + tx.getFrom() + "    to : " + tx.getTo());
+//            System.out.println("value : " + tx.getValue());
+                    EthBlock ethBlock = web3j.ethGetBlockByHash(tx.getBlockHash(),false).send();
+                    long timestamp = ethBlock.getBlock().getTimestamp().longValue();
+                    SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.KOREA);
+                    String ts = sdf.format( new Date(timestamp*1000L));
 
-            testin(tx.getHash(),tx.getTo(),tx.getValue());
-        });
+                    testin(tx.getHash(),tx.getTo(),tx.getValue(),ts);
+                });
 
 //        EthGetTransactionReceipt transactionReceipt = web3j.ethGetTransactionReceipt(txHash).send();
 //        TransactionReceipt receipt = transactionReceipt.getResult();
@@ -157,6 +165,9 @@ public class ExampleUnitTest {
             System.out.println("txHash : " + ti.getTxHash());
             System.out.println("txTo : " + ti.getTxTo());
             System.out.println("txValue : " + ti.getTxValue());
+            System.out.println("timestamp : " + ti.getTimestamp());
+
+            System.out.println();
         }
     }
 

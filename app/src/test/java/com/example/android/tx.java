@@ -6,11 +6,13 @@ public class tx {
     private String txHash;
     private String txTo;
     private BigInteger txValue;
+    private String timestamp;
 
-    public tx(String txHash, String txTo, BigInteger txValue) {
+    public tx(String txHash, String txTo, BigInteger txValue, String timestamp) {
         this.txHash = txHash;
         this.txTo = txTo;
         this.txValue = txValue;
+        this.timestamp = timestamp;
     }
 
     public String getTxHash() { return  txHash; }
@@ -21,4 +23,7 @@ public class tx {
 
     public BigInteger getTxValue() { return  txValue; }
     public void setTxValue(BigInteger txValue) { this.txValue = txValue; }
+
+    public String getTimestamp() { return  timestamp; }
+    public void setTimestamp(String timestamp) { this.timestamp = timestamp; }
 }

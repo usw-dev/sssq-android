@@ -26,7 +26,7 @@ public class screen_sup extends AppCompatActivity {
             public void onClick(View v) {
                 Intent email = new Intent(Intent.ACTION_SEND);
                 email.setType("plain/text");
-                String[] address = {"clgns0415@suwon.ac.kr"};
+                String[] address = {"clgns0415@gmail.com"};
                 email.putExtra(Intent.EXTRA_EMAIL, address);
                 startActivity(email);
             }
