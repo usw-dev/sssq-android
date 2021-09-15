@@ -23,8 +23,6 @@ public class Connect {
         new AsyncTask() {
             @Override
             protected Object doInBackground(Object[] objects) {
-
-
                 try {
                     Web3j web3j = Web3j.build(new HttpService("http://52.79.255.216:8547"));
                     EthGetBalance ethGetBalance = web3j.ethGetBalance("0xf480fb1d4f32b7797c829d6f05bb0805c152b3ec", DefaultBlockParameterName.LATEST).sendAsync().get();

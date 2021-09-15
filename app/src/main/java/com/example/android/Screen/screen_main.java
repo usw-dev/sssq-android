@@ -155,14 +155,6 @@ public class screen_main extends AppCompatActivity {
             }
         });
         //메인 -> 메뉴 -> 문의하기
-//        but_refresh = findViewById(R.id.button_refresh);
-//        but_refresh.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                user_wallet = BDAO.getUserWallet();
-//            }
-//        });
-        //새로고침 버튼
 
         screen_1_chart = new chart();
 
