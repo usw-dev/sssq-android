@@ -5,8 +5,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.app.Activity;
+import android.content.ContentValues;
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.view.animation.AnimationUtils;
@@ -19,6 +21,7 @@ import android.widget.TextView;
 import com.example.android.Action.chart;
 import com.example.android.R;
 import com.example.android.Action.backbutton_event;
+import com.example.android.data.Connect;
 import com.example.android.data.UserWallet;
 import com.example.android.Action.drawer;
 import com.example.android.Action.slide;
@@ -41,7 +44,6 @@ public class screen_main extends AppCompatActivity {
     private Activity activity;
     private backbutton_event backbutton_event;
     private com.example.android.Action.drawer screen_1_drawer;
-    private com.example.android.Action.slide screen_1_slide;
     private com.example.android.Action.chart screen_1_chart;
     private BarChart chart_month;
     private Button but_setting;
@@ -55,6 +57,7 @@ public class screen_main extends AppCompatActivity {
     private BottomSheetBehavior behavior;
     private EditText sendaddress; //송금하기 주소
     private EditText sendmoney; //송금하기 이더
+    private static TextView card_eth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,13 +68,13 @@ public class screen_main extends AppCompatActivity {
         //드로어 레이아웃
         backbutton_event = new backbutton_event(this);
         //뒤로가기 이벤트
-        screen_1_slide = new slide();
-        //계좌 터치 이벤트
 
         drawerLayout = findViewById(R.id.screen1);
         drawerView = findViewById(R.id.drawer);
         ImageButton btn_mymenu = findViewById(R.id.icon_mymenu);
         //매개변수에 필요한 id 탐색
+
+        card_eth = findViewById(R.id.card_ETH);
 
         screen_1_drawer.drawer(drawerLayout, drawerView, btn_mymenu);
         //드로어 레이아웃 오픈
@@ -94,16 +97,6 @@ public class screen_main extends AppCompatActivity {
 
         sendaddress = findViewById(R.id.sendaddress);
         sendmoney = findViewById(R.id.sendmoney);
-
-//        transup = AnimationUtils.loadAnimation(this, R.anim.translateup); //xml 위로올리는거 적용
-//        transdown = AnimationUtils.loadAnimation(this, R.anim.translatedown); //xml 밑으로 내리는거 적용
-//        Sliding animationListener = new Sliding(); //sliding 리스너 생성
-//        transup.setAnimationListener(animationListener); //transup에 리스너 적용
-//        transdown.setAnimationListener(animationListener);
-//
-//        sendaddress = findViewById(R.id.sendaddress);
-//        sendmoney = findViewById(R.id.sendmoney);
-        //계좌 터치 시 애니메이션 이벤트
 
         button_ver = findViewById(R.id.app_ver);
 
@@ -136,15 +129,6 @@ public class screen_main extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        //메인 -> 메뉴 -> 문의하기
-//        but_refresh = findViewById(R.id.button_refresh);
-//        but_refresh.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                user_wallet = BDAO.getUserWallet();
-//            }
-//        });
-        //새로고침 버튼
 
         screen_1_chart = new chart();
 
@@ -171,10 +155,52 @@ public class screen_main extends AppCompatActivity {
         // false true
         chart_month.setData(screen_1_chart.barchart());
         //차트
+
+        but_refresh = findViewById(R.id.button_refresh);
+        but_refresh.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                NetworkTask networkTask = new NetworkTask("df",null);
+                networkTask.execute();
+            }
+        });
+
     };
     @Override
     public void onBackPressed() {
         backbutton_event.backbutton();
     }
     //뒤로가기 버튼 이벤트
+
+    public static class NetworkTask extends AsyncTask<Void, Void, String> {
+
+        private String url;
+        private ContentValues values;
+
+        public NetworkTask(String url, ContentValues values) {
+
+            this.url = url;
+            this.values = values;
+        }
+
+        @Override
+        protected String doInBackground(Void... params) {
+
+            String result = ""; // 요청 결과를 저장할 변수.
+            Connect geth_connect = new Connect();
+            try {
+                result = geth_connect.EEEE();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            return result;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+            card_eth.setText(s);
+        }
+    }
 }
