@@ -77,6 +77,7 @@ public class screen_main extends AppCompatActivity {
         backbutton_event = new backbutton_event(this);
         screen_1_chart = new chart();
         //
+        //end of new
 
         //findview
         //
@@ -93,6 +94,7 @@ public class screen_main extends AppCompatActivity {
         button_ver = findViewById(R.id.app_ver);
         button_info = findViewById(R.id.app_info);
         //
+        //end of findview
 
         //onclicklistener
         //
@@ -145,6 +147,7 @@ public class screen_main extends AppCompatActivity {
             }
         });
         //
+        //end of onclicklistener
 
         screen_1_drawer.drawer(drawerLayout, drawerView, btn_mymenu);
         //드로어 레이아웃 오픈
