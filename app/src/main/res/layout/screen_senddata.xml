@@ -99,7 +99,7 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
                     <EditText
-                        android:id="@+id/sendmoney"
+                        android:id="@+id/sendEth"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:ems="10"
@@ -111,18 +111,28 @@
             </LinearLayout>
         </LinearLayout>
 
-        <Button
-            android:id="@+id/data_send"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="right"
-            android:text="Send"
-            android:textColor="#E4D7D7"
-            android:textColorHint="#CDBCBC"
-            app:rippleColor="#C37F7F" />
+            android:gravity="center|top">
+
+            <Button
+                android:id="@+id/QRbutton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="QR"
+                android:textColor="#E4D7D7"/>
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="170dp"
+                android:layout_height="wrap_content"
+                android:text="" />
+            <Button
+                android:id="@+id/data_send"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Send"
+                android:textColor="#E4D7D7"/>
+        </LinearLayout>
     </LinearLayout>
-
-
-
-
 </LinearLayout>
