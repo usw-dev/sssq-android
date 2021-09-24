@@ -50,74 +50,63 @@ public class screen_main extends AppCompatActivity {
 
     private DrawerLayout drawerLayout;
     private View drawerView;
-    private Activity activity;
     private backbutton_event backbutton_event;
     private com.example.android.Action.drawer screen_1_drawer;
     private com.example.android.Action.chart screen_1_chart;
     private com.example.android.data.Connect connect;
     private BarChart chart_month;
-    private Button but_setting;
     private ImageButton but_refresh;
-    private TextView address;
-    private UserWallet user_wallet;
     private Button button_ver;
     private Button button_info;
     private Button button_sup;
     private LinearLayout senddata;
     private BottomSheetBehavior behavior;
-    private EditText sendaddress; //송금하기 주소
-    private EditText sendmoney; //송금하기 이더
-<<<<<<< HEAD
     private TextView zkem;
     public static Web3j web3j;
-=======
     private static TextView card_eth;
->>>>>>> main
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.screen_main);
 
-        zkem = findViewById(R.id.card_ETH);
-
+        //new
+        //
+        connect = new Connect();
         screen_1_drawer = new drawer();
-
-        //드로어 레이아웃
         backbutton_event = new backbutton_event(this);
-        //뒤로가기 이벤트
+        screen_1_chart = new chart();
+        //
 
-        drawerLayout = findViewById(R.id.screen1);
-        drawerView = findViewById(R.id.drawer);
-        ImageButton btn_mymenu = findViewById(R.id.icon_mymenu);
-        //매개변수에 필요한 id 탐색
-
+        //findview
+        //
+        chart_month = (BarChart) findViewById(R.id.chart_month);
+        but_refresh = findViewById(R.id.button_refresh);
+        zkem = findViewById(R.id.card_ETH);
         card_eth = findViewById(R.id.card_ETH);
-
-        screen_1_drawer.drawer(drawerLayout, drawerView, btn_mymenu);
-        //드로어 레이아웃 오픈
-
         senddata = findViewById(R.id.senddata);
         behavior = BottomSheetBehavior.from(senddata);
         ImageButton account_button = findViewById(R.id.account_button);
+        drawerLayout = findViewById(R.id.screen1);
+        drawerView = findViewById(R.id.drawer);
+        ImageButton btn_mymenu = findViewById(R.id.icon_mymenu);
+        button_ver = findViewById(R.id.app_ver);
+        button_info = findViewById(R.id.app_info);
+        //
+
+        //onclicklistener
+        //
         account_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(behavior.getState()!=BottomSheetBehavior.STATE_HALF_EXPANDED){
+                if (behavior.getState() != BottomSheetBehavior.STATE_HALF_EXPANDED) {
                     behavior.setState(BottomSheetBehavior.STATE_HALF_EXPANDED);
 
-                }
-                else {
+                } else {
                     behavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
                 }
             }
         });
-
-        sendaddress = findViewById(R.id.sendaddress);
-        sendmoney = findViewById(R.id.sendmoney);
-
-        button_ver = findViewById(R.id.app_ver);
 
         button_ver.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -127,8 +116,6 @@ public class screen_main extends AppCompatActivity {
             }
         });
         //메인 -> 메뉴 -> 앱 버전
-
-        button_info = findViewById(R.id.app_info);
 
         button_info.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -148,14 +135,19 @@ public class screen_main extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-<<<<<<< HEAD
-        //메인 -> 메뉴 -> 문의하기
-=======
->>>>>>> main
 
-        screen_1_chart = new chart();
+        but_refresh.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                NetworkTask networkTask = new NetworkTask("df", null);
+                //http 입력
+                networkTask.execute();
+            }
+        });
+        //
 
-        chart_month = (BarChart) findViewById(R.id.chart_month);
+        screen_1_drawer.drawer(drawerLayout, drawerView, btn_mymenu);
+        //드로어 레이아웃 오픈
 
         chart_month.setTouchEnabled(false); // 터치x
         chart_month.getAxisLeft().setDrawGridLines(false); //y축(가로줄) 격자 x 두개 같이써야 없어짐
@@ -178,57 +170,8 @@ public class screen_main extends AppCompatActivity {
         // false true
         chart_month.setData(screen_1_chart.barchart());
         //차트
+    }
 
-        but_refresh = findViewById(R.id.button_refresh);
-<<<<<<< HEAD
-
-
-        connect = new Connect();
-
-
-
-        but_refresh.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String EEEE = null;
-
-//                new AsyncTask() {
-//                    String ether;
-//                    @Override
-//                    protected Object doInBackground(Object[] objects) {
-//
-//
-//                        try {
-//                            web3j = Web3j.build(new HttpService("http://52.79.255.216:8547"));
-//                            EthGetBalance ethGetBalance = web3j.ethGetBalance("0xf480fb1d4f32b7797c829d6f05bb0805c152b3ec", DefaultBlockParameterName.LATEST).sendAsync().get();
-//                            BigDecimal eth = Convert.fromWei(ethGetBalance.getBalance().toString(), Convert.Unit.ETHER);
-//                            ether = eth.toString();
-//                        } catch (ExecutionException | InterruptedException e) {
-//                            ether = "err";
-//                        }
-//
-//                        return null;
-//                    }
-//                }.execute();
-                    EEEE = connect.connect(web3j);
-
-
-                zkem.setText(EEEE);
-            }
-        });
-
-
-=======
-        but_refresh.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                NetworkTask networkTask = new NetworkTask("df",null);
-                networkTask.execute();
-            }
-        });
-
->>>>>>> main
-    };
     @Override
     public void onBackPressed() {
         backbutton_event.backbutton();
@@ -241,7 +184,6 @@ public class screen_main extends AppCompatActivity {
         private ContentValues values;
 
         public NetworkTask(String url, ContentValues values) {
-
             this.url = url;
             this.values = values;
         }
@@ -252,7 +194,7 @@ public class screen_main extends AppCompatActivity {
             String result = ""; // 요청 결과를 저장할 변수.
             Connect geth_connect = new Connect();
             try {
-                result = geth_connect.EEEE();
+                result = geth_connect.connect();
             } catch (Exception e) {
                 e.printStackTrace();
             }
