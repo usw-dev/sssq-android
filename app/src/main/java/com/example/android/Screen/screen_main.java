@@ -34,8 +34,8 @@ import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.data.DataSet;
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
-import com.google.zxing.integration.android.IntentIntegrator;
-import com.google.zxing.integration.android.IntentResult;
+//import com.google.zxing.integration.android.IntentIntegrator;
+//import com.google.zxing.integration.android.IntentResult;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -72,7 +72,7 @@ public class screen_main extends AppCompatActivity {
 
     private Button QRbutton; //QR
     private TextView sendaddress,sendEth;
-    private IntentIntegrator qrScan;
+//    private IntentIntegrator qrScan;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -183,21 +183,21 @@ public class screen_main extends AppCompatActivity {
         chart_month.setData(screen_1_chart.barchart());
         //차트
 
-        QRbutton = findViewById(R.id.QRbutton);
-        sendaddress = findViewById(R.id.sendaddress);
-        sendEth = findViewById(R.id.sendEth);
-
-        qrScan = new IntentIntegrator(this);
-        qrScan.setOrientationLocked(false);
-
-        QRbutton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                //scan option
-                qrScan.setPrompt("Scanning");
-                //qrScan.setOrientationLocked(false);
-                qrScan.initiateScan();
-            }
-        });
+//        QRbutton = findViewById(R.id.QRbutton);
+//        sendaddress = findViewById(R.id.sendaddress);
+//        sendEth = findViewById(R.id.sendEth);
+//
+//        qrScan = new IntentIntegrator(this);
+//        qrScan.setOrientationLocked(false);
+//
+//        QRbutton.setOnClickListener(new View.OnClickListener() {
+//            public void onClick(View v) {
+//                //scan option
+//                qrScan.setPrompt("Scanning");
+//                //qrScan.setOrientationLocked(false);
+//                qrScan.initiateScan();
+//            }
+//        });
 
     }
 
@@ -238,31 +238,31 @@ public class screen_main extends AppCompatActivity {
         }
     }
     //스캔한거 받아서 처리하는 함수
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        IntentResult result = IntentIntegrator.parseActivityResult(requestCode,resultCode,data);
-        if (result != null) {
-            //qrcode 가 없으면
-            if (result.getContents() == null) {
-                Toast.makeText(screen_main.this, "취소!", Toast.LENGTH_SHORT).show();
-            }
-            else {
-                //qrcode 결과가 있으면
-                Toast.makeText(screen_main.this, "스캔완료!", Toast.LENGTH_SHORT).show();
-            }
-            try {
-                //data를 json으로 변환
-                JSONObject obj = new JSONObject(result.getContents()); //스캔한거 받아옴
-                sendaddress.setText(obj.getString("sendaddress"));
-                sendEth.setText(obj.getString("sendEth"));
-            } catch (JSONException e) {
-                e.printStackTrace();
-                //Toast.makeText(screen_main.this, result.getContents(), Toast.LENGTH_LONG).show();
-                sendaddress.setText(result.getContents());
-            }
-        }
-        else {
-            super.onActivityResult(requestCode, resultCode, data);
-        }
-    }
+//    @Override
+//    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+//        IntentResult result = IntentIntegrator.parseActivityResult(requestCode,resultCode,data);
+//        if (result != null) {
+//            //qrcode 가 없으면
+//            if (result.getContents() == null) {
+//                Toast.makeText(screen_main.this, "취소!", Toast.LENGTH_SHORT).show();
+//            }
+//            else {
+//                //qrcode 결과가 있으면
+//                Toast.makeText(screen_main.this, "스캔완료!", Toast.LENGTH_SHORT).show();
+//            }
+//            try {
+//                //data를 json으로 변환
+//                JSONObject obj = new JSONObject(result.getContents()); //스캔한거 받아옴
+//                sendaddress.setText(obj.getString("sendaddress"));
+//                sendEth.setText(obj.getString("sendEth"));
+//            } catch (JSONException e) {
+//                e.printStackTrace();
+//                //Toast.makeText(screen_main.this, result.getContents(), Toast.LENGTH_LONG).show();
+//                sendaddress.setText(result.getContents());
+//            }
+//        }
+//        else {
+//            super.onActivityResult(requestCode, resultCode, data);
+//        }
+//    }
 }
