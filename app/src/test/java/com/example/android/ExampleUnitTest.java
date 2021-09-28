@@ -9,9 +9,15 @@ import org.web3j.abi.datatypes.Array;
 import org.web3j.abi.datatypes.Function;
 import org.web3j.abi.datatypes.Type;
 import org.web3j.abi.datatypes.generated.Uint256;
+import org.web3j.crypto.ECKeyPair;
+import org.web3j.crypto.Keys;
 import org.web3j.crypto.RawTransaction;
+import org.web3j.crypto.Wallet;
+import org.web3j.crypto.WalletFile;
+import org.web3j.crypto.WalletUtils;
 import org.web3j.protocol.Web3j;
 import org.web3j.protocol.admin.Admin;
+import org.web3j.protocol.admin.methods.response.PersonalUnlockAccount;
 import org.web3j.protocol.core.DefaultBlockParameterName;
 import org.web3j.protocol.core.DefaultBlockParameterNumber;
 import org.web3j.protocol.core.methods.request.EthFilter;
@@ -28,6 +34,7 @@ import org.web3j.protocol.http.HttpService;
 import org.web3j.utils.Collection;
 import org.web3j.utils.Convert;
 
+import java.io.File;
 import java.lang.annotation.Target;
 import java.math.BigDecimal;
 import java.math.BigInteger;
@@ -42,6 +49,8 @@ import java.util.Locale;
 import jnr.ffi.Struct;
 
 import static org.junit.Assert.*;
+
+import com.example.android.data.TxHistory;
 
 /**
  * Example local unit test, which will execute on the development machine (host).
@@ -62,15 +71,18 @@ public class ExampleUnitTest {
     }
 
     List<tx> txInfo = new ArrayList<>();
+    List<tx> txMyInfo = new ArrayList<>();
+    String ft;
 
-    public void testin(String txHash, String txTo, BigInteger txValue, String timestamp) {
-        txInfo.add(new tx(txHash,txTo,txValue,timestamp));
+    public void testin(String txHash, String txFrom, String txTo, BigInteger txValue, String timestamp) {
+        if(ft.equals(txFrom))
+            txInfo.add(new tx(txHash,txFrom,txTo,txValue,timestamp));
     }
 
     @Test
     public void testEth() throws Exception {
         // web3j와 ganache-cli 연결
-        Web3j web3j = Web3j.build(new HttpService("http://3.35.54.22:8547"));
+        Web3j web3j = Web3j.build(new HttpService("http://13.124.190.163:8547"));
         // 연결된 ganache-cli에 있는 계정 정보 get
         EthAccounts ethAccounts = web3j.ethAccounts().sendAsync().get();
         // ganache-cli 버전 get
@@ -98,8 +110,9 @@ public class ExampleUnitTest {
         }
 
         // 0번 계좌 -> 1번 계좌 10 이더 전송
-        String fromTx = userWallets.get(0).getAddress();
+        String fromTx = userWallets.get(2).getAddress();
         String toTx = userWallets.get(2).getAddress();
+        ft = fromTx;
         String etherTx = "2";
 //        Admin admin = Admin.build(new HttpService("http://3.38.108.59:8547"));
 //
@@ -144,7 +157,7 @@ public class ExampleUnitTest {
                     SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.KOREA);
                     String ts = sdf.format( new Date(timestamp*1000L));
 
-                    testin(tx.getHash(),tx.getTo(),tx.getValue(),ts);
+                    testin(tx.getHash(),tx.getFrom(),tx.getTo(),tx.getValue(),ts);
                 });
 
 //        EthGetTransactionReceipt transactionReceipt = web3j.ethGetTransactionReceipt(txHash).send();
@@ -156,13 +169,22 @@ public class ExampleUnitTest {
         //System.out.println(subscription);
         // System.out.println(this.tx);
 
-        Thread.sleep(2000);
+        Thread.sleep(3000);
+
+        System.out.println();
+        System.out.println();
+
+//        for(tx ti : txInfo) {
+//            if(fromTx.equals(ti.getTxFrom()))
+//                txMyInfo.add(new tx(ti.getTxHash(),ti.getTxFrom(),ti.getTxTo(),ti.getTxValue(),ti.getTimestamp()));
+//        }
 
         System.out.println();
         System.out.println();
 
         for(tx ti : txInfo) {
             System.out.println("txHash : " + ti.getTxHash());
+            System.out.println("txFrom : " + ti.getTxFrom());
             System.out.println("txTo : " + ti.getTxTo());
             System.out.println("txValue : " + ti.getTxValue());
             System.out.println("timestamp : " + ti.getTimestamp());
@@ -174,8 +196,8 @@ public class ExampleUnitTest {
     @Test
     public void transfer() throws Exception {
         // web3j와 ganache-cli 연결
-        Web3j web3j = Web3j.build(new HttpService("http://13.125.181.148:8547"));
-        Admin admin = Admin.build(new HttpService("http://13.125.181.148:8547"));
+        Web3j web3j = Web3j.build(new HttpService("http://13.124.190.163:8547"));
+        Admin admin = Admin.build(new HttpService("http://13.124.190.163:8547"));
         // 연결된 ganache-cli에 있는 계정 정보 get
         EthAccounts ethAccounts = web3j.ethAccounts().sendAsync().get();
         // ganache-cli 버전 get
@@ -316,5 +338,40 @@ public class ExampleUnitTest {
         EthGetTransactionReceipt transactionReceipt = web3j.ethGetTransactionReceipt(transactionHash).send();
         TransactionReceipt receipt = transactionReceipt.getResult();
         System.out.println("receipt : " + receipt);
+    }
+
+    @Test
+    public void createAccount() throws Exception {
+        Web3j web3j = Web3j.build(new HttpService("http://13.124.190.163:8547"));
+
+        String passwd = "swu";
+        String path = "/home/ubuntu/swucoin/keystore";
+        ECKeyPair keyPair = Keys.createEcKeyPair();
+        WalletFile walletFile = Wallet.createStandard(passwd, keyPair);
+
+        System.out.println("Private Key : " + keyPair.getPrivateKey().toString(16));
+        System.out.println("Account : " + walletFile.getAddress());
+
+        String fileName = WalletUtils.generateNewWalletFile(
+                passwd,
+                new File(path)
+        );
+    }
+
+    @Test
+    public void unLocking() throws Exception {
+        Web3j web3j = Web3j.build(new HttpService("http://13.124.190.163:8547"));
+        Admin admin = Admin.build(new HttpService("http://13.124.190.163:8547"));
+
+        String passwd = "swu2";
+
+        PersonalUnlockAccount unlockAccount = admin.personalUnlockAccount (
+                "0x10016a91938f7982fe9e6ff20d0fd160e6f29e2f",
+                passwd
+        ).send();
+
+        if(unlockAccount.getResult()) {
+            System.out.println("unlock success !!");
+        }
     }
 }

@@ -16,25 +16,13 @@ public class UserWallet extends Application {
     // 개인 계좌 잔액
     private BigDecimal ether;
 
-    // 개인 거래 내역
-    private Subscription history;
-
-    // 카드 주소
-    private TextView card_address;
-
-    // 카드 잔액
-    private TextView card_ether;
-
-    // 카드 내역
-    //
-
-    public UserWallet() {
-    }
-
-    public UserWallet(String address, BigDecimal ether, Subscription history) {
+    public UserWallet(String address, BigDecimal ether) {
         this.address = address;
         this.ether = ether;
-        this.history = history;
+    }
+
+    public UserWallet() {
+        
     }
 
     public String getAddress() {
@@ -49,13 +37,5 @@ public class UserWallet extends Application {
 
     public void setEther(BigDecimal ether) {
         this.ether = ether;
-    }
-
-    public Subscription getHistory() {
-        return history;
-    }
-
-    public void setHistory(Subscription history) {
-        this.history = history;
     }
 }

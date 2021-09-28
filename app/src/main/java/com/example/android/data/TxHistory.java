@@ -1,20 +1,24 @@
-package com.example.android;
+package com.example.android.data;
 
 import java.math.BigInteger;
 
-public class tx {
+public class TxHistory {
     private String txHash;
     private String txFrom;
     private String txTo;
     private BigInteger txValue;
     private String timestamp;
 
-    public tx(String txHash, String txFrom, String txTo, BigInteger txValue, String timestamp) {
+    public TxHistory(String txHash, String txFrom, String txTo, BigInteger txValue, String timestamp) {
         this.txHash = txHash;
         this.txFrom = txFrom;
         this.txTo = txTo;
         this.txValue = txValue;
         this.timestamp = timestamp;
+    }
+
+    public TxHistory() {
+
     }
 
     public String getTxHash() { return  txHash; }
