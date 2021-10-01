@@ -9,6 +9,7 @@ import org.web3j.abi.datatypes.Array;
 import org.web3j.abi.datatypes.Function;
 import org.web3j.abi.datatypes.Type;
 import org.web3j.abi.datatypes.generated.Uint256;
+import org.web3j.crypto.Credentials;
 import org.web3j.crypto.ECKeyPair;
 import org.web3j.crypto.Keys;
 import org.web3j.crypto.RawTransaction;
@@ -20,6 +21,7 @@ import org.web3j.protocol.admin.Admin;
 import org.web3j.protocol.admin.methods.response.PersonalUnlockAccount;
 import org.web3j.protocol.core.DefaultBlockParameterName;
 import org.web3j.protocol.core.DefaultBlockParameterNumber;
+import org.web3j.protocol.core.Request;
 import org.web3j.protocol.core.methods.request.EthFilter;
 import org.web3j.protocol.core.methods.request.Transaction;
 import org.web3j.protocol.core.methods.response.EthAccounts;
@@ -38,6 +40,8 @@ import java.io.File;
 import java.lang.annotation.Target;
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.security.Provider;
+import java.security.Security;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -49,6 +53,8 @@ import java.util.Locale;
 import jnr.ffi.Struct;
 
 import static org.junit.Assert.*;
+
+import android.os.Environment;
 
 import com.example.android.data.TxHistory;
 
@@ -342,26 +348,33 @@ public class ExampleUnitTest {
 
     @Test
     public void createAccount() throws Exception {
-        Web3j web3j = Web3j.build(new HttpService("http://13.124.190.163:8547"));
+        Web3j web3j = Web3j.build(new HttpService("http://13.124.159.160:8547"));
+
 
         String passwd = "swu";
-        String path = "/home/ubuntu/swucoin/keystore";
+        String path = "E:\\";
         ECKeyPair keyPair = Keys.createEcKeyPair();
         WalletFile walletFile = Wallet.createStandard(passwd, keyPair);
 
-        System.out.println("Private Key : " + keyPair.getPrivateKey().toString(16));
+        System.out.println("Private Key : " + keyPair.getPrivateKey());
         System.out.println("Account : " + walletFile.getAddress());
 
         String fileName = WalletUtils.generateNewWalletFile(
                 passwd,
                 new File(path)
         );
+
+//        Credentials credentials = Credentials.create(Wallet.decrypt(passwd,walletFile));
+
+//        System.out.println("Private Key : " + credentials.getEcKeyPair().getPrivateKey());
+//        System.out.println("Account : " + credentials.getAddress());
+
     }
 
     @Test
     public void unLocking() throws Exception {
-        Web3j web3j = Web3j.build(new HttpService("http://13.124.190.163:8547"));
-        Admin admin = Admin.build(new HttpService("http://13.124.190.163:8547"));
+        Web3j web3j = Web3j.build(new HttpService("http://13.124.159.160:8547"));
+        Admin admin = Admin.build(new HttpService("http://13.124.159.160:8547"));
 
         String passwd = "swu2";
 
