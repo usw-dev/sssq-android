@@ -30,10 +30,11 @@
                 android:src="@drawable/image_text" />
 
             <EditText
+                android:id="@+id/EditText_address"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:hint="주소"
-                android:inputType="text"/>
+                android:inputType="text" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -46,18 +47,41 @@
                 android:src="@drawable/image_text" />
 
             <EditText
+                android:id="@+id/EditText_pw"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:hint="비밀번호"
                 android:inputType="textPassword" />
         </RelativeLayout>
 
+        <LinearLayout
+            android:layout_width="200dp"
+            android:layout_height="60dp"
+            android:orientation="horizontal">
+
+            <CheckBox
+                android:id="@+id/checkbox_save"
+                android:layout_width="35dp"
+                android:layout_height="match_parent"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="로그인 정보 기억"
+                android:textStyle="bold"
+                android:layout_gravity="center"
+                android:textColor="@color/white"
+                android:textSize="20dp"/>
+        </LinearLayout>
+
+
+
         <RelativeLayout
             android:layout_width="200dp"
-            android:layout_height="100dp"
+            android:layout_height="70dp"
             android:gravity="center">
 
             <ImageButton
+                android:id="@+id/button_login"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@color/invisible"
@@ -67,11 +91,34 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="로그인"
+                android:textColor="@color/black"
+                android:textSize="16dp"
+                android:textStyle="bold" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="200dp"
+            android:layout_height="70dp"
+            android:gravity="center">
+
+            <ImageButton
+                android:id="@+id/button_createAccount"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/invisible"
+                android:scaleType="fitCenter"
+                android:src="@drawable/image_mint"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
                 android:text="계정 생성"
                 android:textColor="@color/black"
                 android:textSize="16dp"
-                android:textStyle="bold"
-                android:gravity="center"/>
+                android:textStyle="bold" />
         </RelativeLayout>
     </LinearLayout>
 
