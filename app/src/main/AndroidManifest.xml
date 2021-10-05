@@ -23,6 +23,9 @@
             android:name=".Screen.screen_sup"
             android:exported="true" />
         <activity
+            android:name=".Screen.screen_login"
+            android:exported="true" />
+        <activity
             android:name=".Screen.screen_appinfo"
             android:exported="true" />
         <activity

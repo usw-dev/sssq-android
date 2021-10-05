@@ -220,7 +220,7 @@ public class screen_main extends AppCompatActivity {
         @Override
         protected String doInBackground(Void... params) {
 
-            String result = ""; // 요청 결과를 저장할 변수.
+            String result = "";
             Connect geth_connect = new Connect();
             try {
                 result = geth_connect.connect();
