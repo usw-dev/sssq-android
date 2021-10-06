@@ -162,22 +162,24 @@ public class screen_main extends AppCompatActivity {
         //드로어 레이아웃 오픈
 
         chart_month.setTouchEnabled(false); // 터치x
-        chart_month.getAxisLeft().setDrawGridLines(false); //y축(가로줄) 격자 x 두개 같이써야 없어짐
-        chart_month.getAxisLeft().setDrawAxisLine(false); // y축 왼쪽 선 제거
-        chart_month.getAxisLeft().setDrawLabels(false); // y축 왼쪽 라벨 제거
-        chart_month.getAxisRight().setDrawGridLines(false); //y축(가로줄) 격자 x 두개 같이써야 없어짐
-        chart_month.getAxisRight().setDrawAxisLine(false); // y축 오른쪽 선 제거
-        chart_month.getAxisRight().setDrawLabels(false); // y축 오른쪽 라벨 제거
-        chart_month.getXAxis().setDrawGridLines(false); // x축(세로줄) 격자 제거
-        chart_month.getXAxis().setDrawAxisLine(false); // x축 선 제거
-        chart_month.getXAxis().setDrawLabels(true); // x축 라벨 사용
-        chart_month.getXAxis().setTextColor(Color.WHITE); //x축라벨 색
-        chart_month.getXAxis().setLabelCount(6); // 라벨6개 고정
-        chart_month.getXAxis().setCenterAxisLabels(true); //라벨 가운데로
-        chart_month.getXAxis().setPosition(XAxis.XAxisPosition.BOTTOM); // 라벨위치 아래로
-        chart_month.getLegend().setEnabled(false); //레전드(차트밑에 색과 라벨을 나타내는 설정)을 제거
-        chart_month.getDescription().setEnabled(false); // 데스크립션 제거
+        chart_month.getAxisLeft().setDrawGridLines(false);                  // y축(가로줄) 격자 x 두개 같이써야 없어짐
+        chart_month.getAxisLeft().setDrawAxisLine(false);                   // y축 왼쪽 선 제거
+        chart_month.getAxisLeft().setDrawLabels(false);                     // y축 왼쪽 라벨 제거
+        chart_month.getAxisRight().setDrawGridLines(false);                 // y축(가로줄) 격자 x 두개 같이써야 없어짐
+        chart_month.getAxisRight().setDrawAxisLine(false);                  // y축 오른쪽 선 제거
+        chart_month.getAxisRight().setDrawLabels(false);                    // y축 오른쪽 라벨 제거
+        chart_month.getXAxis().setDrawGridLines(false);                     // x축(세로줄) 격자 제거
+        chart_month.getXAxis().setDrawAxisLine(false);                      // x축 선 제거
+        chart_month.getXAxis().setDrawLabels(true);                         // x축 라벨 사용
+        chart_month.getXAxis().setTextColor(Color.WHITE);                   // x축 라벨 색
+        chart_month.getXAxis().setLabelCount(6);                            // 라벨6개 고정
+        chart_month.getXAxis().setCenterAxisLabels(true);                   // 라벨 가운데로
+        chart_month.getXAxis().setPosition(XAxis.XAxisPosition.BOTTOM);     // 라벨 위치 아래로
+        chart_month.getLegend().setEnabled(false);                          // 레전드(차트밑에 색과 라벨을 나타내는 설정)을 제거
+        chart_month.getDescription().setEnabled(false);                     // 데스크립션 제거
+
         String[] labels = chart.labels;
+
         chart_month.getXAxis().setValueFormatter(new IndexAxisValueFormatter(labels)); //115줄의 x축 String 라벨적용
         // false true
         chart_month.setData(screen_1_chart.barchart());

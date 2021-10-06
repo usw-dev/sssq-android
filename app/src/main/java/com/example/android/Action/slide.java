@@ -21,7 +21,6 @@ public class slide extends AppCompatActivity {
     public Animation transup; //올라오는 애니메이션
     public Animation transdown; //내려가는 애니메이션
 
-
 //    @Override
 //    public void onCreate(Bundle savedInstanceState) {
 //        super.onCreate(savedInstanceState);
@@ -39,10 +38,10 @@ public class slide extends AppCompatActivity {
 
 //    public void IB_clicked(View v) {
 //        if (flag) {
-//            senddata.startAnimation(transup); //올림
+//            senddata.startAnimation(transup);     //올림
 //        } else {
 //            senddata.setVisibility(View.VISIBLE);
-//            senddata.startAnimation(transdown); //내림
+//            senddata.startAnimation(transdown);   //내림
 //        }
 //    }
 
