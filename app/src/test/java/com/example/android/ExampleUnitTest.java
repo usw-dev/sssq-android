@@ -33,6 +33,7 @@ import org.web3j.protocol.core.methods.response.EthSendTransaction;
 import org.web3j.protocol.core.methods.response.TransactionReceipt;
 import org.web3j.protocol.core.methods.response.Web3ClientVersion;
 import org.web3j.protocol.http.HttpService;
+import org.web3j.tx.Transfer;
 import org.web3j.utils.Collection;
 import org.web3j.utils.Convert;
 
@@ -88,7 +89,7 @@ public class ExampleUnitTest {
     @Test
     public void testEth() throws Exception {
         // web3j와 ganache-cli 연결
-        Web3j web3j = Web3j.build(new HttpService("http://13.124.190.163:8547"));
+        Web3j web3j = Web3j.build(new HttpService("http://3.38.95.44:8547"));
         // 연결된 ganache-cli에 있는 계정 정보 get
         EthAccounts ethAccounts = web3j.ethAccounts().sendAsync().get();
         // ganache-cli 버전 get
@@ -116,9 +117,11 @@ public class ExampleUnitTest {
         }
 
         // 0번 계좌 -> 1번 계좌 10 이더 전송
-        String fromTx = userWallets.get(2).getAddress();
+        Credentials credentials = WalletUtils.loadCredentials("swu", "E:\\UTC--2021-10-07T14-29-32.868Z--2fe0c4188ac79e36b785664e4c92fd22afe856b7.json");
+        String fromTx = credentials.getAddress();
         String toTx = userWallets.get(2).getAddress();
         ft = fromTx;
+        System.out.println(ft);
         String etherTx = "2";
 //        Admin admin = Admin.build(new HttpService("http://3.38.108.59:8547"));
 //
@@ -175,7 +178,7 @@ public class ExampleUnitTest {
         //System.out.println(subscription);
         // System.out.println(this.tx);
 
-        Thread.sleep(3000);
+        Thread.sleep(8000);
 
         System.out.println();
         System.out.println();
@@ -202,8 +205,8 @@ public class ExampleUnitTest {
     @Test
     public void transfer() throws Exception {
         // web3j와 ganache-cli 연결
-        Web3j web3j = Web3j.build(new HttpService("http://13.124.190.163:8547"));
-        Admin admin = Admin.build(new HttpService("http://13.124.190.163:8547"));
+        Web3j web3j = Web3j.build(new HttpService("http://3.38.95.44:8547"));
+        Admin admin = Admin.build(new HttpService("http://3.38.95.44:8547"));
         // 연결된 ganache-cli에 있는 계정 정보 get
         EthAccounts ethAccounts = web3j.ethAccounts().sendAsync().get();
         // ganache-cli 버전 get
@@ -248,21 +251,21 @@ public class ExampleUnitTest {
                 encodedFunction
         );
         EthSendTransaction transactionResponse = web3j.ethSendTransaction(transaction).sendAsync().get();
-        String transactionHash = transactionResponse.getTransactionHash();
-        System.out.println(transactionHash);
-        Thread.sleep(3000);
-        EthGetTransactionReceipt transactionReceipt = web3j.ethGetTransactionReceipt(transactionHash).send();
-        if(transactionReceipt.getTransactionReceipt().isPresent())
-        {
-            // 9. 결과확인
-            System.out.println("transactionReceipt.getResult().getContractAddress() = " +
-                    transactionReceipt.getResult());
-        }
-        else {
-            System.out.println("transaction complete not yet");
-        }
-        TransactionReceipt receipt = transactionReceipt.getResult();
-        System.out.println("receipt : " + receipt);
+//        String transactionHash = transactionResponse.getTransactionHash();
+//        System.out.println(transactionHash);
+//        Thread.sleep(3000);
+//        EthGetTransactionReceipt transactionReceipt = web3j.ethGetTransactionReceipt(transactionHash).send();
+//        if(transactionReceipt.getTransactionReceipt().isPresent())
+//        {
+//            // 9. 결과확인
+//            System.out.println("transactionReceipt.getResult().getContractAddress() = " +
+//                    transactionReceipt.getResult());
+//        }
+//        else {
+//            System.out.println("transaction complete not yet");
+//        }
+//        TransactionReceipt receipt = transactionReceipt.getResult();
+//        System.out.println("receipt : " + receipt);
 
         // transfer
         function = new Function(
@@ -277,11 +280,11 @@ public class ExampleUnitTest {
                 encodedFunction
         );
         EthSendTransaction transactionResponse2 = web3j.ethSendTransaction(transaction).sendAsync().get();
-        String transactionHash2 = transactionResponse2.getTransactionHash();
-        System.out.println(transactionHash2);
-        EthGetTransactionReceipt transactionReceipt2 = web3j.ethGetTransactionReceipt(transactionHash2).send();
-        TransactionReceipt receipt2 = transactionReceipt2.getResult();
-        System.out.println("receipt2 : " + receipt2);
+//        String transactionHash2 = transactionResponse2.getTransactionHash();
+//        System.out.println(transactionHash2);
+//        EthGetTransactionReceipt transactionReceipt2 = web3j.ethGetTransactionReceipt(transactionHash2).send();
+//        TransactionReceipt receipt2 = transactionReceipt2.getResult();
+//        System.out.println("receipt2 : " + receipt2);
 
         // EthCall ethCall = web3j.ethCall(transaction,DefaultBlockParameterName.LATEST).send();
         // System.out.println(ethCall.getResult());
@@ -348,26 +351,29 @@ public class ExampleUnitTest {
 
     @Test
     public void createAccount() throws Exception {
-        Web3j web3j = Web3j.build(new HttpService("http://13.124.159.160:8547"));
-
+        Web3j web3j = Web3j.build(new HttpService("http://3.38.95.44:8547"));
+        Admin admin = Admin.build(new HttpService("http://3.38.95.44:8547"));
 
         String passwd = "swu";
         String path = "E:\\";
         ECKeyPair keyPair = Keys.createEcKeyPair();
-        WalletFile walletFile = Wallet.createStandard(passwd, keyPair);
+        File walletDir = new File(path);
 
-        System.out.println("Private Key : " + keyPair.getPrivateKey());
-        System.out.println("Account : " + walletFile.getAddress());
+//        System.out.println("Private Key : " + keyPair.getPrivateKey());
+//        System.out.println("Account : " + walletFile.getAddress());
 
-        String fileName = WalletUtils.generateNewWalletFile(
+        String fileName = WalletUtils.generateLightNewWalletFile(
                 passwd,
-                new File(path)
+                walletDir
         );
+        walletDir = new File(path + "/" + fileName);
 
 //        Credentials credentials = Credentials.create(Wallet.decrypt(passwd,walletFile));
 
-//        System.out.println("Private Key : " + credentials.getEcKeyPair().getPrivateKey());
-//        System.out.println("Account : " + credentials.getAddress());
+        Credentials credentials = WalletUtils.loadCredentials(passwd, walletDir);
+
+        System.out.println("Private Key : " + credentials.getEcKeyPair().getPrivateKey());
+        System.out.println("Account : " + credentials.getAddress());
 
     }
 
@@ -386,5 +392,35 @@ public class ExampleUnitTest {
         if(unlockAccount.getResult()) {
             System.out.println("unlock success !!");
         }
+    }
+
+    @Test
+    public void LocalAddress() throws Exception {
+        Web3j web3j = Web3j.build(new HttpService("http://3.38.95.44:8547"));
+        Admin admin = Admin.build(new HttpService("http://3.38.95.44:8547"));
+
+        Credentials credentials = WalletUtils.loadCredentials("swu", "E:\\UTC--2021-10-07T14-29-32.868Z--2fe0c4188ac79e36b785664e4c92fd22afe856b7.json");
+
+//        String etherTx = "1";
+//        Transaction transaction = Transaction.createEtherTransaction(
+//                credentials.getAddress(),
+//                null,null,null,
+//                "0xAB6B527FcE1155EAE2e76AE1D619107f1f01bB28",
+//                Convert.toWei(etherTx,Convert.Unit.ETHER).toBigInteger()
+//        );
+//        EthSendTransaction ethSendTransaction = admin.ethSendTransaction(transaction).sendAsync().get();
+//
+//        System.out.println("\nsend 10 ether from account[0] to cred \n");
+
+        TransactionReceipt receipt = Transfer.sendFunds(web3j,credentials,"0xAB6B527FcE1155EAE2e76AE1D619107f1f01bB28",new BigDecimal(1), Convert.Unit.ETHER).sendAsync().get();
+
+        System.out.println("Transaction complete : " + receipt.getTransactionHash());
+
+
+
+        EthGetBalance ethGetBalance = web3j.ethGetBalance(credentials.getAddress(), DefaultBlockParameterName.LATEST).sendAsync().get();
+        BigDecimal ether = Convert.fromWei(ethGetBalance.getBalance().toString(), Convert.Unit.ETHER);
+
+        System.out.println("eth : " + ether);
     }
 }
