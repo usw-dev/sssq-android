@@ -351,8 +351,8 @@ public class ExampleUnitTest {
 
     @Test
     public void createAccount() throws Exception {
-        Web3j web3j = Web3j.build(new HttpService("http://3.38.95.44:8547"));
-        Admin admin = Admin.build(new HttpService("http://3.38.95.44:8547"));
+//        Web3j web3j = Web3j.build(new HttpService("http://52.79.188.15:8547"));
+//        Admin admin = Admin.build(new HttpService("http://52.79.188.15:8547"));
 
         String passwd = "swu";
         String path = "E:\\";
@@ -396,23 +396,24 @@ public class ExampleUnitTest {
 
     @Test
     public void LocalAddress() throws Exception {
-        Web3j web3j = Web3j.build(new HttpService("http://3.38.95.44:8547"));
-        Admin admin = Admin.build(new HttpService("http://3.38.95.44:8547"));
+        Web3j web3j = Web3j.build(new HttpService("http://52.79.188.15:8547"));
+        Admin admin = Admin.build(new HttpService("http://52.79.188.15:8547"));
 
-        Credentials credentials = WalletUtils.loadCredentials("swu", "E:\\UTC--2021-10-07T14-29-32.868Z--2fe0c4188ac79e36b785664e4c92fd22afe856b7.json");
+        Credentials credentials = WalletUtils.loadCredentials("swu", "E:\\UTC--2021-10-08T11-10-46.978Z--8fbdd84d6d42e2d592aaa7776840f20842e06fff.json");
+        Credentials credentials2 = WalletUtils.loadCredentials("swu", "E:\\UTC--2021-10-08T11-15-42.229Z--63db1a2778ee694698a499f1bad95d8dcb98f2b5.json");
 
-//        String etherTx = "1";
+//        String etherTx = "100";
 //        Transaction transaction = Transaction.createEtherTransaction(
-//                credentials.getAddress(),
+//                "0xf480fb1d4f32b7797c829d6f05bb0805c152b3ec",
 //                null,null,null,
-//                "0xAB6B527FcE1155EAE2e76AE1D619107f1f01bB28",
+//                credentials.getAddress(),
 //                Convert.toWei(etherTx,Convert.Unit.ETHER).toBigInteger()
 //        );
 //        EthSendTransaction ethSendTransaction = admin.ethSendTransaction(transaction).sendAsync().get();
 //
 //        System.out.println("\nsend 10 ether from account[0] to cred \n");
 
-        TransactionReceipt receipt = Transfer.sendFunds(web3j,credentials,"0xAB6B527FcE1155EAE2e76AE1D619107f1f01bB28",new BigDecimal(1), Convert.Unit.ETHER).sendAsync().get();
+        TransactionReceipt receipt = Transfer.sendFunds(web3j,credentials,credentials2.getAddress(),new BigDecimal(1), Convert.Unit.ETHER).sendAsync().get();
 
         System.out.println("Transaction complete : " + receipt.getTransactionHash());
 
@@ -421,6 +422,11 @@ public class ExampleUnitTest {
         EthGetBalance ethGetBalance = web3j.ethGetBalance(credentials.getAddress(), DefaultBlockParameterName.LATEST).sendAsync().get();
         BigDecimal ether = Convert.fromWei(ethGetBalance.getBalance().toString(), Convert.Unit.ETHER);
 
-        System.out.println("eth : " + ether);
+        System.out.println("eth1 : " + ether);
+
+        EthGetBalance ethGetBalance2 = web3j.ethGetBalance(credentials2.getAddress(), DefaultBlockParameterName.LATEST).sendAsync().get();
+        BigDecimal ether2 = Convert.fromWei(ethGetBalance2.getBalance().toString(), Convert.Unit.ETHER);
+
+        System.out.println("eth2 : " + ether2);
     }
 }
