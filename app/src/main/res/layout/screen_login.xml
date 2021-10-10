@@ -33,7 +33,7 @@
                 android:id="@+id/EditText_address"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:hint="주소"
+                android:hint="지갑 주소"
                 android:inputType="text" />
         </RelativeLayout>
 
@@ -104,7 +104,7 @@
             android:gravity="center">
 
             <ImageButton
-                android:id="@+id/button_createAccount"
+                android:id="@+id/button_gotocreateAccount"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@color/invisible"
@@ -115,7 +115,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center"
-                android:text="계정 생성"
+                android:text="지갑 생성"
                 android:textColor="@color/black"
                 android:textSize="16dp"
                 android:textStyle="bold" />

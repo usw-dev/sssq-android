@@ -355,8 +355,8 @@ public class ExampleUnitTest {
 //        Admin admin = Admin.build(new HttpService("http://52.79.188.15:8547"));
 
         String passwd = "swu";
-        String path = "E:\\";
-        ECKeyPair keyPair = Keys.createEcKeyPair();
+        String path = "D:";
+   //     ECKeyPair keyPair = Keys.createEcKeyPair();
         File walletDir = new File(path);
 
 //        System.out.println("Private Key : " + keyPair.getPrivateKey());
@@ -366,14 +366,14 @@ public class ExampleUnitTest {
                 passwd,
                 walletDir
         );
-        walletDir = new File(path + "/" + fileName);
-
-//        Credentials credentials = Credentials.create(Wallet.decrypt(passwd,walletFile));
-
-        Credentials credentials = WalletUtils.loadCredentials(passwd, walletDir);
-
-        System.out.println("Private Key : " + credentials.getEcKeyPair().getPrivateKey());
-        System.out.println("Account : " + credentials.getAddress());
+//        walletDir = new File(path + "/" + fileName);
+//
+////        Credentials credentials = Credentials.create(Wallet.decrypt(passwd,walletFile));
+//
+//        Credentials credentials = WalletUtils.loadCredentials(passwd, walletDir);
+//
+//        System.out.println("Private Key : " + credentials.getEcKeyPair().getPrivateKey());
+//        System.out.println("Account : " + credentials.getAddress());
 
     }
 

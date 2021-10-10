@@ -4,21 +4,27 @@
     package="com.example.android">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
-        android:usesCleartextTraffic="true"
-        android:networkSecurityConfig="@xml/network_security_config"
         android:name="android.support.multidex.MultiDexApplication"
         android:allowBackup="true"
+        android:hardwareAccelerated="true"
         android:icon="@mipmap/codi_icon"
         android:label="@string/app_name"
+        android:networkSecurityConfig="@xml/network_security_config"
         android:roundIcon="@mipmap/codi_icon_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Android"
-        android:hardwareAccelerated="true">
-        <activity android:name="com.journeyapps.barcodescanner.CaptureActivity"
+        android:usesCleartextTraffic="true">
+        <activity
+            android:name=".screen_createaccount"
+            android:exported="true" />
+        <activity
+            android:name="com.journeyapps.barcodescanner.CaptureActivity"
             android:screenOrientation="fullSensor"
-            tools:replace="screenOrientation"/>
+            tools:replace="screenOrientation" />
         <activity
             android:name=".Screen.screen_sup"
             android:exported="true" />
