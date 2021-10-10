@@ -26,7 +26,7 @@ public class screen_login extends AppCompatActivity {
     private CheckBox checkbox;
     private com.example.android.Action.backbutton_event backbutton_event;
 
-    String ID,PW;
+    String ID, PW;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,26 +41,33 @@ public class screen_login extends AppCompatActivity {
         ET_pw = findViewById(R.id.EditText_pw);
         checkbox = findViewById(R.id.checkbox_save);
 
-        boolean bool = PreferenceManager.getBoolean(mContext,"check");
+        boolean bool = PreferenceManager.getBoolean(mContext, "check");
 
-        if(bool){//체크되어 있으면 주소 패스워드 불러옴
-            ET_ad.setText(PreferenceManager.getString(mContext,"address"));
-            ET_pw.setText(PreferenceManager.getString(mContext,"pw"));
+        if (bool) {//체크되어 있으면 주소 패스워드 불러옴
+            ET_ad.setText(PreferenceManager.getString(mContext, "address"));
+            ET_pw.setText(PreferenceManager.getString(mContext, "pw"));
             checkbox.setChecked(true);
         }
+
+        Intent getintent = getIntent();
+
+        if (getintent.hasExtra("address"))
+            ET_ad.setText(getintent.getStringExtra("address"));
+
+        checkbox.setChecked(false);
 
         button_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                PreferenceManager.setString(mContext,"address",ET_ad.getText().toString());
-                PreferenceManager.setString(mContext,"pw",ET_pw.getText().toString());
+                PreferenceManager.setString(mContext, "address", ET_ad.getText().toString());
+                PreferenceManager.setString(mContext, "pw", ET_pw.getText().toString());
 
-                String checkAd = PreferenceManager.getString(mContext,"address");
-                String checkPw = PreferenceManager.getString(mContext,"pw");
+                String checkAd = PreferenceManager.getString(mContext, "address");
+                String checkPw = PreferenceManager.getString(mContext, "pw");
 
-                if(TextUtils.isEmpty(checkAd)||TextUtils.isEmpty(checkPw)){
+                if (TextUtils.isEmpty(checkAd) || TextUtils.isEmpty(checkPw)) {
                     Toast.makeText(mContext, "주소나 비밀번호가 비어있습니다", Toast.LENGTH_SHORT).show();
-                }else{
+                } else {
                     /*
                     여기서 메인화면으로 넘어가는 기능
                      */
@@ -76,17 +83,18 @@ public class screen_login extends AppCompatActivity {
             }
         });
 
-        checkbox.setOnClickListener(v ->  {
-            if(((CheckBox)v).isChecked()){
+        checkbox.setOnClickListener(v -> {
+            if (((CheckBox) v).isChecked()) {
                 PreferenceManager.setString(mContext, "address", ET_ad.getText().toString());
                 PreferenceManager.setString(mContext, "pw", ET_pw.getText().toString());
                 PreferenceManager.setBoolean(mContext, "check", checkbox.isChecked());
-            }else{
-                PreferenceManager.setBoolean(mContext,"check",checkbox.isChecked());
+            } else {
+                PreferenceManager.setBoolean(mContext, "check", checkbox.isChecked());
                 PreferenceManager.clear(mContext);
             }
         });
     }
+
     public void onBackPressed() {
         backbutton_event.backbutton();
     }

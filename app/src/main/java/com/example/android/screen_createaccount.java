@@ -5,6 +5,7 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Environment;
@@ -14,6 +15,7 @@ import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.example.android.Action.backbutton_event;
+import com.example.android.Screen.screen_login;
 import com.example.android.Screen.screen_main;
 
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
@@ -98,9 +100,9 @@ public class screen_createaccount extends AppCompatActivity {
                 } else {
                     getSaveFolder();
 
-                    File walletDir = new File(getExternalFilesDir(null) + "/codi");
+                    String path = new String(getExternalFilesDir(null) + "/codi");
 
-                    Boolean bool = true;
+                    File walletDir = new File(path);
 
                     String fileName = null;
                     try {
@@ -108,6 +110,7 @@ public class screen_createaccount extends AppCompatActivity {
                                 passwd,
                                 walletDir
                         );
+
                     } catch (NoSuchAlgorithmException e) {
                         e.printStackTrace();
                     } catch (NoSuchProviderException e) {
@@ -119,6 +122,26 @@ public class screen_createaccount extends AppCompatActivity {
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
+
+                    walletDir = new File(path + "/" + fileName);
+
+                    Credentials credentials = null;
+
+                    try {
+                        credentials = WalletUtils.loadCredentials(passwd, walletDir);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    } catch (CipherException e) {
+                        e.printStackTrace();
+                    }
+
+                    Toast.makeText(screen_createaccount.this, "지갑 생성 완료!", Toast.LENGTH_SHORT).show();
+
+
+
+                    Intent screen_1 = new Intent(screen_createaccount.this, screen_login.class);
+                    screen_1.putExtra("address",credentials.getAddress());
+                    startActivity(screen_1);
                 }
             }
         });

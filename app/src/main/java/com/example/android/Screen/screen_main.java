@@ -102,6 +102,9 @@ public class screen_main extends AppCompatActivity {
         ImageButton btn_mymenu = findViewById(R.id.icon_mymenu);
         button_ver = findViewById(R.id.app_ver);
         button_info = findViewById(R.id.app_info);
+        QRbutton = findViewById(R.id.QRbutton);
+        sendaddress = findViewById(R.id.sendaddress);
+        sendEth = findViewById(R.id.sendEth);
         //
         //end of findview
 
@@ -155,6 +158,15 @@ public class screen_main extends AppCompatActivity {
                 networkTask.execute();
             }
         });
+
+        QRbutton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                //scan option
+                qrScan.setPrompt("Scanning");
+                //qrScan.setOrientationLocked(false);
+                qrScan.initiateScan();
+            }
+        });
         //
         //end of onclicklistener
 
@@ -185,22 +197,9 @@ public class screen_main extends AppCompatActivity {
         chart_month.setData(screen_1_chart.barchart());
         //차트
 
-        QRbutton = findViewById(R.id.QRbutton);
-        sendaddress = findViewById(R.id.sendaddress);
-        sendEth = findViewById(R.id.sendEth);
 
         qrScan = new IntentIntegrator(this);
         qrScan.setOrientationLocked(false);
-
-        QRbutton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                //scan option
-                qrScan.setPrompt("Scanning");
-                //qrScan.setOrientationLocked(false);
-                qrScan.initiateScan();
-            }
-        });
-
     }
 
     @Override
