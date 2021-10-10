@@ -379,21 +379,23 @@ public class ExampleUnitTest {
 
     @Test
     public void unLocking() throws Exception {
-        Web3j web3j = Web3j.build(new HttpService("http://52.79.188.15:8547"));
-        Admin admin = Admin.build(new HttpService("http://52.79.188.15:8547"));
+    //    Web3j web3j = Web3j.build(new HttpService("http://52.79.188.15:8547"));
+  //      Admin admin = Admin.build(new HttpService("http://52.79.188.15:8547"));
 
         String passwd = "swu";
-        Credentials credentials = WalletUtils.loadCredentials("swu", "E:\\UTC--2021-10-08T11-10-46.978Z--8fbdd84d6d42e2d592aaa7776840f20842e06fff.json");
+        Credentials credentials = WalletUtils.loadCredentials("swu", "D:UTC--2021-10-10T17-29-43.748Z--b6fa08deaea6e34bbb7d96e8f14bfc3426fb51bc.json");
+        System.out.println("Account : " + credentials.getAddress());
+
 
 //        PersonalUnlockAccount unlockAccount = admin.personalUnlockAccount (
 //                credentials.getAddress(),
 //                passwd
 //        ).send();
-//
-////        if(unlockAccount.getError() != null) {
-////            System.out.println(unlockAccount.getError().getMessage());
-////        }
-//
+
+//        if(unlockAccount.getError() != null) {
+//            System.out.println(unlockAccount.getError().getMessage());
+//        }
+
 //        if(unlockAccount.getResult()) {
 //            System.out.println("unlock success !!");
 //        }

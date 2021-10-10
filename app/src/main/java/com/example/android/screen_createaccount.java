@@ -111,6 +111,14 @@ public class screen_createaccount extends AppCompatActivity {
                                 walletDir
                         );
 
+                        walletDir = new File(path + "/" + fileName);
+
+                        Toast.makeText(screen_createaccount.this, "지갑 생성 완료!", Toast.LENGTH_SHORT).show();
+
+                        Intent screen_1 = new Intent(screen_createaccount.this, screen_login.class);
+                        screen_1.putExtra("address",fileName);
+                        startActivity(screen_1);
+
                     } catch (NoSuchAlgorithmException e) {
                         e.printStackTrace();
                     } catch (NoSuchProviderException e) {
@@ -123,25 +131,6 @@ public class screen_createaccount extends AppCompatActivity {
                         e.printStackTrace();
                     }
 
-                    walletDir = new File(path + "/" + fileName);
-
-                    Credentials credentials = null;
-
-                    try {
-                        credentials = WalletUtils.loadCredentials(passwd, walletDir);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    } catch (CipherException e) {
-                        e.printStackTrace();
-                    }
-
-                    Toast.makeText(screen_createaccount.this, "지갑 생성 완료!", Toast.LENGTH_SHORT).show();
-
-
-
-                    Intent screen_1 = new Intent(screen_createaccount.this, screen_login.class);
-                    screen_1.putExtra("address",credentials.getAddress());
-                    startActivity(screen_1);
                 }
             }
         });

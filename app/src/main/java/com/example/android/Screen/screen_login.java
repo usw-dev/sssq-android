@@ -17,6 +17,12 @@ import com.example.android.PreferenceManager;
 import com.example.android.R;
 import com.example.android.screen_createaccount;
 
+import org.web3j.crypto.CipherException;
+import org.web3j.crypto.Credentials;
+import org.web3j.crypto.WalletUtils;
+
+import java.io.IOException;
+
 public class screen_login extends AppCompatActivity {
     private Context mContext;
     private ImageButton button_login;
@@ -55,6 +61,7 @@ public class screen_login extends AppCompatActivity {
             ET_ad.setText(getintent.getStringExtra("address"));
 
         checkbox.setChecked(false);
+        PreferenceManager.clear(mContext);
 
         button_login.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -68,9 +75,19 @@ public class screen_login extends AppCompatActivity {
                 if (TextUtils.isEmpty(checkAd) || TextUtils.isEmpty(checkPw)) {
                     Toast.makeText(mContext, "주소나 비밀번호가 비어있습니다", Toast.LENGTH_SHORT).show();
                 } else {
-                    /*
-                    여기서 메인화면으로 넘어가는 기능
-                     */
+                    try {
+                        Credentials credentials = WalletUtils.loadCredentials(checkPw, getExternalFilesDir(null) + "/codi/"+checkAd);
+
+                    } catch (IOException e) {
+                        Toast.makeText(mContext, "올바르지 않은 파일 입니다", Toast.LENGTH_SHORT).show();
+                        return;
+                    } catch (CipherException e)
+                    {
+                        Toast.makeText(mContext, "올바르지 않은 비밀번호 입니다", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                    Toast.makeText(mContext, "완료", Toast.LENGTH_SHORT).show();
+
                 }
             }
         });
