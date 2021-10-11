@@ -94,6 +94,8 @@ public class screen_main extends AppCompatActivity {
 
             Connect_geth connect_geth = new Connect_geth(ADDRESS);
             connect_geth.execute();
+            Intent loading = new Intent(screen_main.this, screen_loading.class);
+            startActivity(loading);
         }
         //
         //
@@ -138,8 +140,9 @@ public class screen_main extends AppCompatActivity {
 
                 if (compareEther > Integer.parseInt(MYUSERWALLET.getEther().toString())) {
                     Toast.makeText(screen_main.this, "이더가 부족합니다", Toast.LENGTH_SHORT).show();
+
                 } else {
-                    sendEther sendEther = new sendEther(sendaddress.toString(), sendEth.toString());
+                    sendEther sendEther = new sendEther(sendaddress.getText().toString(), sendEth.getText().toString());
                     sendEther.execute();
                 }
             }
@@ -308,8 +311,8 @@ public class screen_main extends AppCompatActivity {
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
 
-            Intent loading = new Intent(screen_main.this, screen_loading.class);
-            startActivity(loading);
+//            Intent loading = new Intent(screen_main.this, screen_loading.class);
+//            startActivity(loading);
 
             Connect_geth connect_geth = new Connect_geth(ADDRESS);
             connect_geth.execute();

@@ -20,7 +20,10 @@
         android:usesCleartextTraffic="true">
         <activity
             android:name=".Screen.screen_loading"
-            android:exported="true" />
+
+            android:exported="true" >
+
+        </activity>
         <activity
             android:name=".Screen.screen_createaccount"
             android:exported="true" />
