@@ -1,19 +1,15 @@
 package com.example.android.Screen;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 
-import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
-import android.view.animation.AnimationUtils;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -22,16 +18,14 @@ import android.widget.Toast;
 import com.example.android.Action.chart;
 import com.example.android.R;
 import com.example.android.Action.backbutton_event;
-import com.example.android.data.Connect;
+import com.example.android.data.BlockChainDAO;
+import com.example.android.data.SendEther;
+import com.example.android.data.Refresh;
+import com.example.android.data.SendEther;
 import com.example.android.data.UserWallet;
 import com.example.android.Action.drawer;
-import com.example.android.Action.slide;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.components.XAxis;
-import com.github.mikephil.charting.data.BarData;
-import com.github.mikephil.charting.data.BarDataSet;
-import com.github.mikephil.charting.data.BarEntry;
-import com.github.mikephil.charting.data.DataSet;
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.zxing.integration.android.IntentIntegrator;
@@ -39,17 +33,12 @@ import com.google.zxing.integration.android.IntentResult;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.web3j.crypto.CipherException;
+import org.web3j.crypto.Credentials;
+import org.web3j.crypto.WalletUtils;
 import org.web3j.protocol.Web3j;
-import org.web3j.protocol.Web3jService;
-import org.web3j.protocol.core.DefaultBlockParameterName;
-import org.web3j.protocol.core.methods.response.EthGetBalance;
-import org.web3j.protocol.http.HttpService;
-import org.web3j.utils.Convert;
 
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.concurrent.ExecutionException;
+import java.io.IOException;
 
 public class screen_main extends AppCompatActivity {
 
@@ -58,7 +47,8 @@ public class screen_main extends AppCompatActivity {
     private backbutton_event backbutton_event;
     private com.example.android.Action.drawer screen_1_drawer;
     private com.example.android.Action.chart screen_1_chart;
-    private com.example.android.data.Connect connect;
+    private com.example.android.data.SendEther sendEther;
+    private com.example.android.data.BlockChainDAO blockChainDAO;
     private BarChart chart_month;
     private ImageButton but_refresh;
     private Button button_ver;
@@ -66,34 +56,63 @@ public class screen_main extends AppCompatActivity {
     private Button button_sup;
     private LinearLayout senddata;
     private BottomSheetBehavior behavior;
-    private TextView zkem;
     public static Web3j web3j;
-    private static TextView card_eth;
+    public static String ID,PW,ADDRESS,ETHER;
 
+    private Button button_sendEther;
     private Button QRbutton; //QR
-    private TextView sendaddress,sendEth;
+    private static TextView sendaddress,sendEth,card_eth,card_address;
     private IntentIntegrator qrScan;
+    private static UserWallet MYUSERWALLET;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.screen_main);
 
+        //login->main
+        //
+        Intent getidpw = getIntent();
+
+        if(getidpw.hasExtra("ID")) {
+            ID = getidpw.getStringExtra("ID");
+            PW = getidpw.getStringExtra("PW");
+
+            Credentials credentials = null;
+
+            try {
+                credentials = WalletUtils.loadCredentials(PW, ID);
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (CipherException e) {
+                e.printStackTrace();
+            }
+
+            ADDRESS = credentials.getAddress();
+
+            Connect_geth connect_geth = new Connect_geth(ADDRESS);
+            connect_geth.execute();
+        }
+        //
+        //
+
         //new
         //
-        connect = new Connect();
+        sendEther = new SendEther();
         screen_1_drawer = new drawer();
         backbutton_event = new backbutton_event(this);
         screen_1_chart = new chart();
         //
         //end of new
 
+
         //findview
         //
+        button_sendEther=findViewById(R.id.data_send);
+        card_eth = findViewById(R.id.card_ETH);
+        card_address = findViewById(R.id.card_account_address);
         chart_month = (BarChart) findViewById(R.id.chart_month);
         but_refresh = findViewById(R.id.button_refresh);
-        zkem = findViewById(R.id.card_ETH);
-        card_eth = findViewById(R.id.card_ETH);
         senddata = findViewById(R.id.senddata);
         behavior = BottomSheetBehavior.from(senddata);
         ImageButton account_button = findViewById(R.id.account_button);
@@ -153,9 +172,8 @@ public class screen_main extends AppCompatActivity {
         but_refresh.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                NetworkTask networkTask = new NetworkTask("df", null);
-                //http 입력
-                networkTask.execute();
+                Connect_geth connect_geth = new Connect_geth(ADDRESS);
+                connect_geth.execute();
             }
         });
 
@@ -208,23 +226,23 @@ public class screen_main extends AppCompatActivity {
     }
     //뒤로가기 버튼 이벤트
 
-    public static class NetworkTask extends AsyncTask<Void, Void, String> {
+    public static class Connect_geth extends AsyncTask<Void, Void, UserWallet> {
 
-        private String url;
-        private ContentValues values;
+        private String address;
 
-        public NetworkTask(String url, ContentValues values) {
-            this.url = url;
-            this.values = values;
+        public Connect_geth(String address) {
+            this.address = address;
         }
 
         @Override
-        protected String doInBackground(Void... params) {
+        protected UserWallet doInBackground(Void... params) {
 
-            String result = "";
-            Connect geth_connect = new Connect();
+            UserWallet result = null;
+
+            Refresh refresh = new Refresh();
+
             try {
-                result = geth_connect.connect();
+                result = refresh.refresh(address);
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -233,9 +251,42 @@ public class screen_main extends AppCompatActivity {
         }
 
         @Override
+        protected void onPostExecute(UserWallet s) {
+            super.onPostExecute(s);
+            MYUSERWALLET = s;
+
+            ETHER = MYUSERWALLET.getEther().toString();
+            card_address.setText(ADDRESS);
+            card_eth.setText(ETHER);
+            /*
+            요 부분에서 차트 값, 내역 설정
+             */
+        }
+    }
+
+    public static class sendEther extends AsyncTask<Void, Void, String> {
+
+        String toAddress;
+        String ether;
+
+        public sendEther(String a, String e) {
+            toAddress = a;
+            ether = e;
+        }
+
+        @Override
+        protected String doInBackground(Void... params) {
+            String result = "";
+
+            return result;
+        }
+
+        @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
-            card_eth.setText(s);
+
+            Connect_geth connect_geth = new Connect_geth(ADDRESS, null);
+            connect_geth.execute();
         }
     }
     //스캔한거 받아서 처리하는 함수

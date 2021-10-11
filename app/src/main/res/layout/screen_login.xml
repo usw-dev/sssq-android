@@ -33,7 +33,7 @@
                 android:id="@+id/EditText_address"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:hint="지갑 주소"
+                android:hint="지갑 json 파일명"
                 android:inputType="text" />
         </RelativeLayout>
 

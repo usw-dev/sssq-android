@@ -21,18 +21,16 @@ public class UserWallet extends Application {
         this.ether = ether;
     }
 
-    public UserWallet() {
-        
-    }
-
     public String getAddress() {
         return address;
     }
 
-    public void setAddress(String address) { this.address = address; }
+    public void setAddress(String address) {
+        this.address = address;
+    }
 
     public BigDecimal getEther() {
-        return ether;
+        return this.ether;
     }
 
     public void setEther(BigDecimal ether) {

@@ -192,33 +192,29 @@ import jnr.ffi.Struct;
 
 
 
-    public class Connect {
+    public class SendEther {
 
-        String ether;
+        String edfther;
 
-        public String connect() {
+        public void SendEther(String from, String to, String SE) {
 
             new AsyncTask() {
                 @Override
                 protected Object doInBackground(Object[] objects) {
 
                     // web3j와 ganache-cli 연결
-                    Web3j web3j = Web3j.build(new HttpService("http://13.124.190.163:8547"));
-                    Admin admin = Admin.build(new HttpService("http://13.124.190.163:8547"));
+                    Web3j web3j = Web3j.build(new HttpService("http://13.124.235.215:8547"));
 
                     // 스마트 컨트랙트
-                    String fromTx = "0xf480fb1d4f32b7797c829d6f05bb0805c152b3ec";
-                    String toTx = "0x10016a91938f7982fe9e6ff20d0fd160e6f29e2f";
                     String contractAddress = "0xb4B6a6Aa93b5Dd8aACD02b83Eb6b5017a3Fdd94C";
-                    String etherTx = "50";
 
                     // set
                     Function function = new Function(
-                            "set", Arrays.asList(new Address(toTx)), Collections.emptyList()
+                            "set", Arrays.asList(new Address(to)), Collections.emptyList()
                     );
                     String encodedFunction = FunctionEncoder.encode(function);
                     Transaction transaction = Transaction.createFunctionCallTransaction(
-                            fromTx,
+                            from,
                             null, null, null,
                             contractAddress,
                             encodedFunction
@@ -239,10 +235,10 @@ import jnr.ffi.Struct;
                     );
                     encodedFunction = FunctionEncoder.encode(function);
                     transaction = Transaction.createFunctionCallTransaction(
-                            fromTx,
+                            from,
                             null, null, null,
                             contractAddress,
-                            Convert.toWei(etherTx,Convert.Unit.ETHER).toBigInteger(),
+                            Convert.toWei(SE,Convert.Unit.ETHER).toBigInteger(),
                             encodedFunction
                     );
                     try {
@@ -255,7 +251,5 @@ import jnr.ffi.Struct;
                     return null;
                 }
             }.execute();
-
-            return ether;
         }
     }

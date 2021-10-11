@@ -116,7 +116,7 @@ public class screen_createaccount extends AppCompatActivity {
                         Toast.makeText(screen_createaccount.this, "지갑 생성 완료!", Toast.LENGTH_SHORT).show();
 
                         Intent screen_1 = new Intent(screen_createaccount.this, screen_login.class);
-                        screen_1.putExtra("address",fileName);
+                        screen_1.putExtra("address", fileName);
                         startActivity(screen_1);
 
                     } catch (NoSuchAlgorithmException e) {

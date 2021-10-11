@@ -139,7 +139,7 @@
                                             android:layout_gravity="left"
                                             android:fontFamily="@font/arhelr14"
                                             android:text="ADDRESS"
-                                            android:textSize="20dp"
+                                            android:textSize="15dp"
                                             android:textColor="@color/gray"
                                             android:textStyle="italic" />
                                     </LinearLayout>
@@ -204,14 +204,14 @@
                                         android:layout_height="match_parent"
                                         android:layout_weight="4">
 
-                                        <TextView
-                                            android:id="@+id/card_name"
-                                            android:layout_width="wrap_content"
-                                            android:layout_height="wrap_content"
-                                            android:layout_gravity="bottom"
-                                            android:text="NAME"
-                                            android:textColor="@color/gray"
-                                            android:fontFamily="@font/arhelr14"/>
+<!--                                        <TextView-->
+<!--                                            android:id="@+id/card_name"-->
+<!--                                            android:layout_width="wrap_content"-->
+<!--                                            android:layout_height="wrap_content"-->
+<!--                                            android:layout_gravity="bottom"-->
+<!--                                            android:text="NAME"-->
+<!--                                            android:textColor="@color/gray"-->
+<!--                                            android:fontFamily="@font/arhelr14"/>-->
                                     </LinearLayout>
                                     <!--name-->
 

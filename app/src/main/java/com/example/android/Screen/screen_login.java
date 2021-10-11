@@ -72,21 +72,26 @@ public class screen_login extends AppCompatActivity {
                 String checkAd = PreferenceManager.getString(mContext, "address");
                 String checkPw = PreferenceManager.getString(mContext, "pw");
 
+                Credentials credentials = null;
+
                 if (TextUtils.isEmpty(checkAd) || TextUtils.isEmpty(checkPw)) {
                     Toast.makeText(mContext, "주소나 비밀번호가 비어있습니다", Toast.LENGTH_SHORT).show();
+
                 } else {
                     try {
-                        Credentials credentials = WalletUtils.loadCredentials(checkPw, getExternalFilesDir(null) + "/codi/"+checkAd);
+                        credentials = WalletUtils.loadCredentials(checkPw, getExternalFilesDir(null) + "/codi/" + checkAd);
 
+                        Intent login = new Intent(screen_login.this, screen_main.class);
+                        login.putExtra("ID", getExternalFilesDir(null) + "/codi/" + checkAd);
+                        login.putExtra("PW", checkPw);
+                        startActivity(login);
                     } catch (IOException e) {
                         Toast.makeText(mContext, "올바르지 않은 파일 입니다", Toast.LENGTH_SHORT).show();
                         return;
-                    } catch (CipherException e)
-                    {
+                    } catch (CipherException e) {
                         Toast.makeText(mContext, "올바르지 않은 비밀번호 입니다", Toast.LENGTH_SHORT).show();
                         return;
                     }
-                    Toast.makeText(mContext, "완료", Toast.LENGTH_SHORT).show();
 
                 }
             }
