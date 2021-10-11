@@ -161,6 +161,7 @@ import org.web3j.abi.datatypes.Array;
 import org.web3j.abi.datatypes.Function;
 import org.web3j.abi.datatypes.Type;
 import org.web3j.abi.datatypes.generated.Uint256;
+import org.web3j.crypto.Credentials;
 import org.web3j.crypto.RawTransaction;
 import org.web3j.protocol.Web3j;
 import org.web3j.protocol.admin.Admin;
@@ -175,10 +176,13 @@ import org.web3j.protocol.core.methods.response.EthGetTransactionReceipt;
 import org.web3j.protocol.core.methods.response.EthSendTransaction;
 import org.web3j.protocol.core.methods.response.TransactionReceipt;
 import org.web3j.protocol.core.methods.response.Web3ClientVersion;
+import org.web3j.protocol.exceptions.TransactionException;
 import org.web3j.protocol.http.HttpService;
+import org.web3j.tx.Transfer;
 import org.web3j.utils.Collection;
 import org.web3j.utils.Convert;
 
+import java.io.IOException;
 import java.lang.annotation.Target;
 import java.math.BigDecimal;
 import java.math.BigInteger;
@@ -196,7 +200,7 @@ import jnr.ffi.Struct;
 
         String edfther;
 
-        public String SendEther(String from, String to, String SE) {
+        public String SendEther(Credentials from, String to, int SE) {
 
             new AsyncTask() {
                 @Override
@@ -205,50 +209,64 @@ import jnr.ffi.Struct;
                     // web3j와 ganache-cli 연결
                     Web3j web3j = Web3j.build(new HttpService("http://3.38.116.88:8547"));
 
+                    try {
+                        TransactionReceipt receipt = Transfer.sendFunds(web3j,from,to,new BigDecimal(SE), Convert.Unit.ETHER).sendAsync().get();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    } catch (ExecutionException e) {
+                        e.printStackTrace();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    } catch (TransactionException e) {
+                        e.printStackTrace();
+                    }
+
+
                     // 스마트 컨트랙트
-                    String contractAddress = "0xb4B6a6Aa93b5Dd8aACD02b83Eb6b5017a3Fdd94C";
-
-                    // set
-                    Function function = new Function(
-                            "set", Arrays.asList(new Address(to)), Collections.emptyList()
-                    );
-                    String encodedFunction = FunctionEncoder.encode(function);
-                    Transaction transaction = Transaction.createFunctionCallTransaction(
-                            from,
-                            null, null, null,
-                            contractAddress,
-                            encodedFunction
-                    );
-
-                    EthSendTransaction transactionResponse = null;
-                    try {
-                        transactionResponse = web3j.ethSendTransaction(transaction).sendAsync().get();
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    } catch (ExecutionException e) {
-                        e.printStackTrace();
-                    }
-
-                    // transfer
-                    function = new Function(
-                            "transfer", Collections.emptyList(), Collections.emptyList()
-                    );
-                    encodedFunction = FunctionEncoder.encode(function);
-                    transaction = Transaction.createFunctionCallTransaction(
-                            from,
-                            null, null, null,
-                            contractAddress,
-                            Convert.toWei(SE,Convert.Unit.ETHER).toBigInteger(),
-                            encodedFunction
-                    );
-                    try {
-                        EthSendTransaction transactionResponse2 = web3j.ethSendTransaction(transaction).sendAsync().get();
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    } catch (ExecutionException e) {
-                        e.printStackTrace();
-                    }
-                    return null;
+//                    String contractAddress = "0xb4B6a6Aa93b5Dd8aACD02b83Eb6b5017a3Fdd94C";
+//
+//                    // set
+//                    Function function = new Function(
+//                            "set", Arrays.asList(new Address(to)), Collections.emptyList()
+//                    );
+//                    String encodedFunction = FunctionEncoder.encode(function);
+//
+//                    Transaction transaction = Transaction.createFunctionCallTransaction(
+//                            from,
+//                            null, null, null,
+//                            contractAddress,
+//                            encodedFunction
+//                    );
+//
+//                    EthSendTransaction transactionResponse = null;
+//                    try {
+//                        transactionResponse = web3j.ethSendTransaction(transaction).sendAsync().get();
+//                    } catch (InterruptedException e) {
+//                        e.printStackTrace();
+//                    } catch (ExecutionException e) {
+//                        e.printStackTrace();
+//                    }
+//
+//                    // transfer
+//                    function = new Function(
+//                            "transfer", Collections.emptyList(), Collections.emptyList()
+//                    );
+//                    encodedFunction = FunctionEncoder.encode(function);
+//                    transaction = Transaction.createFunctionCallTransaction(
+//                            from,
+//                            null, null, null,
+//                            contractAddress,
+//                            Convert.toWei(SE,Convert.Unit.ETHER).toBigInteger(),
+//                            encodedFunction
+//                    );
+//                    try {
+//                        EthSendTransaction transactionResponse2 = web3j.ethSendTransaction(transaction).sendAsync().get();
+//                    } catch (InterruptedException e) {
+//                        e.printStackTrace();
+//                    } catch (ExecutionException e) {
+//                        e.printStackTrace();
+//                    }
+                   return null;
                 }
             }.execute();
 
@@ -257,4 +275,3 @@ import jnr.ffi.Struct;
     }
 
 
-//        TransactionReceipt receipt = Transfer.sendFunds(web3j,credentials,credentials2.getAddress(),new BigDecimal(1), Convert.Unit.ETHER).sendAsync().get();

@@ -63,6 +63,7 @@ public class Refresh {
 
         return userWallet;
     }
+    public List<TxHistory> getTxHistory() { return txHistory; }
 
     public void txin(String txHash, String txFrom, String txTo, BigInteger txValue, String timestamp) {
         if(address.equals(txFrom))

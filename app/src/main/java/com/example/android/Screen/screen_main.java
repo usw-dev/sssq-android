@@ -65,6 +65,7 @@ public class screen_main extends AppCompatActivity {
     private static TextView sendaddress, sendEth, card_eth, card_address;
     private IntentIntegrator qrScan;
     private static UserWallet MYUSERWALLET;
+    private Credentials credentials;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,7 +80,7 @@ public class screen_main extends AppCompatActivity {
             ID = getidpw.getStringExtra("ID");
             PW = getidpw.getStringExtra("PW");
 
-            Credentials credentials = null;
+            credentials = null;
 
             try {
                 credentials = WalletUtils.loadCredentials(PW, ID);
@@ -137,10 +138,8 @@ public class screen_main extends AppCompatActivity {
 
                 if (compareEther > Integer.parseInt(MYUSERWALLET.getEther().toString())) {
                     Toast.makeText(screen_main.this, "이더가 부족합니다", Toast.LENGTH_SHORT).show();
-                }
-
-                else{
-                    sendEther sendEther = new sendEther(sendaddress.toString(),sendEth.toString());
+                } else {
+                    sendEther sendEther = new sendEther(sendaddress.toString(), sendEth.toString());
                     sendEther.execute();
                 }
             }
@@ -284,11 +283,11 @@ public class screen_main extends AppCompatActivity {
     public class sendEther extends AsyncTask<Void, Void, String> {
 
         String toAddress;
-        String ether;
+        int ether;
 
         public sendEther(String a, String e) {
             toAddress = a;
-            ether = e;
+            ether = Integer.parseInt(e);
         }
 
         @Override
@@ -298,7 +297,7 @@ public class screen_main extends AppCompatActivity {
             SendEther sendEther = new SendEther();
 
             try {
-                result = sendEther.SendEther(ADDRESS, toAddress, ether);
+                result = sendEther.SendEther(credentials, toAddress, ether);
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -309,7 +308,7 @@ public class screen_main extends AppCompatActivity {
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
 
-            Intent loading = new Intent(screen_main.this,screen_loading.class);
+            Intent loading = new Intent(screen_main.this, screen_loading.class);
             startActivity(loading);
 
             Connect_geth connect_geth = new Connect_geth(ADDRESS);
