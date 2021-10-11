@@ -32,7 +32,7 @@ public class Refresh {
 
 
         // Web3j 연결부분
-        Web3j web3j = Web3j.build(new HttpService("http://52.78.140.254:8547"));
+        Web3j web3j = Web3j.build(new HttpService("http://3.38.116.88:8547"));
 
         // 잔액 조회 부분
         EthGetBalance ethGetBalance = null;

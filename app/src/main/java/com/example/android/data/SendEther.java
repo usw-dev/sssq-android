@@ -203,7 +203,7 @@ import jnr.ffi.Struct;
                 protected Object doInBackground(Object[] objects) {
 
                     // web3j와 ganache-cli 연결
-                    Web3j web3j = Web3j.build(new HttpService("http://13.124.235.215:8547"));
+                    Web3j web3j = Web3j.build(new HttpService("http://3.38.116.88:8547"));
 
                     // 스마트 컨트랙트
                     String contractAddress = "0xb4B6a6Aa93b5Dd8aACD02b83Eb6b5017a3Fdd94C";
@@ -255,3 +255,6 @@ import jnr.ffi.Struct;
             return "";
         }
     }
+
+
+//        TransactionReceipt receipt = Transfer.sendFunds(web3j,credentials,credentials2.getAddress(),new BigDecimal(1), Convert.Unit.ETHER).sendAsync().get();
