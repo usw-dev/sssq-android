@@ -33,6 +33,7 @@ import com.google.zxing.integration.android.IntentResult;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.web3j.abi.datatypes.Int;
 import org.web3j.crypto.CipherException;
 import org.web3j.crypto.Credentials;
 import org.web3j.crypto.WalletUtils;
@@ -57,11 +58,11 @@ public class screen_main extends AppCompatActivity {
     private LinearLayout senddata;
     private BottomSheetBehavior behavior;
     public static Web3j web3j;
-    public static String ID,PW,ADDRESS,ETHER;
+    public static String ID, PW, ADDRESS, ETHER;
 
     private Button button_sendEther;
     private Button QRbutton; //QR
-    private static TextView sendaddress,sendEth,card_eth,card_address;
+    private static TextView sendaddress, sendEth, card_eth, card_address;
     private IntentIntegrator qrScan;
     private static UserWallet MYUSERWALLET;
 
@@ -74,7 +75,7 @@ public class screen_main extends AppCompatActivity {
         //
         Intent getidpw = getIntent();
 
-        if(getidpw.hasExtra("ID")) {
+        if (getidpw.hasExtra("ID")) {
             ID = getidpw.getStringExtra("ID");
             PW = getidpw.getStringExtra("PW");
 
@@ -108,7 +109,7 @@ public class screen_main extends AppCompatActivity {
 
         //findview
         //
-        button_sendEther=findViewById(R.id.data_send);
+        button_sendEther = findViewById(R.id.data_send);
         card_eth = findViewById(R.id.card_ETH);
         card_address = findViewById(R.id.card_account_address);
         chart_month = (BarChart) findViewById(R.id.chart_month);
@@ -129,6 +130,22 @@ public class screen_main extends AppCompatActivity {
 
         //onclicklistener
         //
+        button_sendEther.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int compareEther = Integer.parseInt(sendEth.getText().toString());
+
+                if (compareEther > Integer.parseInt(MYUSERWALLET.getEther().toString())) {
+                    Toast.makeText(screen_main.this, "이더가 부족합니다", Toast.LENGTH_SHORT).show();
+                }
+
+                else{
+                    sendEther sendEther = new sendEther(sendaddress.toString(),sendEth.toString());
+                    sendEther.execute();
+                }
+            }
+        });
+
         account_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -264,7 +281,7 @@ public class screen_main extends AppCompatActivity {
         }
     }
 
-    public static class sendEther extends AsyncTask<Void, Void, String> {
+    public class sendEther extends AsyncTask<Void, Void, String> {
 
         String toAddress;
         String ether;
@@ -278,6 +295,13 @@ public class screen_main extends AppCompatActivity {
         protected String doInBackground(Void... params) {
             String result = "";
 
+            SendEther sendEther = new SendEther();
+
+            try {
+                result = sendEther.SendEther(ADDRESS, toAddress, ether);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
             return result;
         }
 
@@ -285,20 +309,23 @@ public class screen_main extends AppCompatActivity {
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
 
-            Connect_geth connect_geth = new Connect_geth(ADDRESS, null);
+            Intent loading = new Intent(screen_main.this,screen_loading.class);
+            startActivity(loading);
+
+            Connect_geth connect_geth = new Connect_geth(ADDRESS);
             connect_geth.execute();
         }
     }
+
     //스캔한거 받아서 처리하는 함수
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        IntentResult result = IntentIntegrator.parseActivityResult(requestCode,resultCode,data);
+        IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
         if (result != null) {
             //qrcode 가 없으면
             if (result.getContents() == null) {
                 Toast.makeText(screen_main.this, "취소!", Toast.LENGTH_SHORT).show();
-            }
-            else {
+            } else {
                 //qrcode 결과가 있으면
                 Toast.makeText(screen_main.this, "스캔완료!", Toast.LENGTH_SHORT).show();
             }
@@ -312,8 +339,7 @@ public class screen_main extends AppCompatActivity {
                 //Toast.makeText(screen_main.this, result.getContents(), Toast.LENGTH_LONG).show();
                 sendaddress.setText(result.getContents());
             }
-        }
-        else {
+        } else {
             super.onActivityResult(requestCode, resultCode, data);
         }
     }

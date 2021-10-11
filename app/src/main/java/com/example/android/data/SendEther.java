@@ -196,7 +196,7 @@ import jnr.ffi.Struct;
 
         String edfther;
 
-        public void SendEther(String from, String to, String SE) {
+        public String SendEther(String from, String to, String SE) {
 
             new AsyncTask() {
                 @Override
@@ -251,5 +251,7 @@ import jnr.ffi.Struct;
                     return null;
                 }
             }.execute();
+
+            return "";
         }
     }

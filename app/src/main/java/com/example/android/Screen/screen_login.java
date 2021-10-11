@@ -15,7 +15,6 @@ import android.widget.Toast;
 import com.example.android.Action.backbutton_event;
 import com.example.android.PreferenceManager;
 import com.example.android.R;
-import com.example.android.screen_createaccount;
 
 import org.web3j.crypto.CipherException;
 import org.web3j.crypto.Credentials;
