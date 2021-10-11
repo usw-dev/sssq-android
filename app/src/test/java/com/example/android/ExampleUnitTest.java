@@ -409,11 +409,11 @@ public class ExampleUnitTest {
         Credentials credentials = WalletUtils.loadCredentials("swu", "E:\\UTC--2021-10-08T11-10-46.978Z--8fbdd84d6d42e2d592aaa7776840f20842e06fff.json");
         Credentials credentials2 = WalletUtils.loadCredentials("swu", "E:\\UTC--2021-10-08T11-15-42.229Z--63db1a2778ee694698a499f1bad95d8dcb98f2b5.json");
 
-        String etherTx = "100";
+        String etherTx = "10";
         Transaction transaction = Transaction.createEtherTransaction(
                 "0xf480fb1d4f32b7797c829d6f05bb0805c152b3ec",
                 null,null,null,
-                "0x2e1d438928959911b8d5ca91529597158b2f6e24",
+                "0x99620ad359425f1d5c58c3e2082dc78679ad2a2d",
                 Convert.toWei(etherTx,Convert.Unit.ETHER).toBigInteger()
         );
         EthSendTransaction ethSendTransaction = admin.ethSendTransaction(transaction).sendAsync().get();
