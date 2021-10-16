@@ -3,7 +3,6 @@ package com.example.android.Screen;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 
-import android.content.ContentValues;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.AsyncTask;
@@ -18,10 +17,9 @@ import android.widget.Toast;
 import com.example.android.Action.chart;
 import com.example.android.R;
 import com.example.android.Action.backbutton_event;
-import com.example.android.data.BlockChainDAO;
 import com.example.android.data.SendEther;
 import com.example.android.data.Refresh;
-import com.example.android.data.SendEther;
+import com.example.android.data.TxHistory;
 import com.example.android.data.UserWallet;
 import com.example.android.Action.drawer;
 import com.github.mikephil.charting.charts.BarChart;
@@ -33,13 +31,15 @@ import com.google.zxing.integration.android.IntentResult;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.web3j.abi.datatypes.Int;
 import org.web3j.crypto.CipherException;
 import org.web3j.crypto.Credentials;
 import org.web3j.crypto.WalletUtils;
 import org.web3j.protocol.Web3j;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
 
 public class screen_main extends AppCompatActivity {
 
@@ -47,10 +47,9 @@ public class screen_main extends AppCompatActivity {
     private View drawerView;
     private backbutton_event backbutton_event;
     private com.example.android.Action.drawer screen_1_drawer;
-    private com.example.android.Action.chart screen_1_chart;
+    private static com.example.android.Action.chart screen_1_chart;
     private com.example.android.data.SendEther sendEther;
-    private com.example.android.data.BlockChainDAO blockChainDAO;
-    private BarChart chart_month;
+    private static BarChart chart_month;
     private ImageButton but_refresh;
     private Button button_ver;
     private Button button_info;
@@ -59,6 +58,7 @@ public class screen_main extends AppCompatActivity {
     private BottomSheetBehavior behavior;
     public static Web3j web3j;
     public static String ID, PW, ADDRESS, ETHER;
+    public static List<TxHistory> HISTORY;
 
     private Button button_sendEther;
     private Button QRbutton; //QR
@@ -66,6 +66,7 @@ public class screen_main extends AppCompatActivity {
     private IntentIntegrator qrScan;
     private static UserWallet MYUSERWALLET;
     private Credentials credentials;
+    static String[] labels = chart.labels;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -221,18 +222,11 @@ public class screen_main extends AppCompatActivity {
         chart_month.getXAxis().setDrawAxisLine(false);                      // x축 선 제거
         chart_month.getXAxis().setDrawLabels(true);                         // x축 라벨 사용
         chart_month.getXAxis().setTextColor(Color.WHITE);                   // x축 라벨 색
-        chart_month.getXAxis().setLabelCount(6);                            // 라벨6개 고정
-        chart_month.getXAxis().setCenterAxisLabels(true);                   // 라벨 가운데로
+        chart_month.getXAxis().setLabelCount(2);                            // 라벨6개 고정
+        chart_month.getXAxis().setCenterAxisLabels(false);                   // 라벨 가운데로
         chart_month.getXAxis().setPosition(XAxis.XAxisPosition.BOTTOM);     // 라벨 위치 아래로
         chart_month.getLegend().setEnabled(false);                          // 레전드(차트밑에 색과 라벨을 나타내는 설정)을 제거
         chart_month.getDescription().setEnabled(false);                     // 데스크립션 제거
-
-        String[] labels = chart.labels;
-
-        chart_month.getXAxis().setValueFormatter(new IndexAxisValueFormatter(labels)); //115줄의 x축 String 라벨적용
-        // false true
-        chart_month.setData(screen_1_chart.barchart());
-        //차트
 
 
         qrScan = new IntentIntegrator(this);
@@ -275,11 +269,55 @@ public class screen_main extends AppCompatActivity {
             MYUSERWALLET = s;
 
             ETHER = MYUSERWALLET.getEther().toString();
+            HISTORY = MYUSERWALLET.getTxHistory();
+
+            //    지난달 입금    출금          이번달 입금      출금
+            float pastin = 0, pastout = 0, presentin = 0, presentout = 0;
+
+            long now = System.currentTimeMillis();
+
+            Date date = new Date(now);
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            String Curtime = sdf.format(date);
+
+            int CurY = Integer.parseInt(Curtime.substring(0, 4));
+            int CurM = Integer.parseInt(Curtime.substring(5, 7));
+
+            //지난달과 이번달의 입금 출금
+            if (HISTORY != null) {
+                for (TxHistory history : HISTORY) {
+                    String Txtime = history.getTimestamp();
+
+                    int TxY = Integer.parseInt(Txtime.substring(0, 4));
+                    int TxM = Integer.parseInt(Txtime.substring(5, 7));
+
+                    //이번달
+                    if ((CurY == TxY) && (CurM == TxM)) {
+                        //내가 받았을 때
+                        if (history.getTxTo() == ADDRESS)
+                            presentin += history.getTxValue().floatValue();
+                            //내가 줬을 때
+                        else if (history.getTxFrom() == ADDRESS)
+                            presentout += history.getTxValue().floatValue();
+                    }
+                    //지난달
+                    else if ((CurY == TxY) && ((CurM - TxM) == 1)) {
+                        //내가 받았을 때
+                        if (history.getTxTo() == ADDRESS)
+                            pastin += history.getTxValue().floatValue();
+                            //내가 줬을 때
+                        else if (history.getTxFrom() == ADDRESS)
+                            pastout += history.getTxValue().floatValue();
+                    }
+                }
+            }
+
             card_address.setText(ADDRESS);
             card_eth.setText(ETHER);
-            /*
-            요 부분에서 차트 값, 내역 설정
-             */
+
+            chart_month.getXAxis().setValueFormatter(new IndexAxisValueFormatter(labels));
+            chart_month.setData(screen_1_chart.barchart(pastin, pastout, presentin, presentout));
+            chart_month.invalidate();
         }
     }
 

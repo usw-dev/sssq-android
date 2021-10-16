@@ -30,7 +30,6 @@ public class Refresh {
 
         address = a;
 
-
         // Web3j 연결부분
         Web3j web3j = Web3j.build(new HttpService("http://13.124.7.213:8547"));
 
@@ -45,7 +44,6 @@ public class Refresh {
         }
         BigDecimal ether = Convert.fromWei(ethGetBalance.getBalance().toString(), Convert.Unit.ETHER);
 
-        userWallet = new UserWallet(address, ether);
 
         Subscription subscription = (Subscription) web3j
                 .replayPastTransactionsFlowable(DefaultBlockParameterName.EARLIEST,DefaultBlockParameterName.LATEST)
@@ -54,16 +52,17 @@ public class Refresh {
 //            System.out.println("tx : " + tx.getHash());
 //            System.out.println("from : " + tx.getFrom() + "    to : " + tx.getTo());
 //            System.out.println("value : " + tx.getValue());
+
                     EthBlock ethBlock = web3j.ethGetBlockByHash(tx.getBlockHash(),false).send();
                     long timestamp = ethBlock.getBlock().getTimestamp().longValue();
-                    SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.KOREA);
+                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.KOREA);
                     String ts = sdf.format( new Date(timestamp*1000L));
                     txin(tx.getHash(),tx.getFrom(),tx.getTo(),tx.getValue(),ts);
                 });
+        userWallet = new UserWallet(address, ether, txHistory);
 
         return userWallet;
     }
-    public List<TxHistory> getTxHistory() { return txHistory; }
 
     public void txin(String txHash, String txFrom, String txTo, BigInteger txValue, String timestamp) {
         if(address.equals(txFrom))
