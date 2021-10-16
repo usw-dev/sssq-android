@@ -271,8 +271,11 @@ public class screen_main extends AppCompatActivity {
             ETHER = MYUSERWALLET.getEther().toString();
             HISTORY = MYUSERWALLET.getTxHistory();
 
-            //    지난달 입금    출금          이번달 입금      출금
-            float pastin = 0, pastout = 0, presentin = 0, presentout = 0;
+            //지난 달과 이번 달 입출금
+            float pastIn = 0;
+            float pastOut = 0;
+            float presentIn = 0;
+            float presentOut = 0;
 
             long now = System.currentTimeMillis();
 
@@ -280,8 +283,8 @@ public class screen_main extends AppCompatActivity {
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
             String Curtime = sdf.format(date);
 
-            int CurY = Integer.parseInt(Curtime.substring(0, 4));
-            int CurM = Integer.parseInt(Curtime.substring(5, 7));
+            int curYear = Integer.parseInt(Curtime.substring(0, 4));
+            int curMonth = Integer.parseInt(Curtime.substring(5, 7));
 
             //지난달과 이번달의 입금 출금
             if (HISTORY != null) {
@@ -292,22 +295,22 @@ public class screen_main extends AppCompatActivity {
                     int TxM = Integer.parseInt(Txtime.substring(5, 7));
 
                     //이번달
-                    if ((CurY == TxY) && (CurM == TxM)) {
+                    if ((curYear == TxY) && (curMonth == TxM)) {
                         //내가 받았을 때
                         if (history.getTxTo() == ADDRESS)
-                            presentin += history.getTxValue().floatValue();
+                            presentIn += history.getTxValue().floatValue();
                             //내가 줬을 때
                         else if (history.getTxFrom() == ADDRESS)
-                            presentout += history.getTxValue().floatValue();
+                            presentOut += history.getTxValue().floatValue();
                     }
                     //지난달
-                    else if ((CurY == TxY) && ((CurM - TxM) == 1)) {
+                    else if ((curYear == TxY) && ((curMonth - TxM) == 1)) {
                         //내가 받았을 때
                         if (history.getTxTo() == ADDRESS)
-                            pastin += history.getTxValue().floatValue();
+                            pastIn += history.getTxValue().floatValue();
                             //내가 줬을 때
                         else if (history.getTxFrom() == ADDRESS)
-                            pastout += history.getTxValue().floatValue();
+                            pastOut += history.getTxValue().floatValue();
                     }
                 }
             }
