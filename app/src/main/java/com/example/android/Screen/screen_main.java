@@ -243,8 +243,10 @@ public class screen_main extends AppCompatActivity {
 
         CreateQR.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Bitmap bitmap = com.example.android.Action.CreateQR.encodeAsBitmap("address", 500, 500);
-                QRView2.setImageBitmap(bitmap);
+//                Bitmap bitmap = com.example.android.Action.CreateQR.encodeAsBitmap("address", 500, 500);
+//                QRView2.setImageBitmap(bitmap);
+                Intent intent = new Intent(screen_main.this, screen_qr.class);
+                startActivity(intent);
             }
         });
 
