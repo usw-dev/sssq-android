@@ -67,7 +67,7 @@ public class screen_main extends AppCompatActivity {
     private Button button_sendEther;
     private Button QRbutton; //QR
     private Button CreateQR;
-    private ImageView QRView;
+    private ImageView QRView2;
     private static TextView sendaddress, sendEth, card_eth, card_address;
     private IntentIntegrator qrScan;
     private static UserWallet MYUSERWALLET;
@@ -136,6 +136,8 @@ public class screen_main extends AppCompatActivity {
         QRbutton = findViewById(R.id.QRbutton);
         sendaddress = findViewById(R.id.sendaddress);
         sendEth = findViewById(R.id.sendEth);
+        QRView2 = findViewById(R.id.QRView2);
+        CreateQR = findViewById(R.id.CreateQR);
         //
         //end of findview
 
@@ -242,7 +244,7 @@ public class screen_main extends AppCompatActivity {
         CreateQR.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Bitmap bitmap = com.example.android.Action.CreateQR.encodeAsBitmap("address", 500, 500);
-                QRView.setImageBitmap(bitmap);
+                QRView2.setImageBitmap(bitmap);
             }
         });
 
