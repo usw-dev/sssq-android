@@ -314,19 +314,19 @@ public class screen_main extends AppCompatActivity {
                     //이번달
                     if ((curYear == TxY) && (curMonth == TxM)) {
                         //내가 받았을 때
-                        if (history.getTxTo() == ADDRESS)
+                        if (history.getTxTo().compareTo(ADDRESS) == 0)
                             presentIn += history.getTxValue().floatValue();
                             //내가 줬을 때
-                        else if (history.getTxFrom() == ADDRESS)
+                        else if (history.getTxFrom().compareTo(ADDRESS) == 0)
                             presentOut += history.getTxValue().floatValue();
                     }
                     //지난달
                     else if ((curYear == TxY) && ((curMonth - TxM) == 1)) {
                         //내가 받았을 때
-                        if (history.getTxTo() == ADDRESS)
+                        if (history.getTxTo().compareTo(ADDRESS) == 0)
                             pastIn += history.getTxValue().floatValue();
                             //내가 줬을 때
-                        else if (history.getTxFrom() == ADDRESS)
+                        else if (history.getTxFrom().compareTo(ADDRESS) == 0)
                             pastOut += history.getTxValue().floatValue();
                     }
                 }
