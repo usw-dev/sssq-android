@@ -4,16 +4,19 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.android.Action.CreateQR;
 import com.example.android.Action.chart;
 import com.example.android.R;
 import com.example.android.Action.backbutton_event;
@@ -62,6 +65,8 @@ public class screen_main extends AppCompatActivity {
 
     private Button button_sendEther;
     private Button QRbutton; //QR
+    private Button CreateQR;
+    private ImageView QRView;
     private static TextView sendaddress, sendEth, card_eth, card_address;
     private IntentIntegrator qrScan;
     private static UserWallet MYUSERWALLET;
@@ -231,6 +236,14 @@ public class screen_main extends AppCompatActivity {
 
         qrScan = new IntentIntegrator(this);
         qrScan.setOrientationLocked(false);
+
+        CreateQR.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Bitmap bitmap = com.example.android.Action.CreateQR.encodeAsBitmap("address", 500, 500);
+                QRView.setImageBitmap(bitmap);
+            }
+        });
+
     }
 
     @Override
