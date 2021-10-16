@@ -43,6 +43,7 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class screen_main extends AppCompatActivity {
 
@@ -96,7 +97,8 @@ public class screen_main extends AppCompatActivity {
                 e.printStackTrace();
             }
 
-            ADDRESS = credentials.getAddress();
+            //ADDRESS = credentials.getAddress();
+            ADDRESS = "0x833f3b88d74032b7210d1224d7eef5c535cce42e";
 
             Connect_geth connect_geth = new Connect_geth(ADDRESS);
             connect_geth.execute();
@@ -252,7 +254,7 @@ public class screen_main extends AppCompatActivity {
     }
     //뒤로가기 버튼 이벤트
 
-    public static class Connect_geth extends AsyncTask<Void, Void, UserWallet> {
+    public class Connect_geth extends AsyncTask<Void, Void, UserWallet> {
 
         private String address;
 
@@ -293,7 +295,7 @@ public class screen_main extends AppCompatActivity {
             long now = System.currentTimeMillis();
 
             Date date = new Date(now);
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.KOREA);
             String Curtime = sdf.format(date);
 
             int curYear = Integer.parseInt(Curtime.substring(0, 4));
@@ -332,7 +334,7 @@ public class screen_main extends AppCompatActivity {
             card_eth.setText(ETHER);
 
             chart_month.getXAxis().setValueFormatter(new IndexAxisValueFormatter(labels));
-            chart_month.setData(screen_1_chart.barchart(pastin, pastout, presentin, presentout));
+            chart_month.setData(screen_1_chart.barchart(pastIn, pastOut, presentIn, presentOut));
             chart_month.invalidate();
         }
     }
