@@ -41,7 +41,7 @@ public class screen_loading extends AppCompatActivity {
         handler1.postDelayed(new Runnable() {
             @Override
             public void run() {
-                Text.setText("상대 정보 확인 중");
+                Text.setText("내 정보 확인 중");
             }
         }, 1000);
 

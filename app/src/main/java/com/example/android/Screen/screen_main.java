@@ -126,23 +126,17 @@ public class screen_main extends AppCompatActivity {
             ADDRESS = credentials.getAddress();
             //ADDRESS = "0x833f3b88d74032b7210d1224d7eef5c535cce42e";
 
+            Connect_geth connect_geth = new Connect_geth(ADDRESS);
+            connect_geth.execute();
 
-            Toast.makeText(screen_main.this, "잠시 기다려주세요...", Toast.LENGTH_SHORT).show();
+            try {
+                Thread.sleep(4000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
 
-            Handler handler = new Handler();
-            handler.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    try {
-                        Connect_geth connect_geth = new Connect_geth(ADDRESS);
-                        connect_geth.execute();
-                        Thread.sleep(2000);
-                        Toast.makeText(screen_main.this, "로딩중...", Toast.LENGTH_SHORT).show();
-                        Thread.sleep(2000);
-                    } catch (InterruptedException e) {
-                    }
-                }
-            }, 100);
+            Intent loading = new Intent(screen_main.this, screen_loading.class);
+            startActivity(loading);
         }
         //
         //
@@ -185,14 +179,26 @@ public class screen_main extends AppCompatActivity {
         button_sendEther.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                int compareEther = Integer.parseInt(sendEth.getText().toString());
+                if ((sendaddress.getText().toString().isEmpty()) || (sendEth.getText().toString().isEmpty()))
+                    Toast.makeText(screen_main.this, "기입하지 않은 칸이 있습니다", Toast.LENGTH_SHORT).show();
+                else {
+                    int compareEther = Integer.parseInt(sendEth.getText().toString());
 
-                if (compareEther > Integer.parseInt(MYUSERWALLET.getEther().toString())) {
-                    Toast.makeText(screen_main.this, "이더가 부족합니다", Toast.LENGTH_SHORT).show();
+                    if (compareEther > Integer.parseInt(MYUSERWALLET.getEther().toString())) {
+                        Toast.makeText(screen_main.this, "이더가 부족합니다", Toast.LENGTH_SHORT).show();
+                    } else {
+                        sendEther sendEther = new sendEther(sendaddress.getText().toString(), sendEth.getText().toString());
+                        sendEther.execute();
 
-                } else {
-                    sendEther sendEther = new sendEther(sendaddress.getText().toString(), sendEth.getText().toString());
-                    sendEther.execute();
+                        try {
+                            Thread.sleep(4000);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+
+                        Intent loading = new Intent(screen_main.this, screen_loading.class);
+                        startActivity(loading);
+                    }
                 }
             }
         });
