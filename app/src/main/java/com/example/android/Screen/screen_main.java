@@ -20,6 +20,7 @@ import com.example.android.Action.CreateQR;
 import com.example.android.Action.chart;
 import com.example.android.R;
 import com.example.android.Action.backbutton_event;
+import com.example.android.data.HistorySet;
 import com.example.android.data.SendEther;
 import com.example.android.data.Refresh;
 import com.example.android.data.TxHistory;
@@ -41,6 +42,7 @@ import org.web3j.protocol.Web3j;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -59,10 +61,13 @@ public class screen_main extends AppCompatActivity {
     private Button button_info;
     private Button button_sup;
     private LinearLayout senddata;
+    private LinearLayout scrollview;
     private BottomSheetBehavior behavior;
     public static Web3j web3j;
     public static String ID, PW, ADDRESS, ETHER;
     public static List<TxHistory> HISTORY;
+    public static ArrayList<HistorySet> myHistory;
+
 
     private Button button_sendEther;
     private Button QRbutton; //QR
@@ -97,8 +102,8 @@ public class screen_main extends AppCompatActivity {
                 e.printStackTrace();
             }
 
-            //ADDRESS = credentials.getAddress();
-            ADDRESS = "0x833f3b88d74032b7210d1224d7eef5c535cce42e";
+            ADDRESS = credentials.getAddress();
+            //ADDRESS = "0x833f3b88d74032b7210d1224d7eef5c535cce42e";
 
             Connect_geth connect_geth = new Connect_geth(ADDRESS);
             connect_geth.execute();
@@ -120,6 +125,7 @@ public class screen_main extends AppCompatActivity {
 
         //findview
         //
+        scrollview = findViewById(R.id.scrollView);
         button_sendEther = findViewById(R.id.data_send);
         card_eth = findViewById(R.id.card_ETH);
         card_address = findViewById(R.id.card_account_address);
@@ -298,40 +304,122 @@ public class screen_main extends AppCompatActivity {
 
             long now = System.currentTimeMillis();
 
-            Date date = new Date(now);
+            Date d = new Date(now);
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.KOREA);
-            String Curtime = sdf.format(date);
+            String Curtime = sdf.format(d);
 
+            //현재 년 월
             int curYear = Integer.parseInt(Curtime.substring(0, 4));
             int curMonth = Integer.parseInt(Curtime.substring(5, 7));
+
+            //내 내역들을 담을 리스트
+            myHistory = new ArrayList<>();
 
             //지난달과 이번달의 입금 출금
             if (HISTORY != null) {
                 for (TxHistory history : HISTORY) {
-                    String Txtime = history.getTimestamp();
+                    //보내거나 받는 사람이 나일때
+                    if ((history.getTxTo().compareTo(ADDRESS) == 0) || (history.getTxFrom().compareTo(ADDRESS) == 0)) {
+                        //내역 하나
+                        HistorySet oneHistory = new HistorySet();
 
-                    int TxY = Integer.parseInt(Txtime.substring(0, 4));
-                    int TxM = Integer.parseInt(Txtime.substring(5, 7));
+                        //내역의 년 월 일
+                        String txTime = history.getTimestamp();
+                        int txYear = Integer.parseInt(txTime.substring(0, 4));
+                        int txMonth = Integer.parseInt(txTime.substring(5, 7));
+                        int txDay = Integer.parseInt(txTime.substring(8, 9));
 
-                    //이번달
-                    if ((curYear == TxY) && (curMonth == TxM)) {
-                        //내가 받았을 때
-                        if (history.getTxTo().compareTo(ADDRESS) == 0)
-                            presentIn += history.getTxValue().floatValue();
-                            //내가 줬을 때
-                        else if (history.getTxFrom().compareTo(ADDRESS) == 0)
-                            presentOut += history.getTxValue().floatValue();
-                    }
-                    //지난달
-                    else if ((curYear == TxY) && ((curMonth - TxM) == 1)) {
-                        //내가 받았을 때
-                        if (history.getTxTo().compareTo(ADDRESS) == 0)
-                            pastIn += history.getTxValue().floatValue();
-                            //내가 줬을 때
-                        else if (history.getTxFrom().compareTo(ADDRESS) == 0)
-                            pastOut += history.getTxValue().floatValue();
+                        //날짜를 만들어서 내역에 저장
+                        String date = (Integer.toString(txYear) + "." + Integer.toString(txMonth) + "." + Integer.toString(txDay));
+                        oneHistory.setDate(date);
+
+                        //이번달
+                        if ((curYear == txYear) && (curMonth == txMonth)) {
+                            //내가 받았을 때
+                            if (history.getTxTo().compareTo(ADDRESS) == 0) {
+                                presentIn += history.getTxValue().floatValue();
+
+                                //상대 주소, 이더 내역 저장
+                                oneHistory.setOpponent(history.getTxFrom());
+                                oneHistory.setEther(history.getTxValue().toString());
+                                oneHistory.setWasMe(false);
+                            }
+                                //내가 줬을 때
+                            else if (history.getTxFrom().compareTo(ADDRESS) == 0){
+                                presentOut += history.getTxValue().floatValue();
+
+                                //상대 주소, 이더 내역 저장
+                                oneHistory.setOpponent(history.getTxTo());
+                                oneHistory.setEther(history.getTxValue().toString());
+                                oneHistory.setWasMe(true);
+                            }
+                        }
+                        //지난달
+                        else if ((curYear == txYear) && ((curMonth - txMonth) == 1)) {
+                            //내가 받았을 때
+                            if (history.getTxTo().compareTo(ADDRESS) == 0) {
+                                pastIn += history.getTxValue().floatValue();
+
+                                //상대 주소, 이더 내역 저장
+                                oneHistory.setOpponent(history.getTxFrom());
+                                oneHistory.setEther(history.getTxValue().toString());
+                                oneHistory.setWasMe(false);
+                            }
+                                //내가 줬을 때
+                            else if (history.getTxFrom().compareTo(ADDRESS) == 0) {
+                                pastOut += history.getTxValue().floatValue();
+
+                                //상대 주소, 이더 내역 저장
+                                oneHistory.setOpponent(history.getTxTo());
+                                oneHistory.setEther(history.getTxValue().toString());
+                                oneHistory.setWasMe(true);
+                            }
+                        }
+                        //내역 하나 추가
+                        myHistory.add(oneHistory);
                     }
                 }
+            }
+
+            //스크롤 뷰에 내역을 역순으로 추가
+            for (int i=myHistory.size();i>=0;i--) {
+                LinearLayout lin = new LinearLayout(scrollview.getContext());
+                lin.setOrientation(LinearLayout.HORIZONTAL);
+                lin.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT));
+
+                //날짜
+                TextView date = new TextView(scrollview.getContext());
+                date.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT, 1));
+                date.setText(myHistory.get(i).getDate());
+                date.setTextSize(10f);
+                date.setTextColor(Color.WHITE);
+                lin.addView(date);
+
+                //상대
+                TextView opponent = new TextView(scrollview.getContext());
+                opponent.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT, 1));
+                opponent.setText(myHistory.get(i).getOpponent());
+                opponent.setTextSize(10f);
+                opponent.setTextColor(Color.WHITE);
+                lin.addView(opponent);
+
+                //액수
+                TextView amount = new TextView(scrollview.getContext());
+                amount.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT, 1));
+                amount.setTextSize(10f);
+
+                //보낸 사람이 나인가?
+                if(myHistory.get(i).getWasMe()==true) {
+                    amount.setText("- " + myHistory.get(i).getEther());
+                    amount.setTextColor(Color.WHITE);
+                }
+                else {
+                    amount.setText("+ " + myHistory.get(i).getEther());
+                    amount.setTextColor(Color.rgb(121,231,231));
+                }
+                lin.addView(amount);
+
+                scrollview.addView(lin);
             }
 
             card_address.setText(ADDRESS);
