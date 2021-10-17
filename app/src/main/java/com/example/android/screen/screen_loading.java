@@ -1,4 +1,4 @@
-package com.example.android.Screen;
+package com.example.android.screen;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -6,18 +6,9 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.DataSource;
-import com.bumptech.glide.load.engine.GlideException;
-import com.bumptech.glide.load.resource.gif.GifDrawable;
-import com.bumptech.glide.request.RequestListener;
 import com.example.android.R;
-
-import java.lang.annotation.Target;
-
-import io.reactivex.annotations.Nullable;
 
 public class screen_loading extends AppCompatActivity {
 

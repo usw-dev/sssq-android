@@ -1,23 +1,10 @@
-package com.example.android.Action;
+package com.example.android.action;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.pm.ActivityInfoCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
-import android.content.Intent;
-import android.os.Bundle;
+
 import android.view.View;
 import android.view.MotionEvent;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
-import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.LinearLayout;
-import android.widget.Toast;
-
-import androidx.drawerlayout.widget.DrawerLayout;
-
-import com.example.android.R;
 
 public class drawer {
     public static void drawer(DrawerLayout drawerLayout, View drawerView, ImageButton btn)

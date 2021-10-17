@@ -1,4 +1,4 @@
-package com.example.android.Screen;
+package com.example.android.screen;
 
 import androidx.appcompat.app.AppCompatActivity;
 

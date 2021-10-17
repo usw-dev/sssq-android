@@ -1,13 +1,10 @@
-package com.example.android.Action;
+package com.example.android.action;
 
 import android.graphics.Color;
 
-import com.github.mikephil.charting.charts.BarChart;
-import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
-import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
 
 import java.util.ArrayList;
 
@@ -22,9 +19,6 @@ public class chart {
         BarDataSet barDataSet2 = new BarDataSet(chart_values2(past_out,present_out), "지출");
         barDataSet2.setColors(Color.WHITE);
 
-//        ArrayList<String> labels = new ArrayList<>(Arrays.asList("1월","2월","3월","4월","5월","6월"));//x축 String 라벨
-         //위처럼 x축 string
-
         barDataSet.setDrawValues(false); //데이터 텍스트값 나타내지않음
         barDataSet2.setDrawValues(false); //데이터 텍스트값 나타내지않음
 
@@ -36,7 +30,6 @@ public class chart {
 
         barData.setBarWidth(barWidth); //적용
         barData.groupBars(-0.32f, groupSpace, barSpace); //적용
-//        barData.getGroupWidth(0,0);
 
         //차트
         return barData;

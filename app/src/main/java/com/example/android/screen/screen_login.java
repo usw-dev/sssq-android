@@ -1,4 +1,4 @@
-package com.example.android.Screen;
+package com.example.android.screen;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -12,7 +12,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
-import com.example.android.Action.backbutton_event;
+import com.example.android.action.backbutton_event;
 import com.example.android.PreferenceManager;
 import com.example.android.R;
 
@@ -30,7 +30,7 @@ public class screen_login extends AppCompatActivity {
     private EditText editAddress;
     private EditText editPassword;
     private CheckBox checkbox;
-    private com.example.android.Action.backbutton_event backbuttonEvent;
+    private com.example.android.action.backbutton_event backbuttonEvent;
 
     String ID, PW;
 

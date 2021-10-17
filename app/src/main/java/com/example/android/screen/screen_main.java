@@ -1,10 +1,9 @@
-package com.example.android.Screen;
+package com.example.android.screen;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -18,16 +17,15 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.android.Action.CreateQR;
-import com.example.android.Action.chart;
+import com.example.android.action.chart;
 import com.example.android.R;
-import com.example.android.Action.backbutton_event;
+import com.example.android.action.backbutton_event;
 import com.example.android.data.HistorySet;
 import com.example.android.data.SendEther;
 import com.example.android.data.Refresh;
 import com.example.android.data.TxHistory;
 import com.example.android.data.UserWallet;
-import com.example.android.Action.drawer;
+import com.example.android.action.drawer;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
@@ -54,8 +52,8 @@ public class screen_main extends AppCompatActivity {
     private DrawerLayout drawerLayout;
     private View drawerView;
     private backbutton_event backbutton_event;
-    private com.example.android.Action.drawer screen_1_drawer;
-    private static com.example.android.Action.chart screen_1_chart;
+    private com.example.android.action.drawer screen_1_drawer;
+    private static com.example.android.action.chart screen_1_chart;
     private com.example.android.data.SendEther sendEther;
     private static BarChart chart_month;
     private ImageButton but_refresh;

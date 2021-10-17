@@ -1,4 +1,4 @@
-package com.example.android.Screen;
+package com.example.android.screen;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -19,7 +19,7 @@ public class screen_qr extends AppCompatActivity {
         QRView = findViewById(R.id.QRView);
         String addressQR = screen_main.ADDRESS;
 
-        Bitmap bitmap = com.example.android.Action.CreateQR.encodeAsBitmap(addressQR, 500, 500);
+        Bitmap bitmap = com.example.android.action.CreateQR.encodeAsBitmap(addressQR, 500, 500);
         QRView.setImageBitmap(bitmap);
     }
 }

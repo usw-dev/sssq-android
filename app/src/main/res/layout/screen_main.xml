@@ -8,7 +8,7 @@
     android:layout_height="match_parent"
     android:background="#000000"
     android:orientation="vertical"
-    tools:context=".Screen.screen_main">
+    tools:context=".screen.screen_main">
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
@@ -22,7 +22,7 @@
             android:layout_height="match_parent"
             android:background="@color/main_color"
             android:orientation="vertical"
-            tools:context=".Screen.screen_main">
+            tools:context=".screen.screen_main">
 
             <LinearLayout
                 android:layout_width="match_parent"

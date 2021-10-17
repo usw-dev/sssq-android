@@ -1,4 +1,4 @@
-package com.example.android.Action;
+package com.example.android.action;
 
 import androidx.core.app.ActivityCompat;
 
