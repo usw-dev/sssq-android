@@ -136,9 +136,9 @@ public class screen_main extends AppCompatActivity {
                     try {
                         Connect_geth connect_geth = new Connect_geth(ADDRESS);
                         connect_geth.execute();
-                        Thread.sleep(5000);
+                        Thread.sleep(4000);
                         Toast.makeText(screen_main.this, "로딩중...", Toast.LENGTH_SHORT).show();
-                        Thread.sleep(5000);
+                        Thread.sleep(4000);
                     } catch (InterruptedException e) {
                     }
                 }
@@ -454,7 +454,7 @@ public class screen_main extends AppCompatActivity {
             }
 
             card_address.setText(ADDRESS);
-            card_eth.setText(ETHER.substring(0, 10));
+            card_eth.setText(ETHER);
 
             chart_month.getXAxis().setValueFormatter(new IndexAxisValueFormatter(labels));
             chart_month.setData(screen_1_chart.barchart(pastIn, pastOut, presentIn, presentOut));
