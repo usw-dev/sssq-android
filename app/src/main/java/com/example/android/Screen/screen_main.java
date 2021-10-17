@@ -85,6 +85,25 @@ public class screen_main extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.screen_main);
 
+        chart_month = (BarChart) findViewById(R.id.chart_month);
+
+        chart_month.setTouchEnabled(false); // 터치x
+        chart_month.getAxisLeft().setDrawGridLines(false);                  // y축(가로줄) 격자 x 두개 같이써야 없어짐
+        chart_month.getAxisLeft().setDrawAxisLine(false);                   // y축 왼쪽 선 제거
+        chart_month.getAxisLeft().setDrawLabels(false);                     // y축 왼쪽 라벨 제거
+        chart_month.getAxisRight().setDrawGridLines(false);                 // y축(가로줄) 격자 x 두개 같이써야 없어짐
+        chart_month.getAxisRight().setDrawAxisLine(false);                  // y축 오른쪽 선 제거
+        chart_month.getAxisRight().setDrawLabels(false);                    // y축 오른쪽 라벨 제거
+        chart_month.getXAxis().setDrawGridLines(false);                     // x축(세로줄) 격자 제거
+        chart_month.getXAxis().setDrawAxisLine(false);                      // x축 선 제거
+        chart_month.getXAxis().setDrawLabels(true);                         // x축 라벨 사용
+        chart_month.getXAxis().setTextColor(Color.WHITE);                   // x축 라벨 색
+        chart_month.getXAxis().setLabelCount(2);                            // 라벨6개 고정
+        chart_month.getXAxis().setCenterAxisLabels(false);                   // 라벨 가운데로
+        chart_month.getXAxis().setPosition(XAxis.XAxisPosition.BOTTOM);     // 라벨 위치 아래로
+        chart_month.getLegend().setEnabled(false);                          // 레전드(차트밑에 색과 라벨을 나타내는 설정)을 제거
+        chart_month.getDescription().setEnabled(false);                     // 데스크립션 제거
+
         //login->main
         //
         Intent getidpw = getIntent();
@@ -108,6 +127,7 @@ public class screen_main extends AppCompatActivity {
 
             Connect_geth connect_geth = new Connect_geth(ADDRESS);
             connect_geth.execute();
+
             Intent loading = new Intent(screen_main.this, screen_loading.class);
             startActivity(loading);
         }
@@ -130,7 +150,6 @@ public class screen_main extends AppCompatActivity {
         button_sendEther = findViewById(R.id.data_send);
         card_eth = findViewById(R.id.card_ETH);
         card_address = findViewById(R.id.card_account_address);
-        chart_month = (BarChart) findViewById(R.id.chart_month);
         but_refresh = findViewById(R.id.button_refresh);
         senddata = findViewById(R.id.senddata);
         behavior = BottomSheetBehavior.from(senddata);
@@ -210,6 +229,8 @@ public class screen_main extends AppCompatActivity {
             public void onClick(View v) {
                 Connect_geth connect_geth = new Connect_geth(ADDRESS);
                 connect_geth.execute();
+                Intent loading = new Intent(screen_main.this, screen_loading.class);
+                startActivity(loading);
             }
         });
 
@@ -227,22 +248,6 @@ public class screen_main extends AppCompatActivity {
         screen_1_drawer.drawer(drawerLayout, drawerView, btn_mymenu);
         //드로어 레이아웃 오픈
 
-        chart_month.setTouchEnabled(false); // 터치x
-        chart_month.getAxisLeft().setDrawGridLines(false);                  // y축(가로줄) 격자 x 두개 같이써야 없어짐
-        chart_month.getAxisLeft().setDrawAxisLine(false);                   // y축 왼쪽 선 제거
-        chart_month.getAxisLeft().setDrawLabels(false);                     // y축 왼쪽 라벨 제거
-        chart_month.getAxisRight().setDrawGridLines(false);                 // y축(가로줄) 격자 x 두개 같이써야 없어짐
-        chart_month.getAxisRight().setDrawAxisLine(false);                  // y축 오른쪽 선 제거
-        chart_month.getAxisRight().setDrawLabels(false);                    // y축 오른쪽 라벨 제거
-        chart_month.getXAxis().setDrawGridLines(false);                     // x축(세로줄) 격자 제거
-        chart_month.getXAxis().setDrawAxisLine(false);                      // x축 선 제거
-        chart_month.getXAxis().setDrawLabels(true);                         // x축 라벨 사용
-        chart_month.getXAxis().setTextColor(Color.WHITE);                   // x축 라벨 색
-        chart_month.getXAxis().setLabelCount(2);                            // 라벨6개 고정
-        chart_month.getXAxis().setCenterAxisLabels(false);                   // 라벨 가운데로
-        chart_month.getXAxis().setPosition(XAxis.XAxisPosition.BOTTOM);     // 라벨 위치 아래로
-        chart_month.getLegend().setEnabled(false);                          // 레전드(차트밑에 색과 라벨을 나타내는 설정)을 제거
-        chart_month.getDescription().setEnabled(false);                     // 데스크립션 제거
 
 
         qrScan = new IntentIntegrator(this);
@@ -381,6 +386,8 @@ public class screen_main extends AppCompatActivity {
                     }
                 }
             }
+
+            scrollview.removeAllViews();
 
             //스크롤 뷰에 내역을 역순으로 추가
             for (int i=0;i<myHistory.size();i++) {
