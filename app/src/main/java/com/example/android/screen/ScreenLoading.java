@@ -10,7 +10,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.example.android.R;
 
-public class screen_loading extends AppCompatActivity {
+public class ScreenLoading extends AppCompatActivity {
 
     ImageView loading;
     TextView Text;

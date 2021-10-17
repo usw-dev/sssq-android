@@ -45,7 +45,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-public class screen_main extends AppCompatActivity {
+public class ScreenMain extends AppCompatActivity {
 
     private DrawerLayout drawerLayout;
     private View drawerView;
@@ -128,7 +128,7 @@ public class screen_main extends AppCompatActivity {
                 e.printStackTrace();
             }
 
-            Intent loading = new Intent(screen_main.this, screen_loading.class);
+            Intent loading = new Intent(ScreenMain.this, ScreenLoading.class);
             startActivity(loading);
         }
         //
@@ -172,16 +172,16 @@ public class screen_main extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if ((sendAddress.getText().toString().isEmpty()) || (sendEth.getText().toString().isEmpty()))
-                    Toast.makeText(screen_main.this, "기입하지 않은 칸이 있습니다", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ScreenMain.this, "기입하지 않은 칸이 있습니다", Toast.LENGTH_SHORT).show();
                 else {
                     int compareEther = Integer.parseInt(sendEth.getText().toString());
 
                     if (compareEther > Integer.parseInt(myUserWallet.getEther().toString())) {
-                        Toast.makeText(screen_main.this, "이더가 부족합니다", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ScreenMain.this, "이더가 부족합니다", Toast.LENGTH_SHORT).show();
                     } else {
                         sendEther sendEther = new sendEther(sendAddress.getText().toString(), sendEth.getText().toString());
                         sendEther.execute();
-                        Toast.makeText(screen_main.this, "전송 완료! 새로고침을 눌러주세요", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ScreenMain.this, "전송 완료! 새로고침을 눌러주세요", Toast.LENGTH_SHORT).show();
                     }
                 }
             }
@@ -202,7 +202,7 @@ public class screen_main extends AppCompatActivity {
         buttonVer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(screen_main.this, screen_appver.class);
+                Intent intent = new Intent(ScreenMain.this, ScreenAppVer.class);
                 startActivity(intent);
             }
         });
@@ -211,7 +211,7 @@ public class screen_main extends AppCompatActivity {
         buttonInfo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(screen_main.this, screen_appinfo.class);
+                Intent intent = new Intent(ScreenMain.this, ScreenAppInfo.class);
                 startActivity(intent);
             }
         });
@@ -222,7 +222,7 @@ public class screen_main extends AppCompatActivity {
         buttonSup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(screen_main.this, screen_sup.class);
+                Intent intent = new Intent(ScreenMain.this, ScreenSupport.class);
                 startActivity(intent);
             }
         });
@@ -233,7 +233,7 @@ public class screen_main extends AppCompatActivity {
                 Connect_geth connect_geth = new Connect_geth(ADDRESS);
                 connect_geth.execute();
 
-                Intent loading = new Intent(screen_main.this, screen_loading.class);
+                Intent loading = new Intent(ScreenMain.this, ScreenLoading.class);
                 startActivity(loading);
             }
         });
@@ -255,7 +255,7 @@ public class screen_main extends AppCompatActivity {
 
         createQR.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent intent = new Intent(screen_main.this, screen_qr.class);
+                Intent intent = new Intent(ScreenMain.this, ScreenQr.class);
                 startActivity(intent);
             }
         });
@@ -299,7 +299,7 @@ public class screen_main extends AppCompatActivity {
             handler1.postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    
+
             ETHER = myUserWallet.getEther().toString();
             HISTORY = myUserWallet.getTxHistory();
 
@@ -487,10 +487,10 @@ public class screen_main extends AppCompatActivity {
         if (result != null) {
             //qrcode 가 없으면
             if (result.getContents() == null) {
-                Toast.makeText(screen_main.this, "취소!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(ScreenMain.this, "취소!", Toast.LENGTH_SHORT).show();
             } else {
                 //qrcode 결과가 있으면
-                Toast.makeText(screen_main.this, "스캔완료!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(ScreenMain.this, "스캔완료!", Toast.LENGTH_SHORT).show();
             }
             try {
                 //data를 json으로 변환
@@ -499,7 +499,7 @@ public class screen_main extends AppCompatActivity {
                 sendEth.setText(obj.getString("sendEth"));
             } catch (JSONException e) {
                 e.printStackTrace();
-                //Toast.makeText(screen_main.this, result.getContents(), Toast.LENGTH_LONG).show();
+                //Toast.makeText(ScreenMain.this, result.getContents(), Toast.LENGTH_LONG).show();
                 sendAddress.setText(result.getContents());
             }
         } else {

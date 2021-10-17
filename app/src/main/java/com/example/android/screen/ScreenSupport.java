@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 import com.example.android.R;
 
-public class screen_sup extends AppCompatActivity {
+public class ScreenSupport extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

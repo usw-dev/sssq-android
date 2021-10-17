@@ -22,7 +22,7 @@ import org.web3j.crypto.WalletUtils;
 
 import java.io.IOException;
 
-public class screen_login extends AppCompatActivity {
+public class ScreenLogin extends AppCompatActivity {
     private Context mContext;
     private ImageButton buttonLogin;
     private ImageButton buttonGotocreateAccount;
@@ -84,7 +84,7 @@ public class screen_login extends AppCompatActivity {
                     try {
                         credentials = WalletUtils.loadCredentials(checkPw, getExternalFilesDir(null) + "/codi/" + checkAd);
 
-                        Intent login = new Intent(screen_login.this, screen_main.class);
+                        Intent login = new Intent(ScreenLogin.this, ScreenMain.class);
                         login.putExtra("ID", getExternalFilesDir(null) + "/codi/" + checkAd);
                         login.putExtra("PW", checkPw);
                         startActivity(login);
@@ -103,7 +103,7 @@ public class screen_login extends AppCompatActivity {
         buttonGotocreateAccount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent screen_1 = new Intent(screen_login.this, screen_createaccount.class);
+                Intent screen_1 = new Intent(ScreenLogin.this, ScreenCreateAccount.class);
                 startActivity(screen_1);
             }
         });

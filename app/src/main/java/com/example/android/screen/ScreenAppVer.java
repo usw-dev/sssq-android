@@ -6,11 +6,11 @@ import android.os.Bundle;
 
 import com.example.android.R;
 
-public class screen_appinfo extends AppCompatActivity {
+public class ScreenAppVer extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.screen_appinfo);
+        setContentView(R.layout.screen_appver);
     }
 }

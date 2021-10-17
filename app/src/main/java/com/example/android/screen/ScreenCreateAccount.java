@@ -25,7 +25,7 @@ import java.security.NoSuchProviderException;
 import java.security.Provider;
 import java.security.Security;
 
-public class screen_createaccount extends AppCompatActivity {
+public class ScreenCreateAccount extends AppCompatActivity {
 
     private ImageButton button_createaccount;
     private EditText pw;
@@ -62,7 +62,7 @@ public class screen_createaccount extends AppCompatActivity {
 
         if (!dir.exists()) {
             if (!dir.mkdir())
-                Toast.makeText(screen_createaccount.this, "생성 오류", Toast.LENGTH_SHORT).show();
+                Toast.makeText(ScreenCreateAccount.this, "생성 오류", Toast.LENGTH_SHORT).show();
         }
         return dir;
     }
@@ -88,7 +88,7 @@ public class screen_createaccount extends AppCompatActivity {
                 String passwd = pw.getText().toString();
 
                 if (passwd.isEmpty()) {
-                    Toast.makeText(screen_createaccount.this, "비밀번호를 입력해주세요", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ScreenCreateAccount.this, "비밀번호를 입력해주세요", Toast.LENGTH_SHORT).show();
                 } else {
                     getSaveFolder();
 
@@ -105,9 +105,9 @@ public class screen_createaccount extends AppCompatActivity {
 
                         walletDir = new File(path + "/" + fileName);
 
-                        Toast.makeText(screen_createaccount.this, "지갑 생성 완료!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ScreenCreateAccount.this, "지갑 생성 완료!", Toast.LENGTH_SHORT).show();
 
-                        Intent screen_1 = new Intent(screen_createaccount.this, screen_login.class);
+                        Intent screen_1 = new Intent(ScreenCreateAccount.this, ScreenLogin.class);
                         screen_1.putExtra("address", fileName);
                         startActivity(screen_1);
 

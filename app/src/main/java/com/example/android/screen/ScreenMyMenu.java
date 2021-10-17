@@ -6,7 +6,7 @@ import android.os.Bundle;
 
 import com.example.android.R;
 
-public class screen_mymenu extends AppCompatActivity {
+public class ScreenMyMenu extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

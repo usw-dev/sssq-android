@@ -8,7 +8,7 @@ import android.widget.ImageView;
 
 import com.example.android.R;
 
-public class screen_qr extends AppCompatActivity {
+public class ScreenQr extends AppCompatActivity {
     private ImageView QRView;
 
     @Override
@@ -17,7 +17,7 @@ public class screen_qr extends AppCompatActivity {
         setContentView(R.layout.screen_qr);
 
         QRView = findViewById(R.id.QRView);
-        String addressQR = screen_main.ADDRESS;
+        String addressQR = ScreenMain.ADDRESS;
 
         Bitmap bitmap = com.example.android.action.CreateQR.encodeAsBitmap(addressQR, 500, 500);
         QRView.setImageBitmap(bitmap);
