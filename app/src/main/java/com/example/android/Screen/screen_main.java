@@ -8,6 +8,7 @@ import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
@@ -122,15 +123,30 @@ public class screen_main extends AppCompatActivity {
                 e.printStackTrace();
             }
 
-            //ADDRESS = credentials.getAddress();
-            ADDRESS = "0x833f3b88d74032b7210d1224d7eef5c535cce42e";
+            ADDRESS = credentials.getAddress();
+            //ADDRESS = "0x833f3b88d74032b7210d1224d7eef5c535cce42e";
 
-            Connect_geth connect_geth = new Connect_geth(ADDRESS);
-            connect_geth.execute();
 
-            Intent loading = new Intent(screen_main.this, screen_loading.class);
-            startActivity(loading);
+            Toast.makeText(screen_main.this, "잠시 기다려주세요...", Toast.LENGTH_SHORT).show();
+
+            Handler handler = new Handler();
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        Connect_geth connect_geth = new Connect_geth(ADDRESS);
+                        connect_geth.execute();
+                        Thread.sleep(5000);
+                        Toast.makeText(screen_main.this, "로딩중...", Toast.LENGTH_SHORT).show();
+                        Thread.sleep(5000);
+                    } catch (InterruptedException e) {
+                    }
+                }
+            }, 100);
+
         }
+
+
         //
         //
 
@@ -229,8 +245,14 @@ public class screen_main extends AppCompatActivity {
             public void onClick(View v) {
                 Connect_geth connect_geth = new Connect_geth(ADDRESS);
                 connect_geth.execute();
-                Intent loading = new Intent(screen_main.this, screen_loading.class);
-                startActivity(loading);
+
+                try {
+                    Toast.makeText(screen_main.this, "잠시 기다려주세요...", Toast.LENGTH_SHORT).show();
+                    Thread.sleep(5000);
+                    Toast.makeText(screen_main.this, "로딩중...", Toast.LENGTH_SHORT).show();
+                    Thread.sleep(5000);
+                } catch (InterruptedException e) {
+                }
             }
         });
 
@@ -249,7 +271,6 @@ public class screen_main extends AppCompatActivity {
         //드로어 레이아웃 오픈
 
 
-
         qrScan = new IntentIntegrator(this);
         qrScan.setOrientationLocked(false);
 
@@ -261,7 +282,6 @@ public class screen_main extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
     }
 
     @Override
@@ -350,8 +370,8 @@ public class screen_main extends AppCompatActivity {
                                 oneHistory.setEther(history.getTxValue().toString());
                                 oneHistory.setWasMe(false);
                             }
-                                //내가 줬을 때
-                            else if (history.getTxFrom().compareTo(ADDRESS) == 0){
+                            //내가 줬을 때
+                            else if (history.getTxFrom().compareTo(ADDRESS) == 0) {
                                 presentOut += history.getTxValue().floatValue();
 
                                 //상대 주소, 이더 내역 저장
@@ -371,7 +391,7 @@ public class screen_main extends AppCompatActivity {
                                 oneHistory.setEther(history.getTxValue().toString());
                                 oneHistory.setWasMe(false);
                             }
-                                //내가 줬을 때
+                            //내가 줬을 때
                             else if (history.getTxFrom().compareTo(ADDRESS) == 0) {
                                 pastOut += history.getTxValue().floatValue();
 
@@ -389,8 +409,8 @@ public class screen_main extends AppCompatActivity {
 
             scrollview.removeAllViews();
 
-            //스크롤 뷰에 내역을 역순으로 추가
-            for (int i=0;i<myHistory.size();i++) {
+            //스크롤 뷰에 내역 추가
+            for (int i = 0; i < myHistory.size(); i++) {
                 LinearLayout lin = new LinearLayout(scrollview.getContext());
                 lin.setOrientation(LinearLayout.HORIZONTAL);
                 lin.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT));
@@ -419,15 +439,14 @@ public class screen_main extends AppCompatActivity {
                 amount.setTextSize(20f);
 
                 //보낸 사람이 나인가?
-                if(myHistory.get(i).getWasMe()==true) {
+                if (myHistory.get(i).getWasMe() == true) {
                     amount.setText("- " + myHistory.get(i).getEther());
                     date.setGravity(Gravity.CENTER);
                     amount.setTextColor(Color.RED);
-                }
-                else {
+                } else {
                     amount.setText("+ " + myHistory.get(i).getEther());
                     date.setGravity(Gravity.CENTER);
-                    amount.setTextColor(Color.rgb(121,231,231));
+                    amount.setTextColor(Color.rgb(121, 231, 231));
                 }
                 lin.addView(amount);
 
@@ -435,7 +454,7 @@ public class screen_main extends AppCompatActivity {
             }
 
             card_address.setText(ADDRESS);
-            card_eth.setText(ETHER.substring(0,10));
+            card_eth.setText(ETHER.substring(0, 10));
 
             chart_month.getXAxis().setValueFormatter(new IndexAxisValueFormatter(labels));
             chart_month.setData(screen_1_chart.barchart(pastIn, pastOut, presentIn, presentOut));
