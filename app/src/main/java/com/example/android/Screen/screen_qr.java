@@ -17,9 +17,9 @@ public class screen_qr extends AppCompatActivity {
         setContentView(R.layout.screen_qr);
 
         QRView = findViewById(R.id.QRView);
-//        String s = new screen_login().ID;
+        String addressQR = screen_main.ADDRESS;
 
-        Bitmap bitmap = com.example.android.Action.CreateQR.encodeAsBitmap("QR", 500, 500);
+        Bitmap bitmap = com.example.android.Action.CreateQR.encodeAsBitmap(addressQR, 500, 500);
         QRView.setImageBitmap(bitmap);
     }
 }
