@@ -48,11 +48,6 @@ public class Refresh {
         Subscription subscription = (Subscription) web3j
                 .replayPastTransactionsFlowable(DefaultBlockParameterName.EARLIEST,DefaultBlockParameterName.LATEST)
                 .subscribe(tx -> {
-//            System.out.println(tx.getBlockNumber() + " : " + tx.getBlockHash());
-//            System.out.println("tx : " + tx.getHash());
-//            System.out.println("from : " + tx.getFrom() + "    to : " + tx.getTo());
-//            System.out.println("value : " + tx.getValue());
-
                     EthBlock ethBlock = web3j.ethGetBlockByHash(tx.getBlockHash(),false).send();
                     long timestamp = ethBlock.getBlock().getTimestamp().longValue();
                     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.KOREA);

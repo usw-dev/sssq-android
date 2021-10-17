@@ -221,51 +221,6 @@ import jnr.ffi.Struct;
                         e.printStackTrace();
                     }
 
-
-                    // 스마트 컨트랙트
-//                    String contractAddress = "0xb4B6a6Aa93b5Dd8aACD02b83Eb6b5017a3Fdd94C";
-//
-//                    // set
-//                    Function function = new Function(
-//                            "set", Arrays.asList(new Address(to)), Collections.emptyList()
-//                    );
-//                    String encodedFunction = FunctionEncoder.encode(function);
-//
-//                    Transaction transaction = Transaction.createFunctionCallTransaction(
-//                            from,
-//                            null, null, null,
-//                            contractAddress,
-//                            encodedFunction
-//                    );
-//
-//                    EthSendTransaction transactionResponse = null;
-//                    try {
-//                        transactionResponse = web3j.ethSendTransaction(transaction).sendAsync().get();
-//                    } catch (InterruptedException e) {
-//                        e.printStackTrace();
-//                    } catch (ExecutionException e) {
-//                        e.printStackTrace();
-//                    }
-//
-//                    // transfer
-//                    function = new Function(
-//                            "transfer", Collections.emptyList(), Collections.emptyList()
-//                    );
-//                    encodedFunction = FunctionEncoder.encode(function);
-//                    transaction = Transaction.createFunctionCallTransaction(
-//                            from,
-//                            null, null, null,
-//                            contractAddress,
-//                            Convert.toWei(SE,Convert.Unit.ETHER).toBigInteger(),
-//                            encodedFunction
-//                    );
-//                    try {
-//                        EthSendTransaction transactionResponse2 = web3j.ethSendTransaction(transaction).sendAsync().get();
-//                    } catch (InterruptedException e) {
-//                        e.printStackTrace();
-//                    } catch (ExecutionException e) {
-//                        e.printStackTrace();
-//                    }
                    return null;
                 }
             }.execute();
