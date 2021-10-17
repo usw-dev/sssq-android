@@ -143,10 +143,7 @@ public class screen_main extends AppCompatActivity {
                     }
                 }
             }, 100);
-
         }
-
-
         //
         //
 
