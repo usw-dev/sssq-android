@@ -102,8 +102,8 @@ public class screen_main extends AppCompatActivity {
                 e.printStackTrace();
             }
 
-            ADDRESS = credentials.getAddress();
-            //ADDRESS = "0x833f3b88d74032b7210d1224d7eef5c535cce42e";
+            //ADDRESS = credentials.getAddress();
+            ADDRESS = "0x833f3b88d74032b7210d1224d7eef5c535cce42e";
 
             Connect_geth connect_geth = new Connect_geth(ADDRESS);
             connect_geth.execute();
@@ -423,7 +423,7 @@ public class screen_main extends AppCompatActivity {
             }
 
             card_address.setText(ADDRESS);
-            card_eth.setText(ETHER);
+            card_eth.setText(ETHER.substring(0,10));
 
             chart_month.getXAxis().setValueFormatter(new IndexAxisValueFormatter(labels));
             chart_month.setData(screen_1_chart.barchart(pastIn, pastOut, presentIn, presentOut));
