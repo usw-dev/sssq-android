@@ -8,6 +8,7 @@ import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -382,7 +383,7 @@ public class screen_main extends AppCompatActivity {
             }
 
             //스크롤 뷰에 내역을 역순으로 추가
-            for (int i=myHistory.size();i>=0;i--) {
+            for (int i=0;i<myHistory.size();i++) {
                 LinearLayout lin = new LinearLayout(scrollview.getContext());
                 lin.setOrientation(LinearLayout.HORIZONTAL);
                 lin.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT));
@@ -391,7 +392,8 @@ public class screen_main extends AppCompatActivity {
                 TextView date = new TextView(scrollview.getContext());
                 date.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT, 1));
                 date.setText(myHistory.get(i).getDate());
-                date.setTextSize(10f);
+                date.setGravity(Gravity.CENTER);
+                date.setTextSize(20f);
                 date.setTextColor(Color.WHITE);
                 lin.addView(date);
 
@@ -399,22 +401,25 @@ public class screen_main extends AppCompatActivity {
                 TextView opponent = new TextView(scrollview.getContext());
                 opponent.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT, 1));
                 opponent.setText(myHistory.get(i).getOpponent());
-                opponent.setTextSize(10f);
+                date.setGravity(Gravity.CENTER);
+                opponent.setTextSize(20f);
                 opponent.setTextColor(Color.WHITE);
                 lin.addView(opponent);
 
                 //액수
                 TextView amount = new TextView(scrollview.getContext());
                 amount.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT, 1));
-                amount.setTextSize(10f);
+                amount.setTextSize(20f);
 
                 //보낸 사람이 나인가?
                 if(myHistory.get(i).getWasMe()==true) {
                     amount.setText("- " + myHistory.get(i).getEther());
-                    amount.setTextColor(Color.WHITE);
+                    date.setGravity(Gravity.CENTER);
+                    amount.setTextColor(Color.RED);
                 }
                 else {
                     amount.setText("+ " + myHistory.get(i).getEther());
+                    date.setGravity(Gravity.CENTER);
                     amount.setTextColor(Color.rgb(121,231,231));
                 }
                 lin.addView(amount);

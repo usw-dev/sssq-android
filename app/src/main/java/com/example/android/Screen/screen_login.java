@@ -24,12 +24,13 @@ import java.io.IOException;
 
 public class screen_login extends AppCompatActivity {
     private Context mContext;
-    private ImageButton button_login;
-    private ImageButton button_gotocreateAccount;
-    private EditText ET_ad;
-    private EditText ET_pw;
+    private ImageButton buttonLogin;
+    private ImageButton buttonGotocreateAccount;
+    private ImageButton buttonForget;
+    private EditText editAddress;
+    private EditText editPassword;
     private CheckBox checkbox;
-    private com.example.android.Action.backbutton_event backbutton_event;
+    private com.example.android.Action.backbutton_event backbuttonEvent;
 
     String ID, PW;
 
@@ -39,34 +40,37 @@ public class screen_login extends AppCompatActivity {
         setContentView(R.layout.screen_login);
         mContext = this;
 
-        backbutton_event = new backbutton_event(this);
-        button_login = findViewById(R.id.button_login);
-        button_gotocreateAccount = findViewById(R.id.button_gotocreateAccount);
-        ET_ad = findViewById(R.id.EditText_address);
-        ET_pw = findViewById(R.id.EditText_pw);
+        backbuttonEvent = new backbutton_event(this);
+        buttonLogin = findViewById(R.id.button_login);
+        buttonGotocreateAccount = findViewById(R.id.button_gotocreateAccount);
+        buttonForget = findViewById(R.id.buttonForget);
+
+        editAddress = findViewById(R.id.EditText_address);
+        editPassword = findViewById(R.id.EditText_pw);
         checkbox = findViewById(R.id.checkbox_save);
+
 
         boolean bool = PreferenceManager.getBoolean(mContext, "check");
 
         if (bool) {//체크되어 있으면 주소 패스워드 불러옴
-            ET_ad.setText(PreferenceManager.getString(mContext, "address"));
-            ET_pw.setText(PreferenceManager.getString(mContext, "pw"));
+            editAddress.setText(PreferenceManager.getString(mContext, "address"));
+            editPassword.setText(PreferenceManager.getString(mContext, "pw"));
             checkbox.setChecked(true);
         }
 
         Intent getintent = getIntent();
 
         if (getintent.hasExtra("address"))
-            ET_ad.setText(getintent.getStringExtra("address"));
+            editAddress.setText(getintent.getStringExtra("address"));
 
         checkbox.setChecked(false);
         PreferenceManager.clear(mContext);
 
-        button_login.setOnClickListener(new View.OnClickListener() {
+        buttonLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                PreferenceManager.setString(mContext, "address", ET_ad.getText().toString());
-                PreferenceManager.setString(mContext, "pw", ET_pw.getText().toString());
+                PreferenceManager.setString(mContext, "address", editAddress.getText().toString());
+                PreferenceManager.setString(mContext, "pw", editPassword.getText().toString());
 
                 String checkAd = PreferenceManager.getString(mContext, "address");
                 String checkPw = PreferenceManager.getString(mContext, "pw");
@@ -96,7 +100,7 @@ public class screen_login extends AppCompatActivity {
             }
         });
 
-        button_gotocreateAccount.setOnClickListener(new View.OnClickListener() {
+        buttonGotocreateAccount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent screen_1 = new Intent(screen_login.this, screen_createaccount.class);
@@ -106,17 +110,24 @@ public class screen_login extends AppCompatActivity {
 
         checkbox.setOnClickListener(v -> {
             if (((CheckBox) v).isChecked()) {
-                PreferenceManager.setString(mContext, "address", ET_ad.getText().toString());
-                PreferenceManager.setString(mContext, "pw", ET_pw.getText().toString());
+                PreferenceManager.setString(mContext, "address", editAddress.getText().toString());
+                PreferenceManager.setString(mContext, "pw", editPassword.getText().toString());
                 PreferenceManager.setBoolean(mContext, "check", checkbox.isChecked());
             } else {
                 PreferenceManager.setBoolean(mContext, "check", checkbox.isChecked());
                 PreferenceManager.clear(mContext);
             }
         });
+
+        buttonForget.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(mContext, getExternalFilesDir(null) + "/codi에 있는 \n json 파일의 이름을 복사해주세요", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     public void onBackPressed() {
-        backbutton_event.backbutton();
+        backbuttonEvent.backbutton();
     }
 }
