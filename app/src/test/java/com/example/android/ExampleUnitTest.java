@@ -89,7 +89,7 @@ public class ExampleUnitTest {
     @Test
     public void testEth() throws Exception {
         // web3j와 ganache-cli 연결
-        Web3j web3j = Web3j.build(new HttpService("http://13.124.7.213:8547"));
+        Web3j web3j = Web3j.build(new HttpService("http://52.78.121.223:8547"));
         // 연결된 ganache-cli에 있는 계정 정보 get
         EthAccounts ethAccounts = web3j.ethAccounts().sendAsync().get();
         // ganache-cli 버전 get
@@ -403,22 +403,22 @@ public class ExampleUnitTest {
 
     @Test
     public void LocalAddress() throws Exception {
-        Web3j web3j = Web3j.build(new HttpService("http://13.124.7.213:8547"));
-        Admin admin = Admin.build(new HttpService("http://13.124.7.213:8547"));
+        Web3j web3j = Web3j.build(new HttpService("http://52.78.121.223:8547"));
+        Admin admin = Admin.build(new HttpService("http://52.78.121.223:8547"));
 
         Credentials credentials = WalletUtils.loadCredentials("swu", "E:\\UTC--2021-10-08T11-10-46.978Z--8fbdd84d6d42e2d592aaa7776840f20842e06fff.json");
         Credentials credentials2 = WalletUtils.loadCredentials("swu", "E:\\UTC--2021-10-08T11-15-42.229Z--63db1a2778ee694698a499f1bad95d8dcb98f2b5.json");
 
-//        String etherTx = "10";
-//        Transaction transaction = Transaction.createEtherTransaction(
-//                "0x833f3b88d74032b7210d1224d7eef5c535cce42e",
-//                null,null,null,
-//                credentials.getAddress(),
-//                Convert.toWei(etherTx,Convert.Unit.ETHER).toBigInteger()
-//        );
-//        EthSendTransaction ethSendTransaction = admin.ethSendTransaction(transaction).sendAsync().get();
-//
-//        System.out.println("\nsend 10 ether from account[0] to cred \n");
+        String etherTx = "10";
+        Transaction transaction = Transaction.createEtherTransaction(
+                "0x3378db3a5a73efea87b36085f5f5c73c6ba81e1b",
+                null,null,null,
+                "0xfe2eaaaeb18dd23b986ba4bfc812493480971ea2",
+                Convert.toWei(etherTx,Convert.Unit.ETHER).toBigInteger()
+        );
+        EthSendTransaction ethSendTransaction = admin.ethSendTransaction(transaction).sendAsync().get();
+
+        System.out.println("\nsend 10 ether from account[0] to cred \n");
 
 //        TransactionReceipt receipt = Transfer.sendFunds(web3j,credentials, "0x36032475e40354704f074b941293a355fe24854f",new BigDecimal(1), Convert.Unit.ETHER).sendAsync().get();
 //

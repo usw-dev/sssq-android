@@ -207,7 +207,7 @@ import jnr.ffi.Struct;
                 protected Object doInBackground(Object[] objects) {
 
                     // web3j와 ganache-cli 연결
-                    Web3j web3j = Web3j.build(new HttpService("http://13.124.7.213:8547"));
+                    Web3j web3j = Web3j.build(new HttpService("http://52.78.121.223:8547"));
 
                     try {
                         TransactionReceipt receipt = Transfer.sendFunds(web3j,from,to,new BigDecimal(SE), Convert.Unit.ETHER).sendAsync().get();
