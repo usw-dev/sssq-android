@@ -189,15 +189,7 @@ public class screen_main extends AppCompatActivity {
                     } else {
                         sendEther sendEther = new sendEther(sendaddress.getText().toString(), sendEth.getText().toString());
                         sendEther.execute();
-
-                        try {
-                            Thread.sleep(4000);
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
-
-                        Intent loading = new Intent(screen_main.this, screen_loading.class);
-                        startActivity(loading);
+                        Toast.makeText(screen_main.this, "전송 완료! 새로고침을 눌러주세요", Toast.LENGTH_SHORT).show();
                     }
                 }
             }
@@ -249,13 +241,8 @@ public class screen_main extends AppCompatActivity {
                 Connect_geth connect_geth = new Connect_geth(ADDRESS);
                 connect_geth.execute();
 
-                try {
-                    Toast.makeText(screen_main.this, "잠시 기다려주세요...", Toast.LENGTH_SHORT).show();
-                    Thread.sleep(2000);
-                    Toast.makeText(screen_main.this, "로딩중...", Toast.LENGTH_SHORT).show();
-                    Thread.sleep(4000);
-                } catch (InterruptedException e) {
-                }
+                Intent loading = new Intent(screen_main.this, screen_loading.class);
+                startActivity(loading);
             }
         });
 
@@ -321,6 +308,11 @@ public class screen_main extends AppCompatActivity {
         protected void onPostExecute(UserWallet s) {
             super.onPostExecute(s);
             MYUSERWALLET = s;
+            Handler handler1 = new Handler();
+            handler1.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+
 
             ETHER = MYUSERWALLET.getEther().toString();
             HISTORY = MYUSERWALLET.getTxHistory();
@@ -466,7 +458,10 @@ public class screen_main extends AppCompatActivity {
             chart_month.getXAxis().setValueFormatter(new IndexAxisValueFormatter(labels));
             chart_month.setData(screen_1_chart.barchart(pastIn, pastOut, presentIn, presentOut));
             chart_month.invalidate();
+                }
+            }, 60000);
         }
+
     }
 
     public class sendEther extends AsyncTask<Void, Void, String> {
@@ -496,12 +491,6 @@ public class screen_main extends AppCompatActivity {
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
-
-//            Intent loading = new Intent(screen_main.this, screen_loading.class);
-//            startActivity(loading);
-
-            Connect_geth connect_geth = new Connect_geth(ADDRESS);
-            connect_geth.execute();
         }
     }
 

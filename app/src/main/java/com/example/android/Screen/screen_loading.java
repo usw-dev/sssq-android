@@ -60,6 +60,6 @@ public class screen_loading extends AppCompatActivity {
             public void run() {
                 finish();
             }
-        }, 5000);
+        }, 60000);
     }
 }
