@@ -124,7 +124,7 @@ public class screen_main extends AppCompatActivity {
             }
 
             ADDRESS = credentials.getAddress();
-            //ADDRESS = "0x833f3b88d74032b7210d1224d7eef5c535cce42e";
+            //ADDRESS = "0x3378db3a5a73efea87b36085f5f5c73c6ba81e1b";
 
             Connect_geth connect_geth = new Connect_geth(ADDRESS);
             connect_geth.execute();
@@ -253,7 +253,7 @@ public class screen_main extends AppCompatActivity {
                     Toast.makeText(screen_main.this, "잠시 기다려주세요...", Toast.LENGTH_SHORT).show();
                     Thread.sleep(2000);
                     Toast.makeText(screen_main.this, "로딩중...", Toast.LENGTH_SHORT).show();
-                    Thread.sleep(2000);
+                    Thread.sleep(4000);
                 } catch (InterruptedException e) {
                 }
             }
@@ -338,7 +338,7 @@ public class screen_main extends AppCompatActivity {
             String Curtime = sdf.format(d);
 
             //현재 년 월
-            int curYear = Integer.parseInt(Curtime.substring(0, 4));
+            int curYear = Integer.parseInt(Curtime.substring(2, 4));
             int curMonth = Integer.parseInt(Curtime.substring(5, 7));
 
             //내 내역들을 담을 리스트
@@ -354,9 +354,9 @@ public class screen_main extends AppCompatActivity {
 
                         //내역의 년 월 일
                         String txTime = history.getTimestamp();
-                        int txYear = Integer.parseInt(txTime.substring(0, 4));
+                        int txYear = Integer.parseInt(txTime.substring(2, 4));
                         int txMonth = Integer.parseInt(txTime.substring(5, 7));
-                        int txDay = Integer.parseInt(txTime.substring(8, 9));
+                        int txDay = Integer.parseInt(txTime.substring(8, 10));
 
                         //날짜를 만들어서 내역에 저장
                         String date = (Integer.toString(txYear) + "." + Integer.toString(txMonth) + "." + Integer.toString(txDay));
