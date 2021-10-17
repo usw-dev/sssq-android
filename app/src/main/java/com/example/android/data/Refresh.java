@@ -65,7 +65,7 @@ public class Refresh {
     }
 
     public void txin(String txHash, String txFrom, String txTo, BigInteger txValue, String timestamp) {
-        if(address.equals(txFrom))
+        if(address.equals(txFrom) || address.equals(txTo))
             txHistory.add(new TxHistory(txHash,txFrom,txTo,txValue,timestamp));
     }
 }

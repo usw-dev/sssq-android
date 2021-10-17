@@ -82,14 +82,14 @@ public class ExampleUnitTest {
     String ft;
 
     public void testin(String txHash, String txFrom, String txTo, BigInteger txValue, String timestamp) {
-        if(ft.equals(txFrom))
+        if(ft.equals(txFrom) || ft.equals(txTo))
             txInfo.add(new tx(txHash,txFrom,txTo,txValue,timestamp));
     }
 
     @Test
     public void testEth() throws Exception {
         // web3j와 ganache-cli 연결
-        Web3j web3j = Web3j.build(new HttpService("http://3.35.175.58:8547"));
+        Web3j web3j = Web3j.build(new HttpService("http://13.124.7.213:8547"));
         // 연결된 ganache-cli에 있는 계정 정보 get
         EthAccounts ethAccounts = web3j.ethAccounts().sendAsync().get();
         // ganache-cli 버전 get
@@ -117,8 +117,8 @@ public class ExampleUnitTest {
         }
 
         // 0번 계좌 -> 1번 계좌 10 이더 전송
-        Credentials credentials = WalletUtils.loadCredentials("swu", "E:\\UTC--2021-10-07T14-29-32.868Z--2fe0c4188ac79e36b785664e4c92fd22afe856b7.json");
-        String fromTx = credentials.getAddress();
+        Credentials credentials = WalletUtils.loadCredentials("swu", "E:\\UTC--2021-10-08T11-10-46.978Z--8fbdd84d6d42e2d592aaa7776840f20842e06fff.json");
+        String fromTx = userWallets.get(0).getAddress();
         String toTx = userWallets.get(2).getAddress();
         ft = fromTx;
         System.out.println(ft);
