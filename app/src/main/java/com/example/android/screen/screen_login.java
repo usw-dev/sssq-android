@@ -12,7 +12,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
-import com.example.android.action.backbutton_event;
+import com.example.android.action.BackButtonEvent;
 import com.example.android.PreferenceManager;
 import com.example.android.R;
 
@@ -30,7 +30,7 @@ public class screen_login extends AppCompatActivity {
     private EditText editAddress;
     private EditText editPassword;
     private CheckBox checkbox;
-    private com.example.android.action.backbutton_event backbuttonEvent;
+    private BackButtonEvent backbuttonEvent;
 
     String ID, PW;
 
@@ -40,7 +40,7 @@ public class screen_login extends AppCompatActivity {
         setContentView(R.layout.screen_login);
         mContext = this;
 
-        backbuttonEvent = new backbutton_event(this);
+        backbuttonEvent = new BackButtonEvent(this);
         buttonLogin = findViewById(R.id.button_login);
         buttonGotocreateAccount = findViewById(R.id.button_gotocreateAccount);
         buttonForget = findViewById(R.id.buttonForget);

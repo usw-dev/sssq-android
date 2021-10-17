@@ -5,12 +5,12 @@ import androidx.core.app.ActivityCompat;
 import android.app.Activity;
 import android.widget.Toast;
 
-public class backbutton_event {
+public class BackButtonEvent {
 
     private static Activity act;
     private static long backbutton_TIME = 0;
 
-    public backbutton_event(Activity activity) {
+    public BackButtonEvent(Activity activity) {
         this.act = activity;
     }
 

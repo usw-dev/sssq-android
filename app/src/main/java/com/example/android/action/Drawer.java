@@ -6,7 +6,7 @@ import android.view.View;
 import android.view.MotionEvent;
 import android.widget.ImageButton;
 
-public class drawer {
+public class Drawer {
     public static void drawer(DrawerLayout drawerLayout, View drawerView, ImageButton btn)
 //                    매개변수(드로어 레이아웃 ,드로어 뷰 ,이미지 버튼)
     {

@@ -8,7 +8,7 @@ import com.github.mikephil.charting.data.BarEntry;
 
 import java.util.ArrayList;
 
-public class chart {
+public class Chart {
     public static String[] labels = new String[]{"저번 달","이번 달"};
 
     public BarData barchart(float past_in, float past_out, float present_in,float present_out ){

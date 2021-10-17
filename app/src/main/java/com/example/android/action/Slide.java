@@ -4,7 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.view.animation.Animation;
 
-public class slide extends AppCompatActivity {
+public class Slide extends AppCompatActivity {
 
     public static boolean flag = true; //올라오고 내려온 상태
     public Animation transup; //올라오는 애니메이션
