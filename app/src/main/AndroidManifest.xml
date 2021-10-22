@@ -19,44 +19,44 @@
         android:theme="@style/Theme.Android"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".Screen.screen_loading"
-
-            android:exported="true" >
-
-        </activity>
+            android:name=".screen.ScreenQr"
+            android:exported="true" />
         <activity
-            android:name=".Screen.screen_createaccount"
+            android:name=".screen.ScreenLoading"
+            android:exported="true"></activity>
+        <activity
+            android:name=".screen.ScreenCreateAccount"
             android:exported="true" />
         <activity
             android:name="com.journeyapps.barcodescanner.CaptureActivity"
             android:screenOrientation="fullSensor"
             tools:replace="screenOrientation" />
         <activity
-            android:name=".Screen.screen_sup"
+            android:name=".screen.ScreenSupport"
             android:exported="true" />
         <activity
-            android:name=".Screen.screen_login"
+            android:name=".screen.ScreenLogin"
             android:exported="true" />
         <activity
-            android:name=".Screen.screen_appinfo"
+            android:name=".screen.ScreenAppInfo"
             android:exported="true" />
         <activity
-            android:name=".Screen.screen_appver"
+            android:name=".screen.ScreenAppVer"
             android:exported="true" />
         <activity
-            android:name=".Screen.ScreenTrhistoryActivity"
+            android:name=".screen.ScreenTrhistoryActivity"
             android:exported="true" />
         <activity
-            android:name=".Screen.screen_mymenu"
+            android:name=".screen.ScreenMyMenu"
             android:exported="true" />
-        <activity android:name=".Screen.SplashActivity">
+        <activity android:name=".screen.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Screen.screen_main" />
+        <activity android:name=".screen.ScreenMain"></activity>
     </application>
 
 </manifest>

@@ -120,6 +120,29 @@
                 android:textSize="16dp"
                 android:textStyle="bold" />
         </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="200dp"
+            android:layout_height="70dp"
+            android:gravity="center">
+
+            <ImageButton
+                android:id="@+id/buttonForget"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/invisible"
+                android:scaleType="fitCenter"
+                android:src="@drawable/image_mint"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="파일명을 까먹었어요"
+                android:textColor="@color/black"
+                android:textSize="16dp"
+                android:textStyle="bold" />
+        </RelativeLayout>
     </LinearLayout>
 
 </LinearLayout>

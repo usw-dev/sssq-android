@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/screen1"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#000000"
     android:orientation="vertical"
-    tools:context=".Screen.screen_main">
+    tools:context=".screen.ScreenMain">
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
@@ -21,7 +22,7 @@
             android:layout_height="match_parent"
             android:background="@color/main_color"
             android:orientation="vertical"
-            tools:context=".Screen.screen_main">
+            tools:context=".screen.ScreenMain">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -60,7 +61,19 @@
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="1" />
+                    android:layout_weight="1"
+                    android:gravity="center">
+
+                    <Button
+                        android:id="@+id/CreateQR"
+                        android:layout_width="50dp"
+                        android:layout_height="60dp"
+                        android:backgroundTint="#009688"
+                        android:text="QR"
+                        android:textSize="15sp" />
+                </LinearLayout>
+
+
             </LinearLayout>
             <!-- 상단 -->
 
@@ -177,7 +190,7 @@
                                         android:layout_height="wrap_content"
                                         android:text="0"
                                         android:textColor="@color/black"
-                                        android:textSize="30dp"
+                                        android:textSize="20dp"
                                         android:textStyle="bold"
                                         android:fontFamily="@font/arktlrhrlb"/>
                                     <!--이더 액수-->
@@ -243,11 +256,31 @@
                         android:layout_weight="0.5"
                         android:baselineAligned="false"
                         android:gravity="center">
-
+                        <ImageView
+                            android:id="@+id/QRView2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
                     </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
             <!-- 중단 부분 -->
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:baselineAligned="false"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="카드 터치 시 이더 전송"
+                    android:textColor="@color/mint"
+                    android:textSize="20dp"
+                    android:textStyle="bold"/>
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -318,5 +351,6 @@
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
     <include layout="@layout/screen_mymenu" />
+
 </androidx.drawerlayout.widget.DrawerLayout>
 

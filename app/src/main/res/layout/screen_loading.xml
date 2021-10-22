@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/main_color"
-    tools:context=".Screen.screen_loading"
+    tools:context=".screen.ScreenLoading"
     android:gravity="center"
     android:orientation="vertical">
 
@@ -20,7 +20,7 @@
         android:gravity="center"
         android:layout_width="wrap_content"
         android:layout_height="200dp"
-        android:text=""
+        android:text="서버에 접속 중"
         android:textStyle="bold"
         android:textColor="@color/white"
         android:textSize="50dp"/>
