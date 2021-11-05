@@ -75,7 +75,6 @@ public class ScreenCreateAccount extends AppCompatActivity {
         checkVerify();
         setupBouncyCastle();
 
-
         button_createaccount = findViewById(R.id.button_createAccount);
         pw = findViewById(R.id.EText_pw);
 
@@ -122,7 +121,6 @@ public class ScreenCreateAccount extends AppCompatActivity {
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
-
                 }
             }
         });
