@@ -405,20 +405,20 @@ public class ExampleUnitTest {
     public void LocalAddress() throws Exception {
         Web3j web3j = Web3j.build(new HttpService("http://52.78.121.223:8547"));
         Admin admin = Admin.build(new HttpService("http://52.78.121.223:8547"));
+//
+//        Credentials credentials = WalletUtils.loadCredentials("swu", "E:\\UTC--2021-10-08T11-10-46.978Z--8fbdd84d6d42e2d592aaa7776840f20842e06fff.json");
+//        Credentials credentials2 = WalletUtils.loadCredentials("swu", "E:\\UTC--2021-10-08T11-15-42.229Z--63db1a2778ee694698a499f1bad95d8dcb98f2b5.json");
 
-        Credentials credentials = WalletUtils.loadCredentials("swu", "E:\\UTC--2021-10-08T11-10-46.978Z--8fbdd84d6d42e2d592aaa7776840f20842e06fff.json");
-        Credentials credentials2 = WalletUtils.loadCredentials("swu", "E:\\UTC--2021-10-08T11-15-42.229Z--63db1a2778ee694698a499f1bad95d8dcb98f2b5.json");
-
-        String etherTx = "10";
+        String etherTx = "15";
         Transaction transaction = Transaction.createEtherTransaction(
-                "0x3378db3a5a73efea87b36085f5f5c73c6ba81e1b",
+                "0xcca5f0181d11ad01faaf7ebe26d8a7abcc4db72a",
                 null,null,null,
-                "0x2664ef5640ea532d758aaf9f086b07e96ee379c6",
+                "0xc61e1259de139cbb4093a4e8c00394e1bf520ea",
                 Convert.toWei(etherTx,Convert.Unit.ETHER).toBigInteger()
         );
         EthSendTransaction ethSendTransaction = admin.ethSendTransaction(transaction).sendAsync().get();
 
-        System.out.println("\nsend 10 ether from account[0] to cred \n");
+        System.out.println("\nsend 15 ether from account[0] to card \n");
 
 //        TransactionReceipt receipt = Transfer.sendFunds(web3j,credentials, "0x36032475e40354704f074b941293a355fe24854f",new BigDecimal(1), Convert.Unit.ETHER).sendAsync().get();
 //
@@ -426,11 +426,11 @@ public class ExampleUnitTest {
 
 
 
-        EthGetBalance ethGetBalance = web3j.ethGetBalance(credentials.getAddress(), DefaultBlockParameterName.LATEST).sendAsync().get();
-        BigDecimal ether = Convert.fromWei(ethGetBalance.getBalance().toString(), Convert.Unit.ETHER);
-
-        System.out.println("eth1 : " + ether);
+//        EthGetBalance ethGetBalance = web3j.ethGetBalance(credentials.getAddress(), DefaultBlockParameterName.LATEST).sendAsync().get();
+//        BigDecimal ether = Convert.fromWei(ethGetBalance.getBalance().toString(), Convert.Unit.ETHER);
 //
+//        System.out.println("eth1 : " + ether);
+////
 //        EthGetBalance ethGetBalance2 = web3j.ethGetBalance(credentials2.getAddress(), DefaultBlockParameterName.LATEST).sendAsync().get();
 //        BigDecimal ether2 = Convert.fromWei(ethGetBalance2.getBalance().toString(), Convert.Unit.ETHER);
 //
