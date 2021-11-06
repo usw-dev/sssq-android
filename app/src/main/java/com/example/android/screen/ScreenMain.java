@@ -174,9 +174,9 @@ public class ScreenMain extends AppCompatActivity {
                 if ((sendAddress.getText().toString().isEmpty()) || (sendEth.getText().toString().isEmpty()))
                     Toast.makeText(ScreenMain.this, "기입하지 않은 칸이 있습니다", Toast.LENGTH_SHORT).show();
                 else {
-                    int compareEther = Integer.parseInt(sendEth.getText().toString());
+                    float compareEther = Float.parseFloat(sendEth.getText().toString());
 
-                    if (compareEther > Integer.parseInt(myUserWallet.getEther().toString())) {
+                    if (compareEther > Float.parseFloat(myUserWallet.getEther().toString())) {
                         Toast.makeText(ScreenMain.this, "이더가 부족합니다", Toast.LENGTH_SHORT).show();
                     } else if (compareEther == 0) {
                         Toast.makeText(ScreenMain.this, "0은 보낼 수 없습니다", Toast.LENGTH_SHORT).show();
@@ -185,7 +185,7 @@ public class ScreenMain extends AppCompatActivity {
                     } else {
                         sendEther sendEther = new sendEther(sendAddress.getText().toString(), sendEth.getText().toString());
                         sendEther.execute();
-                        
+
                         Toast.makeText(ScreenMain.this, "전송 완료! 새로고침을 눌러주세요", Toast.LENGTH_SHORT).show();
                     }
                 }
