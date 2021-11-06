@@ -51,6 +51,6 @@ public class ScreenLoading extends AppCompatActivity {
             public void run() {
                 finish();
             }
-        }, 20000);
+        }, 30000);
     }
 }

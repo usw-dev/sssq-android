@@ -445,7 +445,7 @@ public class ScreenMain extends AppCompatActivity {
             chartMonth.setData(screen1Chart.barchart(pastIn, pastOut, presentIn, presentOut));
             chartMonth.invalidate();
                 }
-            }, 20000);
+            }, 30000);
         }
 
     }
