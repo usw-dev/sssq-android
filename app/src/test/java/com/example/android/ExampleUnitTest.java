@@ -324,7 +324,7 @@ public class ExampleUnitTest {
             System.out.println("address : " + userWallet.getAddress() + ", ether : " + userWallet.getEther());
         }
 
-        // 스마트 컨트랙트
+        // 주소 설정
         String fromTx = userWallets.get(2).getAddress();
         String contractAddress = "0x79BA3903cA5A015e3A6244647F7bBf837f70F294";
         String etherTx = "10";
